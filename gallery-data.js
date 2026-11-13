@@ -1,7 +1,7 @@
 // Edit the words and image paths below to make the gallery your own.
 window.galleryData = {
   roomImage: 'images/gallery-room.svg',
-  contactEmail: '',
+  contactEmail: 'traveltoeatmore@gmail.com',
   artist: {
     placeholder: true,
     bio: 'This space is waiting for the story behind the work. Share a little about your practice, your process, and what brings you here.',
