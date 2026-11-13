@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10121b">
+  <meta name="description" content="Enter the world of Overflowism, an interactive gallery for art and feeling.">
+  <title>Overflowism — A space for feeling</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="gallery-data.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#home" aria-label="Overflowism home"><span class="wordmark-symbol" aria-hidden="true">◉</span> OVERFLOWISM<span class="wordmark-dot">.</span></a>
+    <nav aria-label="Main navigation">
+      <a href="#home">Entrance</a>
+      <a href="#gallery">The gallery <span aria-hidden="true">↗</span></a>
+      <a href="#about">The artist <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="view entrance" id="home" aria-labelledby="home-title">
+      <div class="entrance-glow" aria-hidden="true"></div>
+      <div class="entrance-copy">
+        <p class="eyebrow"><span class="tiny-star">✳</span> AN EXPLORATION OF FEELING</p>
+        <h1 id="home-title">Art for everything<br><em>you feel.</em></h1>
+        <p class="intro">When experience can no longer be contained,<br class="desktop-break"> it becomes creation.</p>
+        <a class="button button-light" href="#gallery">Enter the Overflow <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="entrance-art" aria-hidden="true">
+        <div class="orbit orbit-one"></div><div class="orbit orbit-two"></div>
+        <svg class="spiral" viewBox="0 0 400 400" fill="none">
+          <defs><linearGradient id="spiral-gradient" x1="30" y1="45" x2="360" y2="355" gradientUnits="userSpaceOnUse"><stop stop-color="#98fbf1"/><stop offset=".35" stop-color="#3c8dff"/><stop offset=".7" stop-color="#4051e6"/><stop offset="1" stop-color="#d58bc9"/></linearGradient></defs>
+          <path d="M209 197c-14-13-34-2-29 15 6 22 40 24 55 5 19-25 3-62-29-69-41-10-76 21-74 60 2 50 51 79 95 65 54-17 73-81 45-128-33-57-106-66-157-28-63 48-64 138-15 194 59 68 164 61 223-3 72-79 53-198-26-258" stroke="url(#spiral-gradient)" stroke-width="12" stroke-linecap="round"/>
+        </svg>
+        <span class="art-caption">FEEL IT ALL <span>✳</span> MAKE SOMETHING</span>
+      </div>
+      <div class="entrance-bottom"><span>AN INDEPENDENT CREATIVE WORLD</span><span>SCROLL INWARD <span aria-hidden="true">↓</span></span></div>
+    </section>
+
+    <section class="view gallery" id="gallery" aria-labelledby="gallery-title" hidden>
+      <div class="gallery-heading">
+        <div><p class="eyebrow"><span class="tiny-star">✳</span> THE OVERFLOWISM GALLERY / 01</p><h1 id="gallery-title">A room to <em>feel.</em></h1></div>
+        <p>Take your time. Every piece has a story.<br><span>Select an artwork to look closer.</span></p>
+      </div>
+      <div class="room-scroll" tabindex="0" aria-label="Gallery room. Scroll horizontally to explore all paintings.">
+        <div class="room" id="room">
+          <div class="room-overlay" aria-hidden="true"><span>THE FIRST ROOM</span><span>01 — 03</span></div>
+          <div id="artworks"></div>
+          <div class="room-sign" aria-hidden="true"><span>O</span><span>OVERFLOWISM<br><small>A SPACE FOR FEELING</small></span></div>
+        </div>
+      </div>
+      <div class="gallery-footer"><p><span class="pulse-dot"></span> SELECT A PIECE TO EXPLORE <span class="mobile-hint"> · SWIPE TO MOVE THROUGH THE ROOM</span></p><a href="#about">MEET THE ARTIST <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="view about" id="about" aria-labelledby="about-title" hidden>
+      <div class="about-symbol" aria-hidden="true">◉</div>
+      <div class="about-copy">
+        <p class="eyebrow"><span class="tiny-star">✳</span> THE PERSON BEHIND THE WORK</p>
+        <h1 id="about-title">A little more<br><em>about the artist.</em></h1>
+        <p class="about-lead">Art is what happens when there is too much to hold inside.</p>
+        <p id="artist-bio"></p>
+        <p class="placeholder-note" id="artist-note"></p>
+        <a class="text-link" href="#gallery">← Back to the gallery</a>
+      </div>
+      <span class="about-index">OVERFLOWISM / THE ARTIST</span>
+    </section>
+  </main>
+
+  <dialog class="art-dialog" id="art-dialog" aria-labelledby="dialog-title">
+    <div class="dialog-inner">
+      <button class="close-dialog" type="button" aria-label="Close artwork details">×</button>
+      <div class="dialog-image-wrap"><img id="dialog-image" alt=""></div>
+      <div class="dialog-copy">
+        <p class="eyebrow"><span class="tiny-star">✳</span> FROM THE FIRST ROOM</p>
+        <p class="dialog-index" id="dialog-index"></p>
+        <h2 id="dialog-title"></h2>
+        <p class="art-details" id="dialog-details"></p>
+        <p class="art-description" id="dialog-description"></p>
+        <p class="placeholder-note" id="dialog-placeholder">Placeholder artwork and description.</p>
+        <a class="button button-light inquiry" id="inquiry">Inquire About This Piece <span aria-hidden="true">↗</span></a>
+        <p class="inquiry-note" id="inquiry-note" hidden>Add a recipient to your email draft.</p>
+      </div>
+    </div>
+  </dialog>
+</body>
+</html>
