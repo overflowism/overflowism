@@ -10,7 +10,7 @@ window.galleryData = {
   artworks: [
     {
       title: 'Untitled',
-      description: 'White flowers bloom against a vibrant blue sky, celebrating joy, beauty, and new beginnings.',
+      description: 'White flowers with yellow centers bloom from a green-and-yellow vase against a textured blue background. A celebration of joy, beauty, and new beginnings.',',
       details: 'THE BLOOM · Original painting',
       image: 'images/artworks/25218888-6B2C-4817-A892-AE31C950BC33.png',
       alt: 'White flowers with yellow centers in a green and yellow vase against a textured blue background',
