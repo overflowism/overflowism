@@ -9,12 +9,12 @@ window.galleryData = {
   },
   artworks: [
     {
-      title: 'The Shape of Feeling',
-      description: 'A study in the things we carry beneath the surface. Where one feeling ends, another begins.',
-      details: 'Placeholder artwork · Mixed media',
-      image: 'images/artworks/shape-of-feeling.svg',
-      alt: 'Abstract blue and pink forms surrounding a glowing circle',
-      placeholder: true
+      title: 'Untitled',
+      description: 'White flowers bloom against a vibrant blue sky, celebrating joy, beauty, and new beginnings.',
+      details: 'THE BLOOM · Original painting',
+      image: 'images/artworks/25218888-6B2C-4817-A892-AE31C950BC33.png',
+      alt: 'White flowers with yellow centers in a green and yellow vase against a textured blue background',
+      placeholder: false
     },
     {
       title: 'A Place Between',
