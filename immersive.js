@@ -108,6 +108,86 @@
     return (gallery.artworks || []).find(art => !art.placeholder && art.title === 'Untitled') || null;
   }
 
+
+  // Physical scene dressing is generated in one place; rooms keep the same navigation model.
+  // Decorative elements are hidden from assistive technology and disabled by reduced motion.
+  function decorateRoom(room, world) {
+    const stage = $('#installation');
+    stage.dataset.world = world.id;
+    stage.dataset.scene = room.id;
+    const prior = stage.querySelector('.scene-environment');
+    if (prior) prior.remove();
+    const env = make('div', 'scene-environment');
+    env.setAttribute('aria-hidden', 'true');
+    if (world.id === 'bloom') {
+      env.append(make('span', 'scene-sky'), make('span', 'scene-sun'),
+        make('span', 'scene-mountain mountain-back'), make('span', 'scene-mountain mountain-front'),
+        make('span', 'scene-earth'), make('span', 'scene-garden-path'));
+      for (let i = 0; i < 33; i++) {
+        const blossom = make('span', 'scene-blossom', i % 4 === 0 ? '✼' : i % 3 === 0 ? '✿' : '❀');
+        blossom.style.setProperty('--idx', i);
+        blossom.style.setProperty('--pos', ((i * 37 + 7) % 102) + '%');
+        blossom.style.setProperty('--scale', (0.65 + (i % 5) * .19).toFixed(2));
+        blossom.style.setProperty('--bottom', (1 + ((i * 17) % 23)) + '%');
+        blossom.style.setProperty('--duration', (3.7 + i % 5) + 's');
+        blossom.style.setProperty('--delay', (i % 8 * -.73).toFixed(2) + 's');
+        env.append(blossom);
+      }
+      for (let i = 0; i < 7; i++) {
+        const butterfly = make('span', 'scene-wing');
+        butterfly.style.setProperty('--idx', i);
+        butterfly.style.setProperty('--pos', (8 + ((i * 17) % 85)) + '%');
+        butterfly.style.setProperty('--high', (18 + ((i * 29) % 38)) + '%');
+        butterfly.style.setProperty('--delay', (i * -1.4) + 's');
+        env.append(butterfly);
+      }
+      if (room.id === 'fairy-tale-forest') {
+        env.append(make('span', 'scene-tree tree-left'), make('span', 'scene-tree tree-right'));
+      }
+    } else if (world.id === 'noise') {
+      for (let i = 0; i < 20; i++) {
+        const line = make('span', 'scene-thought');
+        line.style.setProperty('--idx', i);
+        line.style.setProperty('--pos', ((i * 41 + 9) % 100) + '%');
+        line.style.setProperty('--high', ((i * 31 + 7) % 90) + '%');
+        env.append(line);
+      }
+    } else if (world.id === 'heart') {
+      for (let i = 0; i < 14; i++) {
+        const petal = make('span', 'scene-heart-petal', i % 3 === 0 ? '✧' : '❦');
+        petal.style.setProperty('--idx', i);
+        petal.style.setProperty('--pos', ((i * 31 + 11) % 100) + '%');
+        env.append(petal);
+      }
+    } else if (world.id === 'watchers') {
+      for (let i = 0; i < 5; i++) {
+        const mirror = make('span', 'scene-mirror');
+        mirror.style.setProperty('--idx', i);
+        env.append(mirror);
+      }
+    } else {
+      env.append(make('span', 'scene-water'));
+    }
+    stage.prepend(env);
+  }
+
+  // Pointer-responsive viewpoint: ambient parallax rather than forced scrolling.
+  // Mouse movement never changes the focused element, keyboard route or artwork.
+  function enableViewpoint() {
+    const entry = $('#entrance');
+    entry.addEventListener('pointermove', event => {
+      if (document.documentElement.classList.contains('motion-off') || event.pointerType === 'touch') return;
+      const rect = entry.getBoundingClientRect();
+      entry.style.setProperty('--look-x', (((event.clientX - rect.left) / rect.width - .5) * 26).toFixed(1) + 'px');
+      entry.style.setProperty('--look-y', (((event.clientY - rect.top) / rect.height - .5) * 16).toFixed(1) + 'px');
+    }, { passive: true });
+    entry.addEventListener('pointerleave', () => {
+      entry.style.setProperty('--look-x', '0px');
+      entry.style.setProperty('--look-y', '0px');
+    });
+  }
+  enableViewpoint();
+
   function renderRoom(id) {
     const room = rooms.get(id);
     if (!room) return false;
@@ -115,6 +195,7 @@
     const world = worlds.get(room.world);
     const installation = $('#installation');
     theme(installation, world);
+    decorateRoom(room, world);
     $('#room-back').href = '#world/' + world.id;
     $('#room-position').textContent = world.name + ' / ROOM ' + String(atlas.rooms.filter(r => r.world === world.id).findIndex(r => r.id === id) + 1).padStart(2, '0');
     $('#room-title').textContent = room.name;
