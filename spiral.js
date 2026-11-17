@@ -18,6 +18,11 @@
   const hashNum=s=>Array.from(s).reduce((n,c)=>((n<<5)-n+c.charCodeAt(0))|0,33);
   const clampWhisperLength=text=>String(text).slice(0,300);
   function room(){return rooms[current];}
+  function exploreLabel(r){
+    return r.id==='mirror'?'REVEAL A REFLECTION ↗':
+      r.id==='collapse'?'LET THE THOUGHTS COLLIDE ↗':
+      r.id==='stillness'?'LISTEN TO THE QUIET ↗':'EXPLORE THE WHISPERS ↗';
+  }
   function setPhase(phase){app.dataset.phase=phase;}
   function count(){return counts[room().id]||0;}
   function threshold(){return data.thresholds[room().id]||5;}
@@ -68,16 +73,20 @@
     button.style.setProperty('--tilt',((step%4)-1.5)*6+'deg');
     button.setAttribute('aria-label','Thought: '+item.text+'. Select to uncover another thought.');
     button.addEventListener('click',()=>{
+      const wasFocused=document.activeElement===button;
+      let nextThought;
       if(item.contrast&&!button.dataset.revealed){
         button.dataset.revealed='yes';
-        addWhisper({text:item.contrast,tone:'hopeful'},step+5,true);
+        nextThought=addWhisper({text:item.contrast,tone:'hopeful'},step+5,true);
       }else{
-        addWhisper(phraseAt(sequence++),sequence);
+        nextThought=addWhisper(phraseAt(sequence++),sequence);
       }
       addStroke(button.textContent);
       setCount(count()+1);
       if(count()>=threshold()) release();
       button.dataset.state='departing';
+      // Keep focus on a visible thought when the original disappears.
+      if(wasFocused)(nextThought||$('#explore')).focus({preventScroll:true});
       window.setTimeout(()=>button.remove(),800);
     });
     field.append(button);
@@ -85,7 +94,9 @@
       const victim=field.firstElementChild;
       if(victim&&victim!==button){victim.dataset.state='departing';window.setTimeout(()=>victim.remove(),800);}
     }
-    if(!paired)$('#live-whisper').textContent='Thought: '+item.text;
+    // Contrasting thoughts must also be announced to assistive technology.
+    $('#live-whisper').textContent='Thought: '+item.text;
+    return button;
   }
   function addStroke(text) {
     const s=hashNum(text)+current*31+selected.length*19;
@@ -124,7 +135,7 @@
   }
   function resetArt(){
     selected=[];released=false;setCount(0);setPhase('exploring');
-    $('#explore').textContent='EXPLORE THE WHISPERS ↗';
+    $('#explore').textContent=exploreLabel(room());
     $('#clear-art').hidden=true;
     $('#silence-action').hidden=room().id!=='stillness';
     clearWhispers();drawArt();revealNext();
@@ -146,7 +157,7 @@
     $('#room-title').textContent=r.name;
     $('#room-subtitle').textContent=r.subtitle;
     $('#room-caption').textContent=r.caption;
-    $('#explore').textContent=r.id==='mirror'?'REVEAL A REFLECTION ↗':r.id==='collapse'?'LET THE THOUGHTS COLLIDE ↗':r.id==='stillness'?'LISTEN TO THE QUIET ↗':'EXPLORE THE WHISPERS ↗';
+    $('#explore').textContent=exploreLabel(r);
     $('#mirror-interact').hidden=r.id!=='mirror';
     $('#silence-action').hidden=r.id!=='stillness';
     $('#clear-art').hidden=true;
