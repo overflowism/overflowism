@@ -133,7 +133,7 @@
           <div class="studio-main-actions"><a class="studio-primary-action" href="#atrium">ENTER THE GALLERY <span aria-hidden="true">↗</span></a><a href="#atlas" class="studio-secondary-action">EXPLORE THE ATLAS</a></div>
         </div>
 
-        <div class="studio-status" aria-live="polite">
+        <div class="studio-status">
           <span class="studio-status-kicker">THE ARTIST IS FEELING</span>
           <strong id="studio-emotion-name">WONDER</strong>
           <p id="studio-emotion-line">Somewhere between looking and becoming.</p>
@@ -152,7 +152,8 @@
           </div>
           <div class="studio-tools"><button type="button" id="studio-mark">MAKE A MARK ✳</button><button type="button" id="studio-words-toggle" aria-expanded="false" aria-controls="studio-words">WRITE A THOUGHT</button><button type="button" id="studio-sound" aria-pressed="false">SOUND OFF ♫</button></div>
           <form id="studio-words" class="studio-words" hidden><label for="studio-word-input">A THOUGHT TO LEAVE HERE</label><input id="studio-word-input" maxlength="90" autocomplete="off" placeholder="Something you can't contain…"><button type="submit">LET IT BECOME FORM ↗</button></form>
-          <p id="studio-words-output" class="studio-words-output" aria-live="polite"></p>
+          <p id="studio-words-output" class="studio-words-output"></p>
+          <p id="studio-announcement" class="studio-sr-only" aria-live="polite" aria-atomic="true"></p>
         </div>
 
         <details class="studio-choose-feeling"><summary>START WITH A FEELING <span>+</span></summary>
