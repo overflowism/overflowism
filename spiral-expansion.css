@@ -34,7 +34,7 @@
 .living-object.kind-portal.zoomed{transform:scale(1.4) rotate(18deg);z-index:2}
 .living-object.kind-door{border-radius:46% 46% 0 0;min-height:clamp(137px,15vw,205px);min-width:clamp(78px,8vw,120px);background:linear-gradient(115deg,#e9c4a633,#a0aeff57,#102333e0);box-shadow:inset 0 0 60px #f6dcb885,0 0 25px #ffe4b677;border:2px solid #ffddb0ba}
 .living-object.kind-morph{border-radius:33% 67% 63% 37%;background:linear-gradient(140deg,#abe5d18a,#b0aee65e,#2a344b80)}
-.living-installation.reacting:not(.motion-off) .living-object.discovered{filter:drop-shadow(0 0 16px #fff8af)}
+html:not(.motion-off) .living-installation.reacting .living-object.discovered{filter:drop-shadow(0 0 16px #fff8af)}
 .spiral-app[data-room="creative"] .living-object{background:radial-gradient(circle at 20% 15%,#f89fe4a6,#996cff46 50%,#090921a8);border-radius:42% 58% 68% 32%}
 .spiral-app[data-room="gratitude"] .living-object{box-shadow:0 0 48px #ffebb28a,inset 0 0 26px #fff5c248}
 .thought-constellation{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:visible;filter:drop-shadow(0 0 8px #fff0c6)}
@@ -63,3 +63,11 @@
 @media(max-width:690px){.room-selector{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.room-selector a{min-height:50px;font-size:9px}.living-installation{position:relative;inset:auto;order:0;width:100%;min-height:195px;margin:5px 0 15px;gap:9px;z-index:4;align-self:center;pointer-events:none}.living-installation .living-object{flex:1 1 28%;max-width:130px;min-height:112px}.living-description{position:relative;order:10;flex:1 1 100%;bottom:auto;font-size:13px;margin-top:5px}.living-installation.is-affirmation{position:relative;inset:auto;margin:5px 0 24px;min-height:345px;gap:8px;align-content:center}.living-installation.is-affirmation .living-object{min-width:0;max-width:42%;flex:1 1 39%;min-height:108px}.living-installation.is-affirmation .living-object-art{font-size:42px}.affirmation-choose{width:100%;margin-top:10px}.affirmation-instruction{font-size:8px}.affirmation-select{max-width:190px}.discovered-affirmation{position:relative;flex:1 1 100%;order:4;margin:0;font-size:14px}.thought-constellation{z-index:-1}.carried-affirmation{position:relative;right:auto;top:auto;order:-1;max-width:100%;width:100%;border-radius:20px;align-self:center;margin:4px 0}.carry-text{font-size:12px}.room-actions{margin-top:10px}.gallery-site{margin-top:5px}.room-rail{margin-top:12px}}
 @media(prefers-reduced-motion:reduce){.living-object,.living-sky{transition:none!important}.living-installation *{animation:none!important}}
 .motion-off .living-object,.motion-off .living-sky{transition:none!important}
+
+/* Readable accessible labels for the thirteen-room navigation and interactive installations. */
+.living-object-label,.living-installation.is-affirmation .living-object-label{font-size:clamp(12px,1vw,14px);line-height:1.4;max-width:135px}
+.affirmation-instruction,.affirmation-permission,.carry-clear{font-size:12px;line-height:1.4}
+@media(max-width:840px){.living-object-label{font-size:12px}}
+@media(max-width:690px){.room-selector a{font-size:12px;min-height:65px;padding:12px 7px;line-height:1.3}.affirmation-instruction{font-size:12px}.living-object-label{font-size:12px}}
+
+.spiral-connections{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:8px 0 6px}.spiral-connections-title{font:700 10px "DM Sans",sans-serif;letter-spacing:.12em;color:#e9cee0}.spiral-connection{font-size:12px;line-height:1.4;color:#fff0e7;border-bottom:1px solid #efd0e994;padding:6px}.spiral-connection:hover,.spiral-connection:focus-visible{color:#fff;border-bottom-color:#fff}
