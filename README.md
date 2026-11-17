@@ -22,7 +22,7 @@ The opening room is a responsive **2.5D CSS/HTML/SVG experience**, not yet a fre
 - **The entrance:** an interactive studio with a moving artist avatar, creative stations, adjustable feelings, paintable canvas and optional emotional starting point.
 - **The atrium:** THE WATCHERS, THE NOISE, THE BLOOM, THE HEART, and THE SPIRAL (fifth official world).
 - **THE UNDERCURRENT:** hidden passages for complicated, unnamed, and quiet feelings.
-- **54 rooms:** 49 original spaces plus five dedicated Spiral rooms, all browsable with interactive environments and artwork locations.
+- **62 rooms:** 49 original spaces plus thirteen dedicated Spiral rooms, all browsable with interactive environments and artwork locations.
 - **The emotional atlas:** search by room, world, or feeling and move between rooms through portals.
 - **Your artwork:** the existing *Untitled* original painting appears within THE BLOOM.
 - **Accessible controls:** keyboard navigation, visible focus, native artwork dialogs, pause-motion toggle, reduced-motion support, and responsive layouts.
@@ -31,9 +31,9 @@ The rooms are creative interpretations of human emotions, not mental-health asse
 
 ## THE SPIRAL — World 05
 
-The standalone immersive world lives at `spiral.html`. Enter a dark whispering corridor and explore five rooms: THE WHISPERS, THE LOOP, THE MIRROR, THE COLLAPSE, and THE STILLNESS. Repeated and contradictory thoughts cross a threshold and become abstract digital artwork. Original physical paintings are added only when assigned by the artist.
+The standalone immersive world lives at `spiral.html`. THE SPIRAL now connects **thirteen rooms**: the original five (THE WHISPERS, THE LOOP, THE MIRROR, THE COLLAPSE, and THE STILLNESS), plus THE CREATIVE, JOY, LOVE, WONDER, GRATITUDE, POSSIBILITY, BECOMING and AFFIRMATION SPIRALS. Thoughts can multiply into joy, curiosity, confidence and love as much as uncertainty and fear. Interactive digital forms evolve as visitors explore. Original paintings are assigned only with artist authorization.
 
-The editable whisper engine, emotional opposites, accessibility rules, and artwork data conventions are documented in [SPIRAL-WORLD.md](SPIRAL-WORLD.md). The current four official worlds and THE UNDERCURRENT remain intact.
+The editable whisper engine, positive scenes, optional affirmation mirror, flower garden, thought echoes, constellation, carry-a-thought, accessibility rules, and artwork data conventions are documented in [SPIRAL-WORLD.md](SPIRAL-WORLD.md). The current four official worlds and THE UNDERCURRENT remain intact.
 
 ## Run locally
 
