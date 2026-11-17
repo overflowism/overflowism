@@ -52,7 +52,8 @@
     if(r.id==='whispers' && step<3) return {text:r.opening[step],tone:'reflective'};
     if(r.id==='loop' && step%4===0) return {text:step%8===0?'What if?':'WHAT IF?',tone:'obsessive'};
     if(r.id==='stillness' && step%4===3) return {text:'But what if I do not know yet?',tone:'reflective'};
-    if(step%3===0){
+    // Keep positive rooms curated; the darker contradiction engine remains in the original five.
+    if(step%3===0 && (!r.themes || (r.id==='love' && step%9===0))){
       const pair=data.opposites[Math.floor(random(key)*data.opposites.length)];
       return {text:pair.first,tone:'dark',contrast:pair.second};
     }
