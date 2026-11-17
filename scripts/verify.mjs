@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 
 function check(condition, message) { assert.ok(condition, message); }
 function read(path) { return readFileSync(path, 'utf8'); }
-for (const file of ['atlas-data.js','immersive.js','gallery-data.js','bloom-walk.js','spiral-data.js','spiral.js']) {
+for (const file of ['atlas-data.js','immersive.js','gallery-data.js','bloom-walk.js','spiral-data.js','spiral-expansion-data.js','spiral.js','spiral-expansion.js']) {
   execFileSync(process.execPath, ['--check', file], { stdio: 'inherit' });
 }
 const context = { window: {} };
@@ -16,9 +16,9 @@ const atlas = context.window.OVERFLOW_ATLAS;
 const gallery = context.window.galleryData;
 check(atlas && gallery, 'Atlas and artwork data should load');
 assert.equal(atlas.worlds.length, 6, 'Five official worlds plus The Undercurrent');
-assert.equal(atlas.rooms.length, 54, 'Original 49 rooms and five Spiral rooms should be present');
+assert.equal(atlas.rooms.length, 62, 'Original 49 rooms and thirteen Spiral rooms should be present');
 assert.equal(new Set(atlas.worlds.map(w => w.id)).size, 6, 'World IDs are unique');
-assert.equal(new Set(atlas.rooms.map(r => r.id)).size, 54, 'Room IDs are unique');
+assert.equal(new Set(atlas.rooms.map(r => r.id)).size, 62, 'Room IDs are unique');
 const worldIds = new Set(atlas.worlds.map(w => w.id));
 const roomIds = new Set(atlas.rooms.map(r => r.id));
 for (const room of atlas.rooms) {
@@ -56,14 +56,20 @@ for (const id of ['intro-title','entrance-choices','enter-choice','world-grid','
     check(html.includes('id="' + id + '"'), 'Missing DOM target: ' + id);
 }
 const spiral = read('spiral.html');
-for(const required of ['spiral-data.js','spiral.js','spiral.css','whisper-field','room-selector','artwork-open','motion-toggle','audio-toggle']) {
+for(const required of ['spiral-data.js','spiral-expansion-data.js','spiral.js','spiral-expansion.js','spiral.css','spiral-expansion.css','whisper-field','room-selector','artwork-open','motion-toggle','audio-toggle']) {
   check(spiral.includes(required), 'Spiral experience missing '+required);
 }
 const spiralContext={window:{}};
 runInNewContext(read('spiral-data.js'),spiralContext,{filename:'spiral-data.js'});
+runInNewContext(read('spiral-expansion-data.js'),spiralContext,{filename:'spiral-expansion-data.js'});
 const spiralData=spiralContext.window.SPIRAL_CONTENT;
-assert.equal(spiralData.rooms.length,5,'Spiral must have five independent rooms');
-assert.equal(Object.keys(spiralData.categories).length,10,'Spiral must provide ten whisper categories');
+assert.equal(spiralData.rooms.length,13,'Spiral must have thirteen independent rooms');
+assert.deepEqual(Array.from(spiralData.rooms.slice(0,5).map(r=>r.id)),['whispers','loop','mirror','collapse','stillness'],'Original five Spiral rooms must be preserved');
+check(Object.keys(spiralData.categories).length>=12,'Spiral must provide twelve or more editable thought categories');
+check(spiralData.affirmations.length>=10,'Affirmations must remain editable content');
+check(spiralData.rooms.slice(5).every(r=>r.themes && r.motif),'Each positive Spiral room needs distinct themes and visual motif');
+check(spiralData.artworkRooms.length===13,'All Spiral rooms must have an artwork placement slot');
+check(Object.keys(spiralData.connections).length>=12,'Spiral needs interwoven connections across difficult and joyful experiences');
 check(spiralData.opposites.length>=8,'Spiral requires curated emotional contradictions');
 check(atlas.worlds.some(w=>w.id==='spiral'),'Spiral must be a top-level world');
 for(const room of spiralData.rooms){
@@ -82,13 +88,13 @@ check(bloomScript.includes('requestAnimationFrame(loop)'), 'Walk-through animati
 check(bloomScript.includes('drawPainting'), 'Walk-through original artwork render missing');
 check(read('immersive.js').includes('bloom.html'), 'Main gallery is not linked to Bloom walk');
 check(existsSync('dist/index.html'), 'Build output is missing; run npm run build first');
-for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js','spiral.html','spiral.css','spiral-data.js','spiral.js']) {
+for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js','spiral.html','spiral.css','spiral-data.js','spiral.js','spiral-expansion-data.js','spiral-expansion.js','spiral-expansion.css']) {
   check(existsSync(resolve('dist',file)), 'Build output missing ' + file);
 }
 check(readdirSync('dist/images').length > 0, 'Built image directory should not be empty');
-console.log('✓ All 54 rooms, five official worlds, hidden Undercurrent passages, and artwork references verified.');
+console.log('✓ All 62 rooms, five official worlds, hidden Undercurrent passages, and artwork references verified.');
 console.log('✓ The interactive HTML and build outputs contain required assets and elements.');
 
 console.log('✓ Bloom walkthrough, original artwork, keyboard/touch controls and routes verified.');
 
-console.log('✓ The Spiral: five rooms, curated whispers, standalone entrance and gallery integration verified.');
+console.log('✓ The Spiral: thirteen rooms, positive spiral scenes, editable affirmations and artwork placeholders verified.');
