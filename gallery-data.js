@@ -12,7 +12,7 @@ window.galleryData = {
       title: 'Untitled',
       description: 'White flowers with yellow centers bloom from a green-and-yellow vase against a textured blue background. A celebration of joy, beauty, and new beginnings.',
       details: 'THE BLOOM · Original painting',
-      image: 'images/artworks/25218888-6B2C-4817-A892-AE31C950BC33.png',
+      image: 'images/artworks/untitled-the-bloom-web.jpg',
       alt: 'White flowers with yellow centers in a green and yellow vase against a textured blue background',
       placeholder: false
     },
