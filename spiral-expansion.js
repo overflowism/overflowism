@@ -15,6 +15,8 @@
   };
   const el=add('div','living-installation',undefined,experience);
   el.id='living-installation';
+  // In the narrow/mobile layout, the installation sits before room controls.
+  experience.insertBefore(el,$('#room-actions'));
   el.setAttribute('aria-label','Living interactive artwork in this room');
   const sky=add('div','living-sky',undefined,scene);
   sky.setAttribute('aria-hidden','true');
@@ -26,6 +28,7 @@
   el.append(constellation);
   const carried=add('div','carried-affirmation',undefined,experience);
   carried.hidden=true;
+  experience.insertBefore(carried,$('.scene-copy'));
   carried.setAttribute('aria-live','polite');
   const carryMark=add('span','carry-symbol','✳',carried);
   const carryText=add('span','carry-text','',carried);
@@ -175,6 +178,7 @@
   const observer=new MutationObserver(render);
   observer.observe(app,{attributes:true,attributeFilter:['data-room']});
   render();showCarry();
+  app.dataset.expanded='yes';
   // Only in-memory state: no visitor text or selected affirmations are persisted or transmitted.
   window.addEventListener('pagehide',()=>observer.disconnect(),{once:true});
 })();
