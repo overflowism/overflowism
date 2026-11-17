@@ -1,32 +1,63 @@
-# Overflowism
+# Overflowism — The Emotional Atlas
 
-A small, static interactive gallery. No accounts, database, or payment service are required.
+An immersive, ever-expanding art-gallery experience built on the original Overflowism static website.
 
-## Run it locally
+> When experience can no longer be contained, it becomes creation.
 
-Install [Node.js](https://nodejs.org/) 18 or newer, then run:
+## The experience
+
+- **The entrance:** a living illustrated sculpture and an optional emotional starting point.
+- **The atrium:** THE WATCHERS, THE NOISE, THE BLOOM, and THE HEART.
+- **THE UNDERCURRENT:** hidden passages for complicated, unnamed, and quiet feelings.
+- **49 rooms:** all browsable now, with interactive visual environments and placeholder artwork.
+- **The emotional atlas:** search by room, world, or feeling and move between rooms through portals.
+- **Your artwork:** the existing *Untitled* original painting appears within THE BLOOM.
+- **Accessible controls:** keyboard navigation, visible focus, native artwork dialogs, pause-motion toggle, reduced-motion support, and responsive layouts.
+
+The rooms are creative interpretations of human emotions, not mental-health assessments or diagnoses.
+
+## Run locally
+
+Requires Node.js 18+.
 
 ```sh
 npm run build
 npm run preview
 ```
 
-Open the address printed in the terminal. The build copies the site into `dist/`; it has no third-party dependencies. You can also serve the project folder with any static web server.
+The site has no client runtime dependencies. The output is placed in `dist/`.
 
-## Make the gallery yours
+## Add paintings
 
-The current paintings and artist biography are **placeholders**. Replace them before presenting the gallery as a collection of real work.
+Your existing data is preserved in `gallery-data.js`, and paintings are stored in `images/artworks/`.
 
-1. Put your painting images in `images/artworks/`. JPG, PNG, WebP, and SVG files work. Keep file names simple, such as `blue-dream.jpg`.
-2. Open `gallery-data.js` in a text editor. For each of the three paintings, update its `title`, `description`, `image`, `alt`, and `details`. Set `placeholder` to `false` when you have replaced the image and text. Keep the quotes and commas in place. The three entries correspond to the left, center, and right frames.
-3. Update `artist.bio` and `artist.note` in the same file. Set `artist.placeholder` to `false` when the biography is ready.
-4. Set `contactEmail` to your own email address. Until you do, the inquiry button opens an email draft with no recipient. The artwork title is included in the subject.
-5. To replace the room illustration, add your image to `images/` and change `roomImage` in `gallery-data.js`. The artwork hotspots are positioned over the existing room, so a replacement should use the same wide 16:9 layout and frame positions, or you will need to adjust the `.artwork--1`, `.artwork--2`, and `.artwork--3` positions in `styles.css`.
+1. Upload a painting to `images/artworks/`.
+2. Add an entry to the `artworks` array in `gallery-data.js`. Use a real image path, a descriptive `alt` value, and `placeholder: false`.
+3. In `immersive.js`, update `matchingArt(room)` to assign that painting to a room. The current first painting, *Untitled*, is assigned to the Butterfly Garden Walkway and Fairy-Tale Forest.
+4. Change the opening text, artist statement, or contact details in `index.html` as the project evolves.
 
-The provided placeholder artwork is original to this project. For best results, use portrait-oriented images. Review the site on a phone and a computer after making changes.
+## Add or edit emotional rooms
 
-## Publish with GitHub Pages
+`atlas-data.js` holds the worlds, room names, emotional tags, quotes, portal links, and first-chapter highlights.
 
-The workflow in `.github/workflows/pages.yml` builds and deploys the site when changes are pushed to `main`. In the repository on GitHub, open **Settings → Pages**, and under **Build and deployment**, choose **GitHub Actions** as the source. After the pull request is merged, check the **Actions** tab for the deployment. The published address will appear in **Settings → Pages**. If the workflow has not run yet, run it manually from the Actions tab.
+Each row inside the data block follows:
 
-All asset paths are relative, so the site also works at a GitHub Pages project subpath.
+```
+room-id|world-id|Room Name|Feeling one, Feeling two|A short poetic line.
+```
+
+Add a room there and it automatically becomes searchable and gets its own interactive installation. Add its ID to `links` to create special cross-world portal connections.
+
+## Customize visuals
+
+- `immersive.css`: atmospheric palettes, typography, installation visuals, motion, and mobile layouts.
+- `immersive.js`: navigation, emotional choices, search, portal links, artwork dialogs, and motion control.
+- `atlas-data.js`: world palettes, rooms, and their connections.
+
+All 49 rooms currently use a reusable atmospheric scene template, not unique 3D environments. That is intentional for the first prototype. The planned 3D architecture, custom environmental assets, and richer room-specific interactions are future enhancements.
+
+## Deploy
+
+The existing `.github/workflows/pages.yml` builds and deploys the project from `main` with GitHub Pages. Review this feature branch in its pull request and merge it when ready. The site will then deploy automatically if GitHub Pages is enabled and set to **GitHub Actions** in repository settings.
+
+The existing work, original paintings, and image assets have been preserved.
