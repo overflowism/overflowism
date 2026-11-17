@@ -128,6 +128,8 @@
         blossom.style.setProperty('--idx', i);
         blossom.style.setProperty('--pos', ((i * 37 + 7) % 102) + '%');
         blossom.style.setProperty('--scale', (0.65 + (i % 5) * .19).toFixed(2));
+        blossom.style.setProperty('--bottom', (1 + ((i * 17) % 23)) + '%');
+        blossom.style.setProperty('--duration', (3.7 + i % 5) + 's');
         blossom.style.setProperty('--delay', (i % 8 * -.73).toFixed(2) + 's');
         env.append(blossom);
       }
