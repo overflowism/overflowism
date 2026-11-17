@@ -62,6 +62,10 @@
       const groups=r.themes?.length ? r.themes : Object.keys(data.categories);
       const group=groups[wrap(Math.floor(step/3)+current*2,groups.length)];
       const list=data.categories[group];
+      if(!Array.isArray(list)||!list.length){
+        const fallback=r.phrases?.length?r.phrases:['A feeling can choose its own form.'];
+        return {text:fallback[Math.floor(random(key+4)*fallback.length)],tone:'reflective'};
+      }
       return {text:list[Math.floor(random(key+4)*list.length)],tone:group};
     }
     const text=r.phrases[Math.floor(random(key+3)*r.phrases.length)];
@@ -179,6 +183,7 @@
     $('#scene').style.setProperty('--turn',(current-2)*2.5+'deg');
     $('#scene').style.setProperty('--drift',((current%3)-1)*9+'px');
     updateArtwork();
+    renderConnections();
     drawArt();
     document.title=r.name+' — THE SPIRAL / Overflowism';
     if(writeUrl&&location.hash!=='#room/'+r.id)history.replaceState(null,'','#room/'+r.id);
@@ -219,6 +224,25 @@
     dialog.showModal();
   }
   const nav=$('#room-selector');
+  // The interwoven connections offer non-linear discovery beyond Previous / Next.
+  const nearby=document.createElement('nav');
+  nearby.className='spiral-connections';
+  nearby.setAttribute('aria-label','Connected Spiral rooms');
+  nav.after(nearby);
+  function renderConnections(){
+    nearby.replaceChildren();
+    const targets=(data.connections?.[room().id]||[]).filter(id=>rooms.some(r=>r.id===id));
+    if(!targets.length)return;
+    const title=make('span','spiral-connections-title','CONNECTED ROOMS');
+    nearby.append(title);
+    for(const id of targets){
+      const target=rooms.find(r=>r.id===id);
+      const link=make('a','spiral-connection',target.name+' ↗');
+      link.href='#room/'+id;
+      link.addEventListener('click',event=>{event.preventDefault();goTo(rooms.indexOf(target));});
+      nearby.append(link);
+    }
+  }
   rooms.forEach((r,i)=>{
     const link=make('a',null,r.name);
     link.href='#room/'+r.id;
