@@ -50,6 +50,8 @@
     // The existing whisper engine owns the canvas transformation and progress.
     // Its button click is the single source for adding a new artistic layer.
     if(r&&newRooms.has(r.id))$('#explore')?.click();
+    // Announce the chosen interactive thought after the shared engine adds its layer.
+    markWords(message);
     artPulse++;
     el.style.setProperty('--pulse-count',String(artPulse));
     el.classList.remove('reacting');
