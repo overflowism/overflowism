@@ -1,4 +1,4 @@
-/* OVERFLOWISM — THE SPIRAL. A five-room interactive thought-to-art installation.
+/* OVERFLOWISM — THE SPIRAL. Thirteen connected immersive thought-to-art rooms.
    Content is editable in spiral-data.js; no visitor data is stored or transmitted. */
 (function () {
   'use strict';
@@ -21,7 +21,12 @@
   function exploreLabel(r){
     return r.id==='mirror'?'REVEAL A REFLECTION ↗':
       r.id==='collapse'?'LET THE THOUGHTS COLLIDE ↗':
-      r.id==='stillness'?'LISTEN TO THE QUIET ↗':'EXPLORE THE WHISPERS ↗';
+      r.id==='stillness'?'LISTEN TO THE QUIET ↗':
+      r.id==='creative'?'GROW THE IDEA ↗':r.id==='joy'?'FOLLOW THE JOY ↗':
+      r.id==='love'?'FOLLOW THE THREAD ↗':r.id==='wonder'?'LOOK CLOSER ↗':
+      r.id==='gratitude'?'NOTICE THE LIGHT ↗':r.id==='possibility'?'OPEN A POSSIBILITY ↗':
+      r.id==='becoming'?'BECOME AGAIN ↗':r.id==='affirmation'?'NURTURE A THOUGHT ↗':
+      'EXPLORE THE WHISPERS ↗';
   }
   function setPhase(phase){app.dataset.phase=phase;}
   function count(){return counts[room().id]||0;}
@@ -53,7 +58,7 @@
     }
     // Sample every curated whisper category over time, not only joy/hope.
     if(step%3===1) {
-      const groups=Object.keys(data.categories);
+      const groups=r.themes?.length ? r.themes : Object.keys(data.categories);
       const group=groups[wrap(Math.floor(step/3)+current*2,groups.length)];
       const list=data.categories[group];
       return {text:list[Math.floor(random(key+4)*list.length)],tone:group};
@@ -105,19 +110,19 @@
     drawArt();
   }
   function revealNext(){
-    if(app.dataset.phase==='quiet')setPhase('exploring');
+    if(app.dataset.phase==='quiet')setPhase(released?'release':'exploring');
     addWhisper(phraseAt(sequence),sequence);
     sequence++;
     setCount(count()+1);
     addStroke(String(sequence)+room().name);
     if(count()>=threshold())release();
-    else setPhase('exploring');
+    else if(!released)setPhase('exploring');
   }
   function clearWhispers(){
     field.replaceChildren();
   }
   function release(){
-    if(released)return;
+    if(released){setPhase('release');return;}
     released=true;setPhase('release');
     const r=room();
     $('#explore').textContent='ADD ANOTHER LAYER ↗';
@@ -149,11 +154,12 @@
     current=wrap(index,rooms.length);
     const r=room();
     selected=[];released=false;sequence=0;
+    counts[r.id]=0;
     app.dataset.room=r.id;
     app.style.setProperty('--room-dark',r.palette[0]);
     app.style.setProperty('--room-mid',r.palette[1]);
     app.style.setProperty('--room-light',r.palette[2]);
-    $('#world-eyebrow').textContent='THE WALLS BEGIN WHISPERING · '+String(current+1).padStart(2,'0')+' / 05';
+    $('#world-eyebrow').textContent='THE WALLS BEGIN WHISPERING · '+String(current+1).padStart(2,'0')+' / '+String(rooms.length).padStart(2,'0');
     $('#room-title').textContent=r.name;
     $('#room-subtitle').textContent=r.subtitle;
     $('#room-caption').textContent=r.caption;
@@ -161,7 +167,7 @@
     $('#mirror-interact').hidden=r.id!=='mirror';
     $('#silence-action').hidden=r.id!=='stillness';
     $('#clear-art').hidden=true;
-    $('#control-hint').textContent=r.id==='loop'?'Watch the same question return in a new form. Tap any thought to uncover another.':r.id==='mirror'?'Touch a reflection to reveal a confession.':r.id==='collapse'?'Collect thoughts until language becomes color. Pause whenever you like.':r.id==='stillness'?'Allow a thought to appear; there is no perfect ending.':'Click a phrase to reveal its contradiction. Use ← / → to explore rooms.';
+    $('#control-hint').textContent=r.id==='loop'?'Watch the same question return in a new form. Tap any thought to uncover another.':r.id==='mirror'?'Touch a reflection to reveal a confession.':r.id==='collapse'?'Collect thoughts until language becomes color. Pause whenever you like.':r.id==='stillness'?'Allow a thought to appear; there is no perfect ending.':r.id==='affirmation'?'Explore the mirror, nurture words, connect stars or carry one thought. You may skip any of these.':r.themes?'Choose an object in the scene or follow the whispering thoughts. Joy can overflow too.':'Click a phrase to reveal its contradiction. Use ← / → to explore rooms.';
     $('#previous-room').textContent='← '+rooms[wrap(current-1,rooms.length)].name;
     $('#next-room').textContent=rooms[wrap(current+1,rooms.length)].name+' →';
     clearWhispers();setCount(0);setPhase('opening');
@@ -215,7 +221,7 @@
   rooms.forEach((r,i)=>{
     const link=make('a',null,r.name);
     link.href='#room/'+r.id;
-    link.prepend(make('span',null,'0'+(i+1)));
+    link.prepend(make('span',null,String(i+1).padStart(2,'0')));
     link.addEventListener('click',e=>{
       e.preventDefault();goTo(i);
     });
