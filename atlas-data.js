@@ -21,7 +21,15 @@
     ['spiral-loop','The Loop','Overthinking, repetition, uncertainty','Here we go again.'],
     ['spiral-mirror','The Mirror','Identity, insecurity, reflection',"The thoughts you don't want to admit."],
     ['spiral-collapse','The Collapse','Overwhelm, emotional intensity, release','When everything becomes too much.'],
-    ['spiral-stillness','The Stillness','Rest, hope, uncertainty','And then, for a moment, silence.']
+    ['spiral-stillness','The Stillness','Rest, hope, uncertainty','And then, for a moment, silence.'],
+    ['spiral-creative','The Creative Spiral','Inspiration, imagination, creative momentum','One idea becomes a universe.'],
+    ['spiral-joy','The Joy Spiral','Happiness, delight, playfulness','Happiness has a way of multiplying.'],
+    ['spiral-love','The Love Spiral','Affection, anticipation, connection','Some feelings just keep growing.'],
+    ['spiral-wonder','The Wonder Spiral','Curiosity, discovery, awe',"There's always something more to discover."],
+    ['spiral-gratitude','The Gratitude Spiral','Appreciation, contentment, abundance','The more beauty you notice, the more you discover.'],
+    ['spiral-possibility','The Possibility Spiral','Hope, anticipation, optimism','But what if it all works out?'],
+    ['spiral-becoming','The Becoming Spiral','Growth, transformation, self-discovery','You can change without losing yourself.'],
+    ['spiral-affirmation','The Affirmation Spiral','Confidence, self-worth, courage','What you nurture in your mind begins to take form.']
   ];
   spiralRooms.forEach(([id,name,feelings,quote])=>rooms.push({
     id,world:'spiral',name,feelings:feelings.split(',').map(s=>s.trim()),quote,index:rooms.length
@@ -43,10 +51,18 @@
     'the-crossroads': ['the-mirror', 'the-spark'],
     'the-landing': ['the-slow-garden', 'the-alarm'],
     'spiral-whispers': ['spiral-loop', 'spiral-mirror'],
-    'spiral-loop': ['spiral-whispers', 'spiral-mirror', 'spiral-collapse'],
+    'spiral-loop': ['spiral-whispers', 'spiral-mirror', 'spiral-collapse', 'spiral-creative', 'spiral-possibility'],
     'spiral-mirror': ['spiral-loop', 'spiral-collapse', 'spiral-stillness'],
-    'spiral-collapse': ['spiral-stillness', 'spiral-whispers'],
-    'spiral-stillness': ['spiral-whispers', 'spiral-collapse', 'the-landing']
+    'spiral-collapse': ['spiral-stillness', 'spiral-whispers', 'spiral-joy'],
+    'spiral-stillness': ['spiral-whispers', 'spiral-collapse', 'spiral-wonder', 'spiral-creative', 'the-landing'],
+    'spiral-creative': ['spiral-loop', 'spiral-wonder', 'spiral-becoming'],
+    'spiral-joy': ['spiral-collapse', 'spiral-gratitude', 'spiral-love'],
+    'spiral-love': ['spiral-whispers', 'spiral-affirmation', 'spiral-joy'],
+    'spiral-wonder': ['spiral-creative', 'spiral-possibility', 'spiral-stillness'],
+    'spiral-gratitude': ['spiral-joy', 'spiral-affirmation'],
+    'spiral-possibility': ['spiral-loop', 'spiral-wonder', 'spiral-becoming'],
+    'spiral-becoming': ['spiral-possibility', 'spiral-affirmation', 'spiral-stillness'],
+    'spiral-affirmation': ['spiral-becoming', 'spiral-love', 'spiral-joy']
   };
   const pathways = [
     { id: 'everything', label: 'I FEEL EVERYTHING', room: '100-tabs-open', detail: 'Begin where every thought has a voice.' },

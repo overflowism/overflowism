@@ -1,0 +1,73 @@
+/* THE SPIRAL — rooms 06–13. Immersive, accessible scene-specific installations.
+   Reuses the original corridor/whisper experience; visual elements are original CSS geometry. */
+.spiral-app{--discovery-shift:0}
+.living-sky{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity 1.4s,background 1.4s;z-index:2}
+.living-sky[data-room="creative"]{opacity:1;background:radial-gradient(ellipse at 68% 35%,#ce6fff72,transparent 42%),radial-gradient(ellipse at 20% 66%,#5f7cff60,transparent 49%),repeating-conic-gradient(from 15deg at 54% 56%,transparent 0deg 22deg,#f6a6ff0a 24deg 25deg)}
+.living-sky[data-room="joy"]{opacity:1;background:radial-gradient(circle at 75% 20%,#fff3a9a8,transparent 36%),radial-gradient(ellipse at 42% 67%,#5be1b35e,transparent 58%),linear-gradient(150deg,#5baadd20,#ffcf7d53)}
+.living-sky[data-room="love"]{opacity:1;background:radial-gradient(ellipse at 65% 40%,#fbbfc887,transparent 52%),repeating-radial-gradient(ellipse at 55% 55%,#f2adc31c 0px 2px,transparent 3px 50px)}
+.living-sky[data-room="wonder"]{opacity:1;background:repeating-radial-gradient(circle at 54% 52%,#bbe7ff1b 0px 2px,transparent 4px 64px),radial-gradient(circle at 51% 51%,#5bc5ff80,transparent 50%)}
+.living-sky[data-room="gratitude"]{opacity:1;background:radial-gradient(circle at 75% 26%,#fff2b375,transparent 32%),radial-gradient(circle at 35% 68%,#acd56f5c,transparent 50%),repeating-radial-gradient(circle at 59% 60%,#faf3af1a 0 1px,transparent 2px 39px)}
+.living-sky[data-room="possibility"]{opacity:1;background:radial-gradient(ellipse at 50% 33%,#ffb98780,transparent 43%),linear-gradient(120deg,#3c80f158,transparent 60%),repeating-linear-gradient(90deg,transparent 0 80px,#eeccff19 82px 84px,transparent 87px 160px)}
+.living-sky[data-room="becoming"]{opacity:1;background:radial-gradient(ellipse at 63% 43%,#b5e6bf76,transparent 46%),repeating-conic-gradient(from 0deg at 50% 50%,#ffffff0c 0deg 20deg,transparent 25deg 45deg)}
+.living-sky[data-room="affirmation"]{opacity:1;background:radial-gradient(circle at 52% 37%,#ffeebba8,transparent 36%),radial-gradient(ellipse at 73% 73%,#cf95f47d,transparent 54%),radial-gradient(ellipse at 23% 50%,#e79bc054,transparent 46%);}
+.spiral-app[data-room="joy"] .corridor-left,.spiral-app[data-room="joy"] .corridor-right,.spiral-app[data-room="gratitude"] .corridor-left,.spiral-app[data-room="gratitude"] .corridor-right{opacity:.55;filter:brightness(1.5)}
+.spiral-app[data-room="wonder"] .corridor-end{border-radius:50%;box-shadow:0 0 90px #9be1ff9c,inset 0 0 60px #92c5ff59;transform:scale(1.12)}
+.spiral-app[data-room="possibility"] .corridor-door{box-shadow:0 0 75px #ffdaa887,inset 0 0 65px #ffe2bf63}
+.spiral-app[data-room="becoming"] .corridor{transform:perspective(1100px) rotateY(calc(var(--turn,0deg) + 2deg)) translateX(var(--drift,0px)) scale(1.06)}
+.spiral-app[data-room="affirmation"] .corridor{opacity:.32}
+.spiral-app[data-room="affirmation"] .light-rift{opacity:.6;background:#fce9bb;box-shadow:0 0 70px 35px #ffe9bc9c}
+.living-installation{position:absolute;inset:22% 21% 22% 29%;z-index:4;pointer-events:none;display:flex;justify-content:center;align-items:center;gap:clamp(7px,2vw,30px);align-content:center;flex-wrap:wrap;perspective:850px}
+.living-installation[hidden]{display:none!important}
+.living-description{position:absolute;left:0;right:0;bottom:-3%;margin:0 auto;width:min(480px,95%);text-align:center;color:#fff7e4;letter-spacing:.04em;font:italic clamp(13px,1.2vw,17px)/1.5 "Playfair Display",Georgia,serif;text-shadow:0 3px 17px #080514;pointer-events:none}
+.living-object{--spin:0deg;pointer-events:auto;position:relative;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:14px;min-width:clamp(85px,9vw,142px);min-height:clamp(105px,11vw,158px);padding:10px 13px;border:1px solid #f7e0f483;border-radius:48% 48% 6% 6%;background:radial-gradient(ellipse at 50% 25%,#fff8,#cda6ed22 53%,#08051091 100%);color:#fff;text-align:center;box-shadow:0 0 33px #e9baf340,inset 0 0 24px #e8c0e928;backdrop-filter:blur(2px);transition:transform .65s cubic-bezier(.2,.7,.2,1),box-shadow .65s,background .65s}
+.living-object:hover,.living-object:focus-visible{transform:translateY(-12px) rotateY(7deg) scale(1.06);box-shadow:0 0 68px #fff6c166,inset 0 0 34px #ffe4bc4a}
+.living-object:focus-visible{outline:3px solid #fff1bf;outline-offset:5px}
+.living-object-art{display:block;position:relative;font:normal clamp(38px,5vw,76px)/1 Georgia,serif;color:#f2deef;text-shadow:0 0 20px #fff7;transition:transform .7s}
+.living-object-label{font-size:clamp(8px,.7vw,10px);letter-spacing:.16em;font-weight:700;max-width:100px;color:#fff8e8;text-shadow:0 2px 12px #0008}
+.living-object.discovered .living-object-art{transform:rotate(39deg) scale(1.32);color:#fff0ac}
+.living-object.kind-flower,.living-object.kind-garden{border-radius:50% 50% 35% 35%;background:radial-gradient(circle at 50% 28%,#fff0a8aa,#84cca568 38%,#215e527a 75%)}
+.living-object.kind-flower .living-object-art,.living-object.kind-garden .living-object-art{color:#fff2be}
+.living-object.kind-butterfly{background:radial-gradient(circle at 50% 26%,#b1f7ffad,#9dd4ec42,#122b5c80);border-radius:70% 10% 70% 10%}
+.living-object.kind-sun{background:radial-gradient(circle,#ffeab6a8,#fbaf6463 44%,transparent 72%);border-radius:50%;box-shadow:0 0 65px #ffe6aa63}
+.living-object.kind-ribbon,.living-object.kind-petal{border-radius:50% 8% 50% 8%;background:linear-gradient(150deg,#f5a3c895,#682d5f85,#e1adc76b);transform:rotate(-7deg)}
+.living-object.kind-portal{border-radius:50%;border:3px double #d1edfa;box-shadow:0 0 45px #a3e5fb9e,inset 0 0 30px #8fcfff83;background:radial-gradient(circle,#e1fdff85 0,#498cb450 28%,#111735ad 68%,#d1e2fe55 96%)}
+.living-object.kind-portal.zoomed{transform:scale(1.4) rotate(18deg);z-index:2}
+.living-object.kind-door{border-radius:46% 46% 0 0;min-height:clamp(137px,15vw,205px);min-width:clamp(78px,8vw,120px);background:linear-gradient(115deg,#e9c4a633,#a0aeff57,#102333e0);box-shadow:inset 0 0 60px #f6dcb885,0 0 25px #ffe4b677;border:2px solid #ffddb0ba}
+.living-object.kind-morph{border-radius:33% 67% 63% 37%;background:linear-gradient(140deg,#abe5d18a,#b0aee65e,#2a344b80)}
+html:not(.motion-off) .living-installation.reacting .living-object.discovered{filter:drop-shadow(0 0 16px #fff8af)}
+.spiral-app[data-room="creative"] .living-object{background:radial-gradient(circle at 20% 15%,#f89fe4a6,#996cff46 50%,#090921a8);border-radius:42% 58% 68% 32%}
+.spiral-app[data-room="gratitude"] .living-object{box-shadow:0 0 48px #ffebb28a,inset 0 0 26px #fff5c248}
+.thought-constellation{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;overflow:visible;filter:drop-shadow(0 0 8px #fff0c6)}
+.living-installation.is-affirmation{inset:24% 17% 14% 23%;justify-content:center;align-content:start;gap:10px 12px}
+.living-installation.is-affirmation .living-object{min-width:clamp(95px,9vw,140px);min-height:clamp(104px,10vw,146px);padding:9px}
+.living-installation.is-affirmation .living-object-label{font-size:9px;max-width:120px}
+.living-installation.is-affirmation .living-object-art{font-size:clamp(40px,4.2vw,67px)}
+.living-installation.is-affirmation .large-object{background:radial-gradient(ellipse,#ffe4cf83,#b6b4ff65 41%,#151026b3 82%);border:3px double #ffe7d9;border-radius:47% 47% 9% 9%;box-shadow:0 0 36px #f8d3e9b9,inset 0 0 34px #fff6ea6c}
+.living-installation.is-affirmation .kind-star{border-radius:50%;background:radial-gradient(circle,#fff5c8ad,#b2adf469 41%,#1d1740bb 75%);box-shadow:0 0 45px #ffe4b5b0}
+.living-installation.is-affirmation .kind-echo{border-radius:50% 50% 7% 7%;background:radial-gradient(circle at 50% 30%,#ffd9e5a6,#a673c58a,#2b1b48b3)}
+.echo-satellite{position:absolute;bottom:calc(100% + 7px);left:20%;width:160px;font:italic 13px "Playfair Display",Georgia,serif;padding:8px;background:#372046e5;border:1px solid #ffe7cf77;color:#fff0d5;text-shadow:none;z-index:7;pointer-events:none}
+.discovered-affirmation{position:absolute;bottom:0;left:8%;right:8%;margin:0;z-index:5;max-width:410px;text-align:center;font:italic 18px/1.45 "Playfair Display",Georgia,serif;color:#fff5dc;text-shadow:0 2px 15px #170c2e,0 0 25px #fff5db;pointer-events:none}
+.discovered-affirmation:nth-last-child(n+3){opacity:.28;filter:blur(1.8px)}
+.affirmation-choose{pointer-events:auto;width:min(520px,100%);padding:10px 12px;border:1px solid #ffecb07b;background:#231a36a8;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;backdrop-filter:blur(5px)}
+.affirmation-instruction,.affirmation-permission{width:100%;text-align:center;letter-spacing:.09em;margin:0;color:#f9edd9;font-size:9px}
+.affirmation-permission{font-size:10px;letter-spacing:0;line-height:1.4;color:#e5dce9}
+.affirmation-select{min-width:120px;max-width:245px;flex:1;padding:9px;color:#251a2d;background:#fcf5ef;border:0;font-size:11px;min-height:38px}
+.carry-action{padding:11px;color:#281a2c;background:#f3debf;border:0;font-size:10px;letter-spacing:.1em;font-weight:700;min-height:38px}
+.carry-action:hover{background:#fff}
+.carried-affirmation{position:absolute;z-index:17;top:7%;right:4%;max-width:min(270px,31%);padding:12px 14px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;background:#2a2444ec;border:1px solid #ffebaeaa;box-shadow:0 0 35px #fff0b745;border-radius:50% 50% 10px 10px;text-align:center}
+.carried-affirmation[hidden]{display:none!important}
+.carry-symbol{font-size:26px;color:#ffe8b6}.carry-text{font:italic 12px/1.4 "Playfair Display",Georgia,serif;color:#fff4df;width:100%}
+.carry-clear{border:0;background:transparent;color:#f5e8d3;font-size:9px;letter-spacing:.12em;text-decoration:underline;padding:5px}
+@media(max-width:1200px){.living-installation{inset:27% 18% 22% 26%}.living-object{min-width:75px;max-width:117px;padding:9px;min-height:110px}.living-installation.is-affirmation{inset:22% 13% 18% 20%}.living-installation.is-affirmation .living-object{min-width:96px;max-width:110px}.carried-affirmation{top:8%;right:3%;max-width:235px}}
+@media(max-width:840px){.room-selector{grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}.living-installation{inset:28% 13% 23% 20%}.living-object-label{font-size:8px}.living-installation.is-affirmation{inset:25% 10% 19% 18%}.affirmation-choose{padding:7px;gap:5px}.discovered-affirmation{font-size:15px}.carried-affirmation{top:6%;max-width:190px}}
+@media(max-width:690px){.room-selector{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}.room-selector a{min-height:50px;font-size:9px}.living-installation{position:relative;inset:auto;order:0;width:100%;min-height:195px;margin:5px 0 15px;gap:9px;z-index:4;align-self:center;pointer-events:none}.living-installation .living-object{flex:1 1 28%;max-width:130px;min-height:112px}.living-description{position:relative;order:10;flex:1 1 100%;bottom:auto;font-size:13px;margin-top:5px}.living-installation.is-affirmation{position:relative;inset:auto;margin:5px 0 24px;min-height:345px;gap:8px;align-content:center}.living-installation.is-affirmation .living-object{min-width:0;max-width:42%;flex:1 1 39%;min-height:108px}.living-installation.is-affirmation .living-object-art{font-size:42px}.affirmation-choose{width:100%;margin-top:10px}.affirmation-instruction{font-size:8px}.affirmation-select{max-width:190px}.discovered-affirmation{position:relative;flex:1 1 100%;order:4;margin:0;font-size:14px}.thought-constellation{z-index:-1}.carried-affirmation{position:relative;right:auto;top:auto;order:-1;max-width:100%;width:100%;border-radius:20px;align-self:center;margin:4px 0}.carry-text{font-size:12px}.room-actions{margin-top:10px}.gallery-site{margin-top:5px}.room-rail{margin-top:12px}}
+@media(prefers-reduced-motion:reduce){.living-object,.living-sky{transition:none!important}.living-installation *{animation:none!important}}
+.motion-off .living-object,.motion-off .living-sky{transition:none!important}
+
+/* Readable accessible labels for the thirteen-room navigation and interactive installations. */
+.living-object-label,.living-installation.is-affirmation .living-object-label{font-size:clamp(12px,1vw,14px);line-height:1.4;max-width:135px}
+.affirmation-instruction,.affirmation-permission,.carry-clear{font-size:12px;line-height:1.4}
+@media(max-width:840px){.living-object-label{font-size:12px}}
+@media(max-width:690px){.room-selector a{font-size:12px;min-height:65px;padding:12px 7px;line-height:1.3}.affirmation-instruction{font-size:12px}.living-object-label{font-size:12px}}
+
+.spiral-connections{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:8px 0 6px}.spiral-connections-title{font:700 10px "DM Sans",sans-serif;letter-spacing:.12em;color:#e9cee0}.spiral-connection{font-size:12px;line-height:1.4;color:#fff0e7;border-bottom:1px solid #efd0e994;padding:6px}.spiral-connection:hover,.spiral-connection:focus-visible{color:#fff;border-bottom-color:#fff}
