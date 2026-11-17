@@ -8,6 +8,7 @@ for (const path of [
   'bloom-walk.css',
   'bloom-walk.js',
   'immersive.css',
+  'bloom.css',
   'immersive.js',
   'atlas-data.js',
   'gallery-data.js',
