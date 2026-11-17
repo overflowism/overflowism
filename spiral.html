@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#100b19">
+  <meta name="description" content="THE SPIRAL — The walls begin whispering. Explore five immersive rooms where thoughts intensify and transform into art, part of Overflowism.">
+  <title>THE SPIRAL — Overflowism</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="spiral.css">
+  <script defer src="gallery-data.js"></script>
+  <script defer src="spiral-data.js"></script>
+  <script defer src="spiral.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#room-actions">Skip the corridor to room controls</a>
+  <div id="spiral-app" class="spiral-app" data-room="whispers" data-phase="opening">
+    <header class="masthead">
+      <a class="wordmark" href="index.html#atrium" aria-label="Overflowism main gallery">✳ OVERFLOWISM<span>.</span></a>
+      <div class="masthead-center"><span>WORLD 05</span><strong>THE SPIRAL</strong></div>
+      <div class="top-actions">
+        <button id="motion-toggle" type="button" aria-pressed="false" title="Pause ambient movement">PAUSE MOTION</button>
+        <button id="audio-toggle" type="button" aria-pressed="false" title="Optional synthesized ambient hum">SOUND OFF</button>
+        <a class="exit-link" href="index.html#world/spiral">EXIT ↗</a>
+      </div>
+    </header>
+
+    <main class="experience" id="experience">
+      <div class="scene" id="scene" aria-hidden="true">
+        <div class="scene-vignette"></div><div class="scene-fog fog-one"></div><div class="scene-fog fog-two"></div>
+        <div class="corridor" id="corridor">
+          <div class="corridor-ceiling"></div><div class="corridor-left"></div><div class="corridor-right"></div>
+          <div class="corridor-floor"></div><div class="corridor-end"></div>
+          <div class="corridor-door"><span class="door-orbit"></span><span class="door-center">◌</span></div>
+          <div class="shadow-strip shadow-left"></div><div class="shadow-strip shadow-right"></div>
+        </div>
+        <div class="scene-mirror mirror-a"></div><div class="scene-mirror mirror-b"></div>
+        <div class="light-rift"></div><div class="floor-reflection"></div>
+      </div>
+
+      <canvas id="thought-canvas" class="thought-canvas" aria-label="An abstract digital composition formed from accumulating whispers; not an original physical painting." role="img"></canvas>
+      <div class="whisper-field" id="whisper-field" aria-label="Discover thoughts floating around the corridor"></div>
+
+      <section class="scene-copy" aria-labelledby="room-title">
+        <p class="eyebrow" id="world-eyebrow">THE WALLS BEGIN WHISPERING · 01 / 05</p>
+        <h1 id="room-title">THE WHISPERS</h1>
+        <p class="room-subtitle" id="room-subtitle">Everything you never said.</p>
+        <p class="room-caption" id="room-caption">The walls begin whispering.</p>
+      </section>
+
+      <div class="threshold-marker" aria-label="Thoughts becoming an artwork">
+        <span class="eyebrow">THE THRESHOLD</span>
+        <div class="threshold-track" role="progressbar" id="thought-progress" aria-label="Thought accumulation" aria-valuemin="0" aria-valuemax="5" aria-valuenow="0"><span id="progress-fill"></span></div>
+        <p id="threshold-status">A thought appears.</p>
+      </div>
+
+      <section id="room-actions" class="room-actions" aria-label="Interactive room controls">
+        <div class="control-heading">FOLLOW THE THOUGHTS</div>
+        <button class="primary-action" id="explore" type="button">EXPLORE THE WHISPERS <span aria-hidden="true">↗</span></button>
+        <button class="outline-action" id="mirror-interact" type="button" hidden>TOUCH THE MIRROR ◇</button>
+        <button class="outline-action" id="silence-action" type="button" hidden>LET THE ROOM GO QUIET ◌</button>
+        <button class="outline-action" id="clear-art" type="button" hidden>BEGIN ANOTHER THOUGHT ↻</button>
+        <p class="control-hint" id="control-hint">Click a phrase to reveal its contradiction. Use ← / → to move between rooms.</p>
+      </section>
+
+      <aside class="gallery-site" aria-label="Artwork within this room">
+        <button type="button" id="artwork-open" class="artwork-reveal" aria-haspopup="dialog">
+          <span class="artwork-sigil" aria-hidden="true">◇</span>
+          <span class="artwork-kicker">ARTWORK ALCOVE</span>
+          <strong id="artwork-title">A PLACE FOR THE NEXT PAINTING</strong>
+          <small>DISCOVER THE ART ↗</small>
+        </button>
+      </aside>
+
+      <div class="room-rail">
+        <div class="rail-heading"><span class="eyebrow">FIVE ROOMS · ONE OVERFLOW</span><span>ESCAPE IS ALWAYS AVAILABLE</span></div>
+        <nav class="room-selector" id="room-selector" aria-label="The Spiral rooms"></nav>
+        <div class="room-arrows">
+          <button type="button" id="previous-room" aria-label="Go to previous room">← PREVIOUS</button>
+          <button type="button" id="next-room" aria-label="Go to next room">NEXT ROOM →</button>
+        </div>
+      </div>
+      <p id="live-whisper" class="sr-only" aria-live="polite" aria-atomic="true"></p>
+    </main>
+
+    <div class="intro-veil" id="intro-veil">
+      <div class="intro-border" aria-hidden="true"></div>
+      <div class="intro-content">
+        <span class="eyebrow">OVERFLOWISM PRESENTS · WORLD 05</span>
+        <span class="intro-symbol" aria-hidden="true">◎</span>
+        <h2>THE <em>SPIRAL</em></h2>
+        <p class="intro-tagline">The walls begin whispering.</p>
+        <div class="intro-whisper-lines" aria-hidden="true">
+          <span>Are you listening?</span><span>Or are you thinking again?</span>
+        </div>
+        <p class="intro-description">An impossible corridor of hidden thoughts. Here, what cannot remain inside becomes something you can see.</p>
+        <button class="enter-button" id="enter-spiral" type="button">ENTER THE SPIRAL <span aria-hidden="true">↗</span></button>
+        <a class="intro-exit" href="index.html#atrium">RETURN TO THE GALLERY</a>
+      </div>
+    </div>
+
+    <dialog id="art-dialog" aria-labelledby="art-dialog-title">
+      <button type="button" id="close-art" class="dialog-close" aria-label="Close artwork details">×</button>
+      <div class="dialog-grid">
+        <div class="dialog-image" id="dialog-image"><div class="art-placeholder" aria-hidden="true">◇</div></div>
+        <div class="dialog-copy">
+          <span class="eyebrow">THE SPIRAL · ARTWORK</span>
+          <h2 id="art-dialog-title">A space for what comes next.</h2>
+          <p id="art-dialog-description">This alcove awaits an original Overflowism artwork. The evolving thought composition in this room is an interactive digital experience, not an existing physical painting.</p>
+          <p id="art-dialog-details">Artwork not yet assigned.</p>
+          <a id="art-inquiry" class="dialog-inquiry" href="mailto:hello@overflowism.com" hidden>INQUIRE ABOUT THE ARTWORK ↗</a>
+        </div>
+      </div>
+    </dialog>
+
+  </div>
+  <noscript><p class="noscript">The Spiral's interactive whispering walls require JavaScript. <a href="index.html#world/spiral">Explore the gallery rooms instead.</a></p></noscript>
+</body>
+</html>

@@ -7,14 +7,20 @@ An immersive, ever-expanding art-gallery experience built on the original Overfl
 ## The experience
 
 - **The entrance:** a living illustrated sculpture and an optional emotional starting point.
-- **The atrium:** THE WATCHERS, THE NOISE, THE BLOOM, and THE HEART.
+- **The atrium:** THE WATCHERS, THE NOISE, THE BLOOM, THE HEART, and THE SPIRAL (fifth official world).
 - **THE UNDERCURRENT:** hidden passages for complicated, unnamed, and quiet feelings.
-- **49 rooms:** all browsable now, with interactive visual environments and placeholder artwork.
+- **54 rooms:** 49 original spaces plus five dedicated Spiral rooms, all browsable with interactive environments and artwork locations.
 - **The emotional atlas:** search by room, world, or feeling and move between rooms through portals.
 - **Your artwork:** the existing *Untitled* original painting appears within THE BLOOM.
 - **Accessible controls:** keyboard navigation, visible focus, native artwork dialogs, pause-motion toggle, reduced-motion support, and responsive layouts.
 
 The rooms are creative interpretations of human emotions, not mental-health assessments or diagnoses.
+
+## THE SPIRAL — World 05
+
+The standalone immersive world lives at `spiral.html`. Enter a dark whispering corridor and explore five rooms: THE WHISPERS, THE LOOP, THE MIRROR, THE COLLAPSE, and THE STILLNESS. Repeated and contradictory thoughts cross a threshold and become abstract digital artwork. Original physical paintings are added only when assigned by the artist.
+
+The editable whisper engine, emotional opposites, accessibility rules, and artwork data conventions are documented in [SPIRAL-WORLD.md](SPIRAL-WORLD.md). The current four official worlds and THE UNDERCURRENT remain intact.
 
 ## Run locally
 

@@ -57,7 +57,7 @@
 
   const worldGrid = $('#world-grid');
   atlas.worlds.filter(w => w.id !== 'undercurrent').forEach((world, index) => {
-    const card = anchor('', '#world/' + world.id, 'world-card');
+    const card = anchor('', world.id === 'spiral' ? 'spiral.html' : '#world/' + world.id, 'world-card');
     card.dataset.world = world.id;
     theme(card, world);
     card.append(
@@ -87,6 +87,14 @@
     $('#world-symbol').textContent = world.symbol;
     const existingWalk = document.querySelector('#bloom-walk-entry');
     if (existingWalk) existingWalk.remove();
+    const oldSpiralEntry=document.querySelector('#spiral-world-entry');
+    if(oldSpiralEntry) oldSpiralEntry.remove();
+    if(id==='spiral'){
+      const enterSpiral=anchor('ENTER THE SPIRAL ↗','spiral.html','spiral-world-entry');
+      enterSpiral.id='spiral-world-entry';
+      enterSpiral.setAttribute('aria-label','Enter THE SPIRAL immersive world of five rooms');
+      document.querySelector('.world-hero-body').append(enterSpiral);
+    }
     if (id === 'bloom') {
       const enterWalk = anchor('WALK INTO THE GARDEN ↗', 'bloom.html', 'bloom-world-entry');
       enterWalk.id = 'bloom-walk-entry';
@@ -98,7 +106,7 @@
     const target = $('#room-grid');
     target.replaceChildren();
     matching.forEach((room, index) => {
-      const card = anchor('', '#room/' + room.id, 'room-card');
+      const card = anchor('', room.world === 'spiral' ? 'spiral.html#room/' + room.id.replace(/^spiral-/,'') : '#room/' + room.id, 'room-card');
       theme(card, world);
       const top = make('div', 'room-card-top');
       top.append(make('span', null, 'ROOM ' + String(index + 1).padStart(2, '0')),
@@ -203,6 +211,13 @@
     $('#room-title').textContent = room.name;
     $('#room-quote').textContent = '“' + room.quote + '”';
     $('#room-emblem').textContent = world.symbol;
+    const oldSpiralRoom=document.querySelector('#spiral-room-entry');
+    if(oldSpiralRoom) oldSpiralRoom.remove();
+    if(room.world==='spiral'){
+      const spiralRoom=anchor('STEP INTO THIS SPIRAL ROOM ↗','spiral.html#room/'+room.id.replace(/^spiral-/,''),'spiral-world-entry');
+      spiralRoom.id='spiral-room-entry';
+      document.querySelector('.room-bottom-copy').append(spiralRoom);
+    }
     const oldWalk = document.querySelector('#bloom-room-entry');
     if (oldWalk) oldWalk.remove();
     if (id === 'butterfly-garden-walkway' || id === 'fairy-tale-forest') {
@@ -259,7 +274,7 @@
       return;
     }
     filtered.forEach(room => {
-      const card = anchor('', '#room/' + room.id, 'atlas-result');
+      const card = anchor('', room.world === 'spiral' ? 'spiral.html#room/' + room.id.replace(/^spiral-/,'') : '#room/' + room.id, 'atlas-result');
       card.append(make('span', null, worlds.get(room.world).name),
         make('h3', null, room.name), make('p', null, room.feelings.join(' · ')));
       results.append(card);

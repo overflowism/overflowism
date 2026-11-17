@@ -6,6 +6,7 @@
     { id: 'noise', name: 'THE NOISE', label: 'Intensity · Chaos · Energy', line: "Some minds don't whisper. They arrive all at once.", symbol: '✳', colors: ['#181448', '#6652da', '#e65ab0'] },
     { id: 'bloom', name: 'THE BLOOM', label: 'Joy · Growth · Wonder', line: 'Even the most complicated mind can grow something beautiful.', symbol: '✿', colors: ['#164d4d', '#66a58a', '#f6ba72'] },
     { id: 'heart', name: 'THE HEART', label: 'Love · Loss · Attachment', line: "Some people leave. Their feelings don't.", symbol: '♡', colors: ['#491a3c', '#be5d81', '#f0b1b6'] },
+    { id: 'spiral', name: 'THE SPIRAL', label: 'Contradiction · Thinking · Becoming', line: 'The walls begin whispering.', symbol: '◎', colors: ['#0c0b13', '#51263e', '#c3a5c7'] },
     { id: 'undercurrent', name: 'THE UNDERCURRENT', label: 'Stillness · In-between · Rest', line: "For everything that doesn't have a name yet.", symbol: '◌', colors: ['#1d2437', '#60788d', '#b5a9c7'] }
   ];
   // id | world | name | feelings | poetic invitation
@@ -13,6 +14,18 @@
     const [id, world, name, feelings, quote] = line.split('|');
     return { id, world, name, feelings: feelings.split(',').map(s => s.trim()), quote, index };
   });
+  // THE SPIRAL: fifth official world with its own entrance, while retaining THE UNDERCURRENT.
+  // These are discovery records for the central gallery; the immersive experience runs in spiral.html.
+  const spiralRooms = [
+    ['spiral-whispers','The Whispers','Contradiction, unsaid thoughts, longing','Everything you never said.'],
+    ['spiral-loop','The Loop','Overthinking, repetition, uncertainty','Here we go again.'],
+    ['spiral-mirror','The Mirror','Identity, insecurity, reflection',"The thoughts you don't want to admit."],
+    ['spiral-collapse','The Collapse','Overwhelm, emotional intensity, release','When everything becomes too much.'],
+    ['spiral-stillness','The Stillness','Rest, hope, uncertainty','And then, for a moment, silence.']
+  ];
+  spiralRooms.forEach(([id,name,feelings,quote])=>rooms.push({
+    id,world:'spiral',name,feelings:feelings.split(',').map(s=>s.trim()),quote,index:rooms.length
+  }));
   const links = {
     'the-empty-chair': ['the-sunroom', 'the-echo', 'the-deep-water'],
     'the-sunroom': ['the-empty-chair', 'the-celebration'],
@@ -28,7 +41,12 @@
     'the-unsent-letter': ['the-release', 'the-echo'],
     'the-void': ['the-roots', 'the-landing'],
     'the-crossroads': ['the-mirror', 'the-spark'],
-    'the-landing': ['the-slow-garden', 'the-alarm']
+    'the-landing': ['the-slow-garden', 'the-alarm'],
+    'spiral-whispers': ['spiral-loop', 'spiral-mirror'],
+    'spiral-loop': ['spiral-whispers', 'spiral-mirror', 'spiral-collapse'],
+    'spiral-mirror': ['spiral-loop', 'spiral-collapse', 'spiral-stillness'],
+    'spiral-collapse': ['spiral-stillness', 'spiral-whispers'],
+    'spiral-stillness': ['spiral-whispers', 'spiral-collapse', 'the-landing']
   };
   const pathways = [
     { id: 'everything', label: 'I FEEL EVERYTHING', room: '100-tabs-open', detail: 'Begin where every thought has a voice.' },

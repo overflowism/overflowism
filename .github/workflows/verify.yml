@@ -41,6 +41,21 @@ jobs:
           else
             echo "No headless browser installed; JavaScript syntax and DOM contracts checked by npm test."
           fi
+      - name: Verify Spiral world initializes in a browser
+        shell: bash
+        run: |
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -n "$BROWSER" ]; then
+            "$BROWSER" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+              --virtual-time-budget=1800 --dump-dom "file://$PWD/dist/spiral.html" > /tmp/overflowism-spiral-dom.html
+            grep -q 'data-ready="yes"' /tmp/overflowism-spiral-dom.html
+            echo "Spiral world initialized in headless browser."
+            "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage \
+              --window-size=1440,1000 --virtual-time-budget=2000 \
+              --screenshot="$PWD/preview-spiral.png" "file://$PWD/dist/spiral.html" || true
+          else
+            echo "No headless browser installed; JavaScript syntax and DOM contracts checked by npm test."
+          fi
       - name: Package interactive preview
         uses: actions/upload-artifact@v4
         with:
@@ -48,5 +63,6 @@ jobs:
           path: |
             dist/**
             preview-desktop.png
+            preview-spiral.png
           if-no-files-found: error
           retention-days: 14
