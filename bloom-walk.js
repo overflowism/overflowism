@@ -293,6 +293,7 @@
     if(!state.paused)state.elapsed+=dt;
     update(dt);
     draw(state.elapsed);
+    if (!$('#bloom-world').dataset.ready) $('#bloom-world').dataset.ready = 'yes';
     requestAnimationFrame(loop);
   }
   function openArt() {
