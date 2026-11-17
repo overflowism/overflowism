@@ -1,5 +1,6 @@
 # OVERFLOWISM — V2 Art Direction & Build Notes
 
+> **Foundational manifesto takes precedence:** This document is a V2 visual chapter, not the definition of Overflowism. For Marcela Thomas's 2026 movement, central statement, full range of overflow (including joy, music, nature, spirituality, beauty, travel and love), and future design guardrails, read [FOUNDATIONAL-MANIFESTO.md](FOUNDATIONAL-MANIFESTO.md) first. The visual direction below must not narrow the movement to mental health, emotional suffering, or one aesthetic.
 ## Creative north star
 
 **Welcome to the inside of my mind.** Overflowism is an artist-led, immersive emotional gallery, not a conventional portfolio or a clinical map. Every painting gets to live inside an atmosphere that feels like walking into a physical installation. The gallery should feel mysterious, welcoming, cinematic, and alive.
