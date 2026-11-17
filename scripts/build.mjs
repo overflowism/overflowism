@@ -5,6 +5,7 @@ await mkdir('dist', { recursive: true });
 for (const path of [
   'index.html',
   'immersive.css',
+  'bloom.css',
   'immersive.js',
   'atlas-data.js',
   'gallery-data.js',
