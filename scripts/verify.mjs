@@ -68,8 +68,20 @@ assert.deepEqual(Array.from(spiralData.rooms.slice(0,5).map(r=>r.id)),['whispers
 check(Object.keys(spiralData.categories).length>=12,'Spiral must provide twelve or more editable thought categories');
 check(spiralData.affirmations.length>=10,'Affirmations must remain editable content');
 check(spiralData.rooms.slice(5).every(r=>r.themes && r.motif),'Each positive Spiral room needs distinct themes and visual motif');
+for(const room of spiralData.rooms){
+  for(const theme of room.themes||[]){
+    check(Array.isArray(spiralData.categories[theme]) && spiralData.categories[theme].length>0,
+      'Unknown or empty Spiral whisper category '+theme+' in '+room.id);
+  }
+}
 check(spiralData.artworkRooms.length===13,'All Spiral rooms must have an artwork placement slot');
-check(Object.keys(spiralData.connections).length>=12,'Spiral needs interwoven connections across difficult and joyful experiences');
+for(const room of spiralData.rooms){
+  check(Array.isArray(spiralData.connections[room.id]) && spiralData.connections[room.id].length,
+    'Spiral room lacks discovery connections: '+room.id);
+  for(const next of spiralData.connections[room.id]){
+    check(spiralData.rooms.some(r=>r.id===next),'Spiral connection target missing: '+next);
+  }
+}
 check(spiralData.opposites.length>=8,'Spiral requires curated emotional contradictions');
 check(atlas.worlds.some(w=>w.id==='spiral'),'Spiral must be a top-level world');
 for(const room of spiralData.rooms){
