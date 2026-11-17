@@ -71,3 +71,8 @@
 @media(max-width:400px){.studio-copy h1{font-size:43px}.studio-interactions{margin-top:570px}.studio-avatar{width:36vw}.studio-live-canvas{width:25%;left:18%}.studio-choose-feeling .entry-option{font-size:9px}}
 .motion-off .studio-entrance *, .motion-off .studio-entrance *:before,.motion-off .studio-entrance *:after{animation:none!important;transition:none!important}
 @media(prefers-reduced-motion:reduce){.studio-entrance *, .studio-entrance *:before,.studio-entrance *:after{animation:none!important;transition:none!important}}
+
+/* Refined studio typography: warm editorial serif + restrained monospaced gallery signage. */
+.topbar:has(+ main .studio-entrance:not([hidden])) .brand{font:500 23px "Cormorant Garamond",Georgia,serif;letter-spacing:.12em}
+.topbar:has(+ main .studio-entrance:not([hidden])) nav a{font:700 10px "Space Mono",monospace;letter-spacing:.07em}
+.topbar:has(+ main .studio-entrance:not([hidden])) .motion-toggle{font:700 9px "Space Mono",monospace;letter-spacing:.02em;background:#24151c}
