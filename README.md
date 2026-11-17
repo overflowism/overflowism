@@ -61,3 +61,26 @@ All 49 rooms currently use a reusable atmospheric scene template, not unique 3D 
 The existing `.github/workflows/pages.yml` builds and deploys the project from `main` with GitHub Pages. Review this feature branch in its pull request and merge it when ready. The site will then deploy automatically if GitHub Pages is enabled and set to **GitHub Actions** in repository settings.
 
 The existing work, original paintings, and image assets have been preserved.
+
+
+## THE BLOOM — Walkable Garden (Chapter One)
+
+Visit `bloom.html` (or select **WALK INTO THE GARDEN** from THE BLOOM world page) to enter an original, full-screen garden environment.
+
+- **Arrival:** a cinematic invitation into an imagined Medellín-inspired butterfly garden.
+- **Explore:** move forward with W / Up, backward with S / Down, turn with A/D or Left/Right. Drag the scene to look around. Touchscreen visitors can use the on-screen controls.
+- **Discover:** approach the original **Untitled** painting along the path, then select **LOOK CLOSER** to see its information and inquire about it.
+- **Continue:** the walkway transitions into the Fairy-Tale Forest and ends with a choice to explore more worlds or walk again.
+- **Atmosphere:** illustrated depth, garden flowers, butterflies, trees, mountain skyline, spotlighted artwork, and gentle ambient motion. Motion can be paused. No audio automatically plays.
+- **Accessibility:** an optional standard gallery route remains available. The controls are explicitly labeled, and browser reduced-motion preferences are respected.
+
+The walk-through uses a lightweight **canvas-based perspective scene** and does not require Three.js, external assets, or a backend service. It is a designed interactive environment, not yet a photorealistic or full free-roaming WebGL museum.
+
+### Maintain the Garden
+
+- `bloom.html` — layout, copy, buttons, overlay and painting information.
+- `bloom-walk.css` — typography, overlays, controls and responsive layout.
+- `bloom-walk.js` — camera, walking, drawing, garden objects, navigation, interactions.
+- `gallery-data.js` — existing original painting and inquiry email.
+
+To replace or add art later, update the artwork inventory and the scene placement logic in `bloom-walk.js`. The current original painting is preserved at `images/artworks/untitled-the-bloom-web.jpg`.
