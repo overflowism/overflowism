@@ -36,7 +36,7 @@ button:focus-visible,a:focus-visible{outline:3px solid #f9ceeb;outline-offset:4p
 .eyebrow{font-size:10px;font-weight:700;letter-spacing:.23em;color:#e3bfd7}.scene-copy h1{font-family:"Playfair Display",Georgia,serif;font-size:clamp(56px,7vw,110px);font-weight:400;line-height:1.02;letter-spacing:-.05em;margin:20px 0 10px;text-wrap:balance}
 .room-subtitle{font:italic clamp(19px,2.3vw,30px)/1.3 "Playfair Display",Georgia,serif;color:#f5d8e7}.room-caption{font-size:13px;color:#ccb8cf;margin-top:25px;letter-spacing:.06em}
 .whisper-field{position:absolute;inset:0;z-index:5;pointer-events:none;overflow:hidden}
-.whisper{position:absolute;max-width:min(34vw,340px);border:0;background:linear-gradient(135deg,#110d1c9c,#34152f70);border-left:1px solid #f1afcc66;padding:14px 17px;color:#f9e9f4;text-align:left;font:italic clamp(13px,1.3vw,19px)/1.5 "Playfair Display",Georgia,serif;text-shadow:0 2px 12px #03040d;backdrop-filter:blur(4px);box-shadow:0 9px 30px #05040a5e;transform:perspective(570px) rotateY(var(--tilt,0deg)) translateY(0);opacity:0;animation:whisperIn .65s ease forwards,whisperFloat 6s ease-in-out .7s infinite alternate;pointer-events:auto;cursor:pointer;overflow-wrap:anywhere}
+.whisper{position:absolute;max-width:min(34vw,340px);border:0;background:linear-gradient(135deg,#110d1c9c,#34152f70);border-left:1px solid #f1afcc66;padding:14px 17px;color:#f9e9f4;text-align:left;font:italic clamp(13px,1.3vw,19px)/1.5 "Playfair Display",Georgia,serif;text-shadow:0 2px 12px #03040d;backdrop-filter:blur(4px);box-shadow:0 9px 30px #05040a5e;transform:perspective(570px) rotateY(var(--tilt,0deg)) translateY(0);opacity:1;animation:whisperIn .65s ease forwards,whisperFloat 6s ease-in-out .7s infinite alternate;pointer-events:auto;cursor:pointer;overflow-wrap:anywhere}
 .whisper:hover,.whisper:focus-visible{border-color:#ffdbef;background:#47253ca9}
 .whisper[data-tone=hopeful],.whisper[data-tone=joyful],.whisper[data-tone=comforting]{border-color:#ffe1aa99;color:#fff1d9}
 .whisper[data-state=departing]{animation:whisperOut .75s ease forwards;pointer-events:none}
@@ -92,7 +92,7 @@ dialog::backdrop{background:#04030ddc;backdrop-filter:blur(6px)}
 @keyframes fog{to{transform:translate(8vw,-8vh) scale(1.14)}}
 @keyframes orbit{50%{transform:rotate(18deg) scale(1.07)}}
 @keyframes rift{50%{opacity:.56;transform:scaleX(1.5)}}
-@keyframes whisperIn{to{opacity:1}}
+@keyframes whisperIn{from{opacity:0}to{opacity:1}}
 @keyframes whisperFloat{to{transform:perspective(570px) rotateY(var(--tilt,0deg)) translateY(-14px)}}
 @keyframes whisperOut{to{opacity:0;transform:translateY(-30px) scale(.92)}}
 @media(max-width:950px){.experience{grid-template-columns:minmax(0,1fr) 210px;padding:44px 4vw 22px}.scene-copy h1{font-size:clamp(56px,8vw,82px)}.artwork-reveal{min-height:190px}.whisper{max-width:36vw}}
