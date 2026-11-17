@@ -18,9 +18,11 @@
     {id:'fire',x:60,y:61,mood:'chaos',heat:86,title:'THE THRESHOLD',line:'Even the difficult feelings belong here.'}
   ];
   const stationMap=new Map(stations.map(s=>[s.id,s]));
-  let index=0,autoplay=null,marked=0,painting=false,brushColor=0,audio=null,scheduled=null;
+  let index=0,autoplay=null,marked=0,painting=false,paintMoves=0,brushColor=0,audio=null,scheduled=null;
+  let audioStarting=false,audioGeneration=0;
   const colors=['#b32141','#315a9c','#f5c15a','#e19ab6','#223c39','#ec7650','#f2ead4'];
-  const mark=txt=>{const output=$('#studio-words-output');if(output)output.textContent=txt;};
+  const announce=txt=>{const live=$('#studio-announcement');if(live)live.textContent=txt;};
+  const mark=(txt,spoken=false)=>{const output=$('#studio-words-output');if(output)output.textContent=txt;if(spoken)announce(txt);};
   function paintSeed(){
     if(!ctx)return;
     ctx.setTransform(1,0,0,1,0,0);
@@ -36,7 +38,7 @@
       ctx.fillRect(x,y,10+i%6*3,5+i%5*4);
     }
   }
-  function stroke(x,y){
+  function stroke(x,y,spoken=false){
     if(!ctx)return;
     const r=12+(marked%8)*4;
     ctx.save();
@@ -52,12 +54,12 @@
     ctx.strokeStyle=colors[(brushColor+3)%colors.length];ctx.lineWidth=3;
     ctx.beginPath();ctx.moveTo(x,y+r);ctx.quadraticCurveTo(x-13,y+r*2,x+10,y+r*3);ctx.stroke();
     ctx.restore();marked++;brushColor++;
-    mark('A feeling became a mark. ' + marked + ' layers of release.');
+    mark('A feeling became a mark. ' + marked + ' layers of release.',spoken);
   }
-  function randomMark(){
+  function randomMark(spoken=false){
     const x=35+((marked*83+41)%(paint.width-70));
     const y=65+((marked*59+39)%(paint.height-140));
-    stroke(x,y);
+    stroke(x,y,spoken);
   }
   paintSeed();
   const at=(event)=>{
@@ -65,40 +67,44 @@
     return{x:(event.clientX-box.left)/box.width*paint.width,y:(event.clientY-box.top)/box.height*paint.height};
   };
   paint.addEventListener('pointerdown',event=>{
-    painting=true;paint.setPointerCapture?.(event.pointerId);
-    const p=at(event);stroke(p.x,p.y);
+    painting=true;paintMoves=0;paint.setPointerCapture?.(event.pointerId);
+    const p=at(event);stroke(p.x,p.y,true);
   });
   paint.addEventListener('pointermove',event=>{
-    if(!painting||marked%2===1)return;
+    if(!painting)return;
+    paintMoves++;
+    if(paintMoves%2!==0)return; // Independent of the mark count; drawing cannot deadlock.
     const p=at(event);stroke(p.x,p.y);
   });
   paint.addEventListener('pointerup',()=>{painting=false;});
   paint.addEventListener('pointercancel',()=>{painting=false;});
   paint.addEventListener('keydown',event=>{
-    if(event.key==='Enter'||event.key===' '){event.preventDefault();randomMark();}
+    if(event.key==='Enter'||event.key===' '){event.preventDefault();randomMark(true);}
   });
   $('#studio-mark')?.addEventListener('click',()=>{
-    randomMark();setStation('paint',true);
+    setStation('paint',true);randomMark(true);
   });
   function setStation(id,manual=false){
     const s=stationMap.get(id);
     if(!s)return;
     index=stations.indexOf(s);
     room.dataset.mood=s.mood;
-    avatar.dataset.action=manual&&s.id!=='dance'?s.id:'walk';
-    avatar.style.left=s.x+'%';avatar.style.top=s.y+'%';
+    const moving=!media.matches&&!document.documentElement.classList.contains('motion-off');
+    avatar.dataset.action=moving?'walk':s.id;
+    avatar.style.setProperty('--avatar-x',s.x+'%');
+    avatar.style.setProperty('--avatar-y',s.y+'%');
     name.textContent=s.title;line.textContent=s.line;
     temp.style.width=s.heat+'%';
     track.setAttribute('aria-valuenow',String(s.heat));
     room.querySelectorAll('[data-studio-stop]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.studioStop===id)));
     // Walk into the station, then act in place.
     clearTimeout(scheduled);
-    if(!media.matches&&!document.documentElement.classList.contains('motion-off')){
+    if(moving){
       scheduled=window.setTimeout(()=>{avatar.dataset.action=s.id;},2200);
-    }else avatar.dataset.action=s.id;
-    if(id==='paint'&&marked<16)randomMark();
-    if(id==='code'){$('.laptop-screen')?.classList.add('coding');}
-    if(manual)resetTour();
+    }
+    if(id==='paint'&&!manual&&marked<16)randomMark();
+    $('.laptop-screen')?.classList.toggle('coding',id==='code');
+    if(manual){announce(s.title+'. '+s.line);resetTour();}
   }
   const allowAuto=()=>!media.matches&&!document.documentElement.classList.contains('motion-off')&&!document.hidden&&!room.hidden;
   function autoplayStep(){
@@ -124,32 +130,68 @@
     const msg=text.value.trim().slice(0,90);
     if(!msg){text.focus();return;}
     // Render plain text only: a private thought is never transmitted or persisted.
-    mark('“'+msg+'” — released into the room.');
-    randomMark();text.value='';setStation('paint',true);
+    setStation('paint',true);randomMark();text.value='';
+    mark('“'+msg+'” — released into the room.',true);
   });
-  // Ambient audio is a low synthesized original tone, off until explicit opt-in.
+  // Optional synthesized room tone. One in-flight initialization at a time;
+  // contexts are closed on off, hidden, navigation, and errors.
   const soundButton=$('#studio-sound');
+  function soundLabel(enabled){
+    if(!soundButton)return;
+    soundButton.textContent=enabled?'SOUND ON ♫':'SOUND OFF ♫';
+    soundButton.setAttribute('aria-pressed',String(enabled));
+  }
   async function soundOff(){
-    if(audio){
-      try{audio.osc.stop();audio.osc.disconnect();audio.gain.disconnect();await audio.ctx.suspend();}catch(e){}
-      audio=null;
+    audioGeneration++; // Invalidates pending resume() on a hidden/unloaded page.
+    const previous=audio;
+    audio=null;
+    soundLabel(false);
+    if(previous){
+      try{previous.osc.stop();}catch(e){}
+      try{previous.osc.disconnect();previous.gain.disconnect();}catch(e){}
+      try{await previous.ctx.close();}catch(e){}
     }
-    if(soundButton){soundButton.textContent='SOUND OFF ♫';soundButton.setAttribute('aria-pressed','false');}
   }
   soundButton?.addEventListener('click',async()=>{
-    if(audio){await soundOff();return;}
-    const C=window.AudioContext||window.webkitAudioContext;
-    if(!C){soundButton.textContent='AUDIO UNAVAILABLE';soundButton.disabled=true;return;}
+    // Guard synchronous double clicks while resume() or close() is in flight.
+    if(audioStarting)return;
+    audioStarting=true;
+    soundButton.disabled=true;
+    let localContext=null,localOsc=null,localGain=null;
     try{
-      const ctxAudio=new C();await ctxAudio.resume();
-      const osc=ctxAudio.createOscillator(),gain=ctxAudio.createGain();
-      osc.type='sine';osc.frequency.value=109;gain.gain.value=.014;
-      osc.connect(gain);gain.connect(ctxAudio.destination);osc.start();
-      audio={ctx:ctxAudio,osc,gain};soundButton.textContent='SOUND ON ♫';soundButton.setAttribute('aria-pressed','true');
-    }catch(e){await soundOff();soundButton.textContent='AUDIO UNAVAILABLE';}
+      if(audio){await soundOff();return;}
+      const C=window.AudioContext||window.webkitAudioContext;
+      if(!C){soundButton.textContent='AUDIO UNAVAILABLE';return;}
+      const generation=++audioGeneration;
+      localContext=new C();
+      await localContext.resume();
+      if(generation!==audioGeneration)return; // Visibility/pagehide canceled start.
+      localOsc=localContext.createOscillator();
+      localGain=localContext.createGain();
+      localOsc.type='sine';localOsc.frequency.value=109;localGain.gain.value=.014;
+      localOsc.connect(localGain);localGain.connect(localContext.destination);
+      localOsc.start();
+      audio={ctx:localContext,osc:localOsc,gain:localGain};
+      // The active object now owns this context; the finally block must not close it.
+      localContext=null;localOsc=null;localGain=null;
+      soundLabel(true);
+    }catch(e){
+      await soundOff();
+      soundButton.textContent='AUDIO UNAVAILABLE';
+    }finally{
+      if(localOsc){try{localOsc.stop();localOsc.disconnect();}catch(e){}}
+      if(localGain){try{localGain.disconnect();}catch(e){}}
+      if(localContext){try{await localContext.close();}catch(e){}}
+      audioStarting=false;
+      if(soundButton.textContent!=='AUDIO UNAVAILABLE')soundButton.disabled=false;
+    }
   });
-  document.addEventListener('visibilitychange',()=>{if(document.hidden)soundOff();});
-  window.addEventListener('pagehide',()=>{if(autoplay)clearInterval(autoplay);clearTimeout(scheduled);soundOff();});
+  document.addEventListener('visibilitychange',()=>{if(document.hidden)void soundOff();});
+  window.addEventListener('pagehide',()=>{
+    if(autoplay)clearInterval(autoplay);
+    clearTimeout(scheduled);
+    void soundOff();
+  });
   // Decorative elements can be paused from the site's existing PAUSE MOTION button.
   room.dataset.studioReady='yes';
 })();
