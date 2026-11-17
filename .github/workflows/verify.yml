@@ -29,6 +29,20 @@ jobs:
               --window-size=1440,1000 --virtual-time-budget=3000 \
               --screenshot="$PWD/preview-desktop.png" "file://$PWD/dist/index.html" || true
           fi
+      - name: Verify live studio entrance initializes
+        shell: bash
+        run: |
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -n "$BROWSER" ]; then
+            "$BROWSER" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+              --virtual-time-budget=1200 --dump-dom "file://$PWD/dist/index.html" > /tmp/overflowism-studio-dom.html
+            grep -q 'data-studio-ready="yes"' /tmp/overflowism-studio-dom.html
+            grep -q 'data-studio-stop="dance"' /tmp/overflowism-studio-dom.html
+            grep -q 'data-studio-stop="code"' /tmp/overflowism-studio-dom.html
+            echo "The animated studio and its controls initialized."
+          else
+            echo "No browser available; studio code and markup verified by npm test."
+          fi
       - name: Verify Bloom experience renders in a browser
         shell: bash
         run: |
