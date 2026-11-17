@@ -16,7 +16,7 @@
   const colors=['#eac8db','#c6a4e9','#f8c9b7','#8b87d8','#d7b3dc','#f5deb8','#5e9a9f','#b85c83'];
   const random=(seed)=>{const x=Math.sin(seed*82.5127+31.988)*42758.545;return x-Math.floor(x)};
   const hashNum=s=>Array.from(s).reduce((n,c)=>((n<<5)-n+c.charCodeAt(0))|0,33);
-  const escapeFromUserInput=text=>String(text).slice(0,300);
+  const clampWhisperLength=text=>String(text).slice(0,300);
   function room(){return rooms[current];}
   function setPhase(phase){app.dataset.phase=phase;}
   function count(){return counts[room().id]||0;}
@@ -46,15 +46,18 @@
       const pair=data.opposites[Math.floor(random(key)*data.opposites.length)];
       return {text:pair.first,tone:'dark',contrast:pair.second};
     }
-    if(step%4===2) {
-      const group=step%8===2?'joyful':'hopeful', list=data.categories[group];
+    // Sample every curated whisper category over time, not only joy/hope.
+    if(step%3===1) {
+      const groups=Object.keys(data.categories);
+      const group=groups[wrap(Math.floor(step/3)+current*2,groups.length)];
+      const list=data.categories[group];
       return {text:list[Math.floor(random(key+4)*list.length)],tone:group};
     }
     const text=r.phrases[Math.floor(random(key+3)*r.phrases.length)];
     return {text,tone:r.id==='stillness'?'comforting':r.id==='collapse'?'contradictory':'reflective'};
   }
   function addWhisper(item,step,paired=false){
-    const button=make('button','whisper',escapeFromUserInput(item.text));
+    const button=make('button','whisper',clampWhisperLength(item.text));
     button.type='button';
     button.dataset.tone=item.tone||'reflective';
     const positions=[[65,22],[14,42],[55,53],[26,73],[77,63],[43,26],[9,57],[71,77],[48,67],[78,36],[21,20],[51,82]];
@@ -114,6 +117,8 @@
     addStroke(r.name+' RELEASE');
   }
   function silence(){
+    // A quiet room must contain no hidden interactive whisper buttons.
+    clearWhispers();
     setPhase('quiet');
     $('#live-whisper').textContent='The room is quiet.';
   }
@@ -261,8 +266,18 @@
     }
     ctx.restore();
   }
+  // While the opening veil is visible, background controls cannot receive focus.
+  function setEntranceOpen(open){
+    for(const node of [$('.masthead'),$('#experience')]){
+      node.inert=open;
+      if(open)node.setAttribute('aria-hidden','true');
+      else node.removeAttribute('aria-hidden');
+    }
+    $('#intro-veil').hidden=!open;
+  }
+  setEntranceOpen(true);
   $('#enter-spiral').addEventListener('click',()=>{
-    $('#intro-veil').hidden=true;
+    setEntranceOpen(false);
     $('#explore').focus({preventScroll:true});
     revealNext();
   });
@@ -288,7 +303,6 @@
     if(e.key==='ArrowLeft'&&document.activeElement?.tagName!=='BUTTON'){e.preventDefault();goTo(current-1);}
     if(e.key===' '&&e.target===document.body){e.preventDefault();revealNext();}
   });
-  let rafId=null;
   function ambientBeat(){
     if(motionOff||document.hidden||$('#intro-veil').hidden===false)return;
     const now=Date.now();if(now-lastInteraction<8500)return;lastInteraction=now;
@@ -304,14 +318,20 @@
   $('#motion-toggle').addEventListener('click',()=>{motionOverride=true;toggleMotion(!motionOff);});
   motionMedia.addEventListener?.('change',e=>{if(!motionOverride)toggleMotion(e.matches);});
   function audioSupported(){return !!(window.AudioContext||window.webkitAudioContext);}
+  function setAudioUi(on){
+    $('#audio-toggle').textContent=on?'SOUND ON':'SOUND OFF';
+    $('#audio-toggle').setAttribute('aria-pressed',String(on));
+  }
   function stopSound(){
-    if(!ambient)return;
-    try{ambient.osc.stop();ambient.osc.disconnect();ambient.gain.disconnect();}catch(e){}
-    ambient=null;
+    if(ambient){
+      try{ambient.osc.stop();ambient.osc.disconnect();ambient.gain.disconnect();}catch(e){}
+      ambient=null;
+    }
+    setAudioUi(false);
   }
   $('#audio-toggle').addEventListener('click',async()=>{
     if(ambient){
-      stopSound();$('#audio-toggle').textContent='SOUND OFF';$('#audio-toggle').setAttribute('aria-pressed','false');return;
+      stopSound();return;
     }
     if(!audioSupported()){
       $('#audio-toggle').textContent='AUDIO UNAVAILABLE';$('#audio-toggle').disabled=true;return;
@@ -324,15 +344,19 @@
       gain.gain.value=.016;
       osc.connect(gain);gain.connect(audioCtx.destination);osc.start();
       ambient={osc,gain};
-      $('#audio-toggle').textContent='SOUND ON';$('#audio-toggle').setAttribute('aria-pressed','true');
-    }catch(e){$('#audio-toggle').textContent='AUDIO UNAVAILABLE';}
+      setAudioUi(true);
+    }catch(e){stopSound();$('#audio-toggle').textContent='AUDIO UNAVAILABLE';}
   });
-  window.addEventListener('pagehide',stopSound);
+  window.addEventListener('pagehide',()=>{
+    stopSound();
+    if(interval!==null){window.clearInterval(interval);interval=null;}
+  });
   window.addEventListener('resize',resizeCanvas,{passive:true});
   document.addEventListener('visibilitychange',()=>{if(document.hidden)stopSound();});
   // Modest timer: text appears slowly, never flashes or accelerates uncontrollably.
   interval=window.setInterval(ambientBeat,12500);
   goTo(roomIndexFromHash(),false);
   resizeCanvas();
+  $('#enter-spiral').focus({preventScroll:true});
   $('#spiral-app').dataset.ready='yes';
 })();
