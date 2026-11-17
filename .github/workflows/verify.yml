@@ -29,6 +29,18 @@ jobs:
               --window-size=1440,1000 --virtual-time-budget=3000 \
               --screenshot="$PWD/preview-desktop.png" "file://$PWD/dist/index.html" || true
           fi
+      - name: Verify Bloom experience renders in a browser
+        shell: bash
+        run: |
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -n "$BROWSER" ]; then
+            "$BROWSER" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+              --virtual-time-budget=1800 --dump-dom "file://$PWD/dist/bloom.html" > /tmp/overflowism-bloom-dom.html
+            grep -q 'data-ready="yes"' /tmp/overflowism-bloom-dom.html
+            echo "Bloom canvas initialized in headless browser."
+          else
+            echo "No headless browser installed; JavaScript syntax and DOM contracts checked by npm test."
+          fi
       - name: Package interactive preview
         uses: actions/upload-artifact@v4
         with:
