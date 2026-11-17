@@ -4,9 +4,22 @@ An immersive, ever-expanding art-gallery experience built on the original Overfl
 
 > When experience can no longer be contained, it becomes creation.
 
+## A living studio entrance (interactive first pass)
+
+The website opens inside the artist's **animated personal studio**, not the old head-shaped hero illustration. The artist is represented by an original **stylized curvy brown-haired SVG avatar** moving through six stations: paint, code, dance, roses, view, and reflection. The room includes changing emotional color/temperature, scenic but **unnamed** windows, flickering fireplace and candles, red roses, Catholic votive niche/cross/rosary details, rotating record, a coding laptop and a paintable canvas.
+
+- **Watch** the avatar visit creative stations automatically (when motion is enabled), or choose a station manually.
+- **Make a mark** on the unfinished studio canvas using the button, Enter/Space on the canvas, mouse or touch. Marks stay on this page only.
+- **Write a thought** and release it into a painted flower; the text isn't saved or sent.
+- **Sound** is OFF by default; optional low synthesized ambient tone starts only after an explicit click.
+- **Pause motion** in the persistent header and automatic changes stop; reduced-motion preferences are respected.
+- **Enter the gallery**, explore the atlas or open the optional "start with a feeling" menu; all existing worlds and Bloom's original *Untitled* painting remain intact.
+
+The opening room is a responsive **2.5D CSS/HTML/SVG experience**, not yet a free-roaming full 3D avatar. The scenic views are deliberately unnamed and the room contains no dog. Additional original paintings are needed as repository image assets before they can be shown faithfully on the walls; decorative CSS paintings are placeholders, not attributed originals.
+
 ## The experience
 
-- **The entrance:** a living illustrated sculpture and an optional emotional starting point.
+- **The entrance:** an interactive studio with a moving artist avatar, creative stations, adjustable feelings, paintable canvas and optional emotional starting point.
 - **The atrium:** THE WATCHERS, THE NOISE, THE BLOOM, THE HEART, and THE SPIRAL (fifth official world).
 - **THE UNDERCURRENT:** hidden passages for complicated, unnamed, and quiet feelings.
 - **54 rooms:** 49 original spaces plus five dedicated Spiral rooms, all browsable with interactive environments and artwork locations.

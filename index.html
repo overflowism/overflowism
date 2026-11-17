@@ -4,18 +4,20 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#100e1a">
-  <meta name="description" content="Overflowism — a living museum of the human mind. Wander through immersive worlds of fear, chaos, love and wonder.">
-  <meta property="og:title" content="OVERFLOWISM — Welcome to the inside of my mind">
-  <meta property="og:description" content="Every feeling has a place here. Even the ones without a name.">
-  <title>Overflowism — Welcome to the inside of my mind</title>
+  <meta name="description" content="Overflowism — a living studio where experience becomes art. Wander through immersive worlds of joy, beauty, love, wonder and everything in between.">
+  <meta property="og:title" content="OVERFLOWISM — A Living Artist Studio">
+  <meta property="og:description" content="I create what I can’t contain. Walk into an artist’s living studio.">
+  <title>Overflowism — A Living Artist Studio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="immersive.css">
   <link rel="stylesheet" href="bloom.css">
+  <link rel="stylesheet" href="studio.css">
   <script defer src="gallery-data.js"></script>
   <script defer src="atlas-data.js"></script>
   <script defer src="immersive.js"></script>
+  <script defer src="studio.js"></script>
 </head>
 <body>
   <a href="#content" class="skip-link">Skip to main content</a>
@@ -31,48 +33,135 @@
   </header>
 
   <main id="content">
-    <section class="screen entrance-screen" id="entrance" data-screen="entrance" aria-labelledby="intro-title">
-      <div class="entrance-nebula" aria-hidden="true"></div>
-      <div class="entrance-art" aria-hidden="true">
-        <div class="aura aura-one"></div><div class="aura aura-two"></div>
-        <svg class="head-art" viewBox="0 0 510 590" role="img" aria-label="Illustration of a head filled with blooming color">
-          <defs>
-            <linearGradient id="head-g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3e406d"/><stop offset=".45" stop-color="#242444"/><stop offset="1" stop-color="#13162b"/></linearGradient>
-            <radialGradient id="bloom-g"><stop stop-color="#d98ebd"/><stop offset="1" stop-color="#6b54c5"/></radialGradient>
-          </defs>
-          <path d="M260 70C345 65 404 131 403 219c0 49-26 94-48 121-10 37 5 94 30 149-75 53-216 54-292 4 35-51 58-111 49-152-29-34-40-75-34-128C118 126 173 75 260 70Z" fill="url(#head-g)" stroke="#a39dc9" stroke-opacity=".58" stroke-width="1.5"/>
-          <path d="M290 122c55 10 80 58 78 110M170 241c-4 37 13 65 34 83M207 379c40 22 84 20 124-2" fill="none" stroke="#abb2e9" stroke-opacity=".23" stroke-width="3" stroke-linecap="round"/>
-          <path d="M163 252c28-25 58-25 87-8m31 0c27-17 55-15 78 8" stroke="#6f74aa" stroke-width="4" stroke-linecap="round" fill="none"/>
-          <path d="M239 302q22 16 45 0M237 334q26 11 52-1" stroke="#ba85af" stroke-opacity=".65" stroke-width="3" stroke-linecap="round" fill="none"/>
-          <path d="M255 65 236 22m22 46 23-52m-17 48 66-39m-77 47-57-49m68 45 73 12" stroke="#f2a6c5" stroke-opacity=".55" stroke-width="2" fill="none"/>
-          <g class="mind-flower"><circle cx="258" cy="53" r="25" fill="#a74fa6" opacity=".8"/><circle cx="229" cy="45" r="22" fill="#e47ca0"/><circle cx="243" cy="19" r="22" fill="#e98a8b"/><circle cx="274" cy="22" r="21" fill="#e467b6"/><circle cx="260" cy="48" r="18" fill="#ffe4a0"/></g>
-          <g class="mind-flower second"><circle cx="347" cy="115" r="21" fill="#ca6fa4"/><circle cx="327" cy="101" r="18" fill="#f2a18b"/><circle cx="338" cy="80" r="21" fill="#cda1db"/><circle cx="364" cy="89" r="17" fill="#a7bced"/><circle cx="347" cy="99" r="13" fill="#f7dba2"/></g>
-          <g class="mind-flower third"><circle cx="163" cy="129" r="17" fill="#f59aa9"/><circle cx="146" cy="117" r="17" fill="#bd73ce"/><circle cx="161" cy="96" r="17" fill="#7ea7db"/><circle cx="182" cy="113" r="17" fill="#b4dbbf"/><circle cx="163" cy="115" r="10" fill="#fae2a2"/></g>
-          <g fill="none" stroke-linecap="round">
-            <path d="M270 76C304 54 328 44 379 58" stroke="#f596bc" stroke-width="6"/>
-            <path d="M254 72C228 55 201 50 151 55" stroke="#8baff6" stroke-width="5"/>
-            <path d="M299 84C310 62 319 42 319 21" stroke="#a7cda9" stroke-width="4"/>
-          </g>
-          <g fill="#f8c1d8"><circle cx="122" cy="84" r="6"/><circle cx="397" cy="95" r="7"/><circle cx="424" cy="177" r="5"/><circle cx="92" cy="199" r="4"/></g>
-          <g fill="#98c9eb"><circle cx="193" cy="30" r="5"/><circle cx="336" cy="30" r="4"/><circle cx="422" cy="290" r="6"/></g>
-        </svg>
-        <div class="float-word word-one">LOVE</div><div class="float-word word-two">CHAOS</div><div class="float-word word-three">BECOMING</div>
-        <div class="art-halo"></div>
-      </div>
-      <div class="entrance-content">
-        <p class="overline"><span class="overline-star">✳</span> AN IMMERSIVE ART EXPERIENCE</p>
-        <h1 id="intro-title">Welcome to the<br><em>inside of my mind.</em></h1>
-        <p class="lead">Every feeling has a place here.<br>Even the ones without a name.</p>
-        <div class="intro-choices">
-          <span class="mini-label">WHERE WOULD YOU LIKE TO BEGIN?</span>
-          <div class="choice-list" id="entrance-choices" role="group" aria-label="Choose an emotional starting point"></div>
+    <section class="screen entrance-screen studio-entrance" id="entrance" data-screen="entrance" aria-labelledby="intro-title" data-mood="wonder">
+      <div class="studio-space" id="studio-space">
+        <div class="studio-scene" aria-hidden="true">
+          <div class="studio-ambience"></div><div class="studio-ceiling"></div><div class="studio-backwall"></div>
+          <div class="studio-arched-window window-hills">
+            <div class="studio-window-glow"></div><div class="window-cloud cloud-one"></div><div class="window-cloud cloud-two"></div>
+            <div class="window-mountain far"></div><div class="window-mountain near"></div><div class="window-city"></div>
+            <span class="window-bar bar-vertical"></span><span class="window-bar bar-horizontal"></span>
+          </div>
+          <div class="studio-arched-window window-roofs">
+            <div class="window-sky"></div><div class="window-sun"></div>
+            <div class="window-rooftops"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <span class="window-bar bar-vertical"></span><span class="window-bar bar-horizontal"></span>
+          </div>
+          <div class="studio-arched-window window-sea">
+            <div class="window-moon"></div><div class="window-horizon"></div><div class="window-water"></div>
+            <span class="window-bar bar-vertical"></span><span class="window-bar bar-horizontal"></span>
+          </div>
+          <div class="studio-gallery-wall">
+            <div class="studio-art-frame frame-original">
+              <img src="images/artworks/untitled-the-bloom-web.jpg" alt="" loading="eager">
+              <span class="frame-caption">ORIGINAL ARTWORK · THE BLOOM</span>
+            </div>
+            <div class="studio-art-frame frame-abstract"><div class="studio-ink-eye"></div><div class="studio-ink-mark"></div></div>
+            <div class="studio-art-frame frame-sketch"><div class="sketch-line one"></div><div class="sketch-line two"></div><div class="sketch-line three"></div></div>
+          </div>
+          <div class="studio-floor"></div><div class="studio-floor-reflection"></div>
+          <div class="studio-fireplace"><div class="fireplace-mantel"></div><div class="fireplace-glow"></div><div class="fireplace-flame flame-a"></div><div class="fireplace-flame flame-b"></div><div class="fireplace-flame flame-c"></div></div>
+          <div class="studio-votive-niche"><span class="niche-cross">✝</span><span class="niche-votive"></span><span class="niche-votive"></span><span class="niche-votive"></span><span class="niche-rosary"></span></div>
+          <div class="studio-roses"><div class="rose-flower rose-a"></div><div class="rose-flower rose-b"></div><div class="rose-flower rose-c"></div><div class="rose-flower rose-d"></div><div class="rose-leaves"></div><div class="rose-vase"></div></div>
+          <div class="studio-desk">
+            <div class="studio-laptop">
+              <div class="laptop-screen"><span class="code-top">~/overflowism/</span>
+                <span class="code-row row-one"></span><span class="code-row row-two"></span><span class="code-row row-three"></span><span class="code-row row-four"></span><span class="code-row row-five"></span>
+                <span class="code-prompt">npm run create_</span>
+              </div><div class="laptop-base"></div>
+            </div>
+            <div class="studio-keyboard"></div><div class="desk-candle candle-a"></div><div class="desk-candle candle-b"></div><div class="studio-notebook"></div>
+          </div>
+          <div class="studio-worktable"><div class="worktable-top"></div><div class="worktable-leg left"></div><div class="worktable-leg right"></div>
+            <div class="worktable-brushes"><i></i><i></i><i></i></div><div class="worktable-palette"></div>
+          </div>
+          <div class="studio-candle-shelf"><span class="studio-candle c1"></span><span class="studio-candle c2"></span><span class="studio-candle c3"></span><span class="studio-candle c4"></span></div>
+          <div class="studio-scorpio-stars"><span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span></div>
+          <div class="studio-vinyl"><div class="vinyl-record"></div><div class="vinyl-needle"></div></div>
+          <div class="studio-rose-shadow"></div>
         </div>
-        <div class="entrance-actions">
-          <a class="pill-button" id="enter-choice" href="#room/the-mirror">ENTER MY MIND <span aria-hidden="true">↗</span></a>
-          <a class="quiet-link" href="#atrium">OR EXPLORE FREELY <span aria-hidden="true">→</span></a>
+
+        <div class="studio-live-canvas">
+          <div class="canvas-rail"><span class="canvas-label">WORK IN PROGRESS</span><span class="canvas-mark">✳</span></div>
+          <canvas id="studio-paint-surface" width="500" height="640" aria-label="Interactive blank studio canvas. Select Paint and drag, or use Make a Mark to paint with the keyboard." tabindex="0"></canvas>
+          <div class="canvas-footer"><span>NOTHING HAS TO BE FINISHED.</span></div>
         </div>
+
+        <div class="studio-avatar" id="studio-avatar" aria-label="A stylized, curvy brown-haired artist avatar moving around her studio" role="img" data-action="walk">
+          <div class="avatar-shadow"></div>
+          <svg viewBox="0 0 250 455" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="studioSkin" x1="0" x2="1"><stop stop-color="#a85e42"/><stop offset=".52" stop-color="#df996a"/><stop offset="1" stop-color="#8f523a"/></linearGradient>
+              <linearGradient id="studioHair" x1="0" x2="1"><stop stop-color="#170d12"/><stop offset=".38" stop-color="#68402d"/><stop offset=".69" stop-color="#9d6341"/><stop offset="1" stop-color="#24151d"/></linearGradient>
+              <linearGradient id="studioOutfit" x1="0" x2="1"><stop stop-color="#090910"/><stop offset=".45" stop-color="#29202b"/><stop offset="1" stop-color="#08080c"/></linearGradient>
+              <linearGradient id="studioTrouser" x1="0" x2="1"><stop stop-color="#09080e"/><stop offset=".45" stop-color="#251a27"/><stop offset="1" stop-color="#0c0b12"/></linearGradient>
+            </defs>
+            <g class="avatar-hair-back"><path d="M73 97 C28 105 30 186 52 240 C31 281 52 309 82 318 C103 304 137 302 166 314 C203 296 212 260 191 222 C223 165 197 95 166 82 Z" fill="url(#studioHair)"/><path d="M59 136 C33 183 69 221 48 261 M186 125 C213 190 174 241 195 277" stroke="#c28e60" stroke-opacity=".4" stroke-width="9" fill="none"/></g>
+            <g class="avatar-leg-left"><path d="M96 291 C84 321 79 362 79 422 L66 442 L101 446 C111 407 119 366 126 336 Z" fill="url(#studioTrouser)" stroke="#513741" stroke-width="2"/></g>
+            <g class="avatar-leg-right"><path d="M127 318 C132 346 148 381 153 428 L146 448 L187 448 C184 408 177 361 165 311 Z" fill="url(#studioTrouser)" stroke="#513741" stroke-width="2"/></g>
+            <path d="M89 228 C63 245 58 275 73 310 C84 329 113 333 131 323 C146 334 172 324 181 308 C196 274 179 246 163 226 Z" fill="url(#studioTrouser)" stroke="#50313d" stroke-width="2"/>
+            <path d="M97 155 C80 169 72 196 84 220 C91 236 91 243 82 257 C94 276 118 268 131 267 C144 273 162 272 175 261 C160 239 168 226 173 203 C169 173 155 153 139 150 Z" fill="url(#studioSkin)"/>
+            <path d="M91 161 C77 169 73 192 79 211 C87 230 109 226 124 225 C139 230 164 233 175 209 C178 192 170 169 152 159 C145 171 137 187 129 191 C111 193 101 180 91 161 Z" fill="url(#studioOutfit)" stroke="#100d14" stroke-width="2"/>
+            <path d="M95 169 L113 195 M150 169 L136 195" stroke="#ded1ba" stroke-opacity=".45" stroke-width="3"/>
+            <path d="M104 225 C116 231 143 230 154 224" stroke="#33212b" stroke-width="4"/>
+            <g class="avatar-arm-left"><path d="M91 165 C70 173 59 208 53 249 C46 271 43 282 48 293 C53 299 60 298 64 291 C70 265 80 240 89 218 Z" fill="url(#studioSkin)"/><path d="M49 287 l-8 16 m9 -17 l0 18 m7 -17 l4 15" stroke="#b87753" stroke-width="4" stroke-linecap="round"/></g>
+            <g class="avatar-arm-right"><path d="M158 162 C179 161 194 181 195 210 C195 233 185 253 190 263 C203 274 203 284 198 288 C182 282 176 265 175 247 C168 227 162 213 153 201 Z" fill="url(#studioSkin)"/><path d="M196 277 l10 10 m-13 -9 l4 14" stroke="#ba7c59" stroke-width="3"/></g>
+            <path d="M111 143 Q125 154 139 143 L142 171 Q124 185 109 169Z" fill="url(#studioSkin)"/>
+            <ellipse cx="124" cy="94" rx="55" ry="67" fill="url(#studioHair)"/>
+            <path d="M82 75 C80 104 90 146 124 155 C153 147 164 119 162 82 C150 50 97 46 82 75Z" fill="url(#studioSkin)"/>
+            <path d="M82 103 Q91 100 106 106 M139 105 Q150 100 161 103" stroke="#301721" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <path d="M93 110 Q100 117 108 110 M139 109 Q147 117 155 108" stroke="#231522" stroke-width="3" fill="none"/>
+            <path d="M124 112 L120 129 L131 130" stroke="#9e5c4f" stroke-width="2.5" fill="none"/>
+            <path d="M110 140 Q125 149 141 139 Q126 135 110 140" fill="#7a2c42"/><path d="M111 140 Q125 144 139 139" stroke="#d96b70" fill="none" stroke-width="2"/>
+            <path d="M74 89 C59 42 96 16 132 20 C184 21 190 61 177 116 C171 80 166 67 154 48 C141 71 102 83 75 77Z" fill="url(#studioHair)"/>
+            <path d="M75 69 C88 29 126 25 152 36 M169 69 C178 117 167 167 182 202" fill="none" stroke="#b47f56" stroke-opacity=".7" stroke-width="9" stroke-linecap="round"/>
+            <circle cx="81" cy="126" r="8" fill="none" stroke="#e8bb83" stroke-width="3"/><circle cx="166" cy="123" r="8" fill="none" stroke="#e8bb83" stroke-width="3"/>
+            <path d="M80 247 l7 8 m63 32 l8 6 M106 310 l6 -13" stroke="#d44569" stroke-width="5" stroke-linecap="round"/>
+            <path d="M144 268 l8 11 M93 288 l9 -6 M177 346 l-8 6" stroke="#5a8fdb" stroke-width="5" stroke-linecap="round"/>
+            <circle cx="79" cy="240" r="3" fill="#eabb3e"/><circle cx="158" cy="302" r="4" fill="#ec6494"/>
+          </svg>
+          <div class="avatar-brush" aria-hidden="true"></div>
+        </div>
+        <div class="studio-emotion-ring" aria-hidden="true"></div>
+        <div class="studio-spotlight" aria-hidden="true"></div>
+
+        <div class="studio-copy">
+          <p class="studio-kicker">OVERFLOWISM <span class="studio-kicker-dot">✳</span> AN ARTIST'S LIVING WORLD</p>
+          <h1 id="intro-title">Where experience<br><em>becomes art.</em></h1>
+          <p class="studio-manifesto">I create what I can't contain.</p>
+          <p class="studio-brief">A living studio. A thousand feelings.<br>Come see what becomes of them.</p>
+          <div class="studio-main-actions"><a class="studio-primary-action" href="#atrium">ENTER THE GALLERY <span aria-hidden="true">↗</span></a><a href="#atlas" class="studio-secondary-action">EXPLORE THE ATLAS</a></div>
+        </div>
+
+        <div class="studio-status">
+          <span class="studio-status-kicker">THE ARTIST IS FEELING</span>
+          <strong id="studio-emotion-name">WONDER</strong>
+          <p id="studio-emotion-line">Somewhere between looking and becoming.</p>
+          <div class="studio-temperature"><span>CREATIVE TEMPERATURE</span><div id="studio-temp-track" role="progressbar" aria-label="Creative intensity" aria-valuemin="0" aria-valuemax="100" aria-valuenow="44"><i id="studio-temp-fill"></i></div></div>
+        </div>
+
+        <div class="studio-interactions">
+          <span class="studio-interactions-title">FOLLOW HER THROUGH THE STUDIO</span>
+          <div class="studio-interaction-row">
+            <button type="button" data-studio-stop="paint">PAINT</button>
+            <button type="button" data-studio-stop="code">CODE</button>
+            <button type="button" data-studio-stop="dance">DANCE</button>
+            <button type="button" data-studio-stop="roses">FEEL</button>
+            <button type="button" data-studio-stop="windows">WANDER</button>
+            <button type="button" data-studio-stop="fire">REFLECT</button>
+          </div>
+          <div class="studio-tools"><button type="button" id="studio-mark">MAKE A MARK ✳</button><button type="button" id="studio-words-toggle" aria-expanded="false" aria-controls="studio-words">WRITE A THOUGHT</button><button type="button" id="studio-sound" aria-pressed="false">SOUND OFF ♫</button></div>
+          <form id="studio-words" class="studio-words" hidden><label for="studio-word-input">A THOUGHT TO LEAVE HERE</label><input id="studio-word-input" maxlength="90" autocomplete="off" placeholder="Something you can't contain…"><button type="submit">LET IT BECOME FORM ↗</button></form>
+          <p id="studio-words-output" class="studio-words-output"></p>
+          <p id="studio-announcement" class="studio-sr-only" aria-live="polite" aria-atomic="true"></p>
+        </div>
+
+        <details class="studio-choose-feeling"><summary>START WITH A FEELING <span>+</span></summary>
+          <div class="intro-choices"><div class="choice-list" id="entrance-choices" role="group" aria-label="Choose an optional emotional starting point"></div></div>
+          <a class="studio-feeling-enter" id="enter-choice" href="#room/the-mirror">STEP INSIDE THAT FEELING ↗</a>
+        </details>
+        <p class="studio-bottom-note">EXPERIENCE → FEELING → THRESHOLD → RELEASE → FORM <span>THE GALLERY IS NEVER FINISHED.</span></p>
       </div>
-      <div class="edge-note"><span>OVERFLOWISM / VOL. 01</span><span>NOT EVERYTHING INSIDE US HAS A NAME.</span></div>
     </section>
 
     <section class="screen atrium-screen" id="atrium" data-screen="atrium" aria-labelledby="atrium-title" hidden>

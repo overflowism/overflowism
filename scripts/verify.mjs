@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 
 function check(condition, message) { assert.ok(condition, message); }
 function read(path) { return readFileSync(path, 'utf8'); }
-for (const file of ['atlas-data.js','immersive.js','gallery-data.js','bloom-walk.js','spiral-data.js','spiral.js']) {
+for (const file of ['atlas-data.js','immersive.js','gallery-data.js','bloom-walk.js','spiral-data.js','spiral.js','studio.js']) {
   execFileSync(process.execPath, ['--check', file], { stdio: 'inherit' });
 }
 const context = { window: {} };
@@ -70,6 +70,22 @@ for(const room of spiralData.rooms){
   check(atlas.rooms.some(r=>r.id===room.atlasId && r.world==='spiral'),'Spiral room missing in main atlas '+room.id);
 }
 check(read('immersive.js').includes('spiral.html'),'Main gallery does not link to Spiral');
+// Studio entrance is a working interactive room, not a static background image.
+const studioHtml = read('index.html');
+for(const id of ['studio-space','studio-avatar','studio-paint-surface','studio-emotion-name',
+  'studio-temp-track','studio-mark','studio-words','studio-word-input','studio-sound',
+  'entrance-choices','enter-choice']) {
+  check(studioHtml.includes('id="' + id + '"'), 'Living studio missing interaction target: ' + id);
+}
+for(const file of ['studio.css','studio.js']) {
+  check(studioHtml.includes(file), 'Main entrance must load ' + file);
+}
+const studioJs = read('studio.js');
+for(const marker of ["data-studio-stop","pointerdown","setStation","randomMark","visibilitychange","AudioContext"]) {
+  check(studioJs.includes(marker), 'Studio interaction missing ' + marker);
+}
+check(studioHtml.includes('images/artworks/untitled-the-bloom-web.jpg'), 'Preserve original Untitled painting inside the studio');
+check(!studioHtml.includes('window-dog') && !studioHtml.includes('dog-portrait'), 'No dog requested in studio');
 const bloom = read('bloom.html');
 for (const key of ['garden','start-walk','examine-art','touch-pad','intro-veil','motion-toggle','landmark-panel']) {
   check(bloom.includes(key), 'Walk-through is missing interaction: ' + key);
@@ -82,7 +98,7 @@ check(bloomScript.includes('requestAnimationFrame(loop)'), 'Walk-through animati
 check(bloomScript.includes('drawPainting'), 'Walk-through original artwork render missing');
 check(read('immersive.js').includes('bloom.html'), 'Main gallery is not linked to Bloom walk');
 check(existsSync('dist/index.html'), 'Build output is missing; run npm run build first');
-for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js','spiral.html','spiral.css','spiral-data.js','spiral.js']) {
+for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js','spiral.html','spiral.css','spiral-data.js','spiral.js','studio.css','studio.js']) {
   check(existsSync(resolve('dist',file)), 'Build output missing ' + file);
 }
 check(readdirSync('dist/images').length > 0, 'Built image directory should not be empty');
@@ -92,3 +108,5 @@ console.log('✓ The interactive HTML and build outputs contain required assets 
 console.log('✓ Bloom walkthrough, original artwork, keyboard/touch controls and routes verified.');
 
 console.log('✓ The Spiral: five rooms, curated whispers, standalone entrance and gallery integration verified.');
+
+console.log('✓ Living studio: animated avatar, scenic windows, canvas, coding station and interaction controls verified.');
