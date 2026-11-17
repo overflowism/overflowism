@@ -41,6 +41,22 @@ jobs:
           else
             echo "No headless browser installed; JavaScript syntax and DOM contracts checked by npm test."
           fi
+      - name: Confirm live Bloom chapter URL
+        shell: bash
+        run: |
+          set -e
+          url="https://overflowism.lol/bloom.html"
+          for attempt in 1 2 3 4 5; do
+            status="$(curl -L --max-time 20 --silent --show-error -o /tmp/live-bloom.html -w '%{http_code}' "$url" || true)"
+            echo "Attempt $attempt / LIVE_BLOOM_HTTP=$status"
+            if [ "$status" = "200" ] && grep -q 'bloom-walk.js' /tmp/live-bloom.html; then
+              echo "LIVE_BLOOM_VERIFIED=YES"
+              exit 0
+            fi
+            sleep 8
+          done
+          echo "LIVE_BLOOM_VERIFIED=NO"
+          exit 1
       - name: Package interactive preview
         uses: actions/upload-artifact@v4
         with:
