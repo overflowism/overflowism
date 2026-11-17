@@ -121,3 +121,14 @@ transform:perspective(800px) rotateX(64deg);transform-origin:bottom;border-top:2
 .bloom-world-entry:hover,.bloom-room-entry:hover{background:#ffe0a4;transform:translateY(-3px)}
 .bloom-room-entry{margin-top:13px}
 @media(prefers-reduced-motion:reduce){.bloom-world-entry,.bloom-room-entry{transition:none}}
+
+/* World 05: preserve the four existing cards while displaying a distinct fifth entrance. */
+@media(min-width:1121px){.world-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.world-card{min-height:455px;padding:19px}.world-card-name{font-size:22px}}
+.world-card[data-world="spiral"]{background:radial-gradient(ellipse at 48% 30%,#6d436f,#1a1028 67%);border-color:#d8a7c55c}
+.world-card[data-world="spiral"]:before{background:repeating-radial-gradient(ellipse at 50% 45%,#e1acd418 0 2px,transparent 3px 27px),linear-gradient(145deg,#120c1d,#633653 70%,#160e23)}
+.world-card[data-world="spiral"]:after{background:radial-gradient(ellipse at 50% 32%,#e0aacf99,transparent 61%)}
+.world-card[data-world="spiral"] .world-card-symbol{filter:drop-shadow(0 0 28px #ecc2f0);color:#f4cde8}
+.world-hero[data-world="spiral"]{background:radial-gradient(ellipse at 80% 45%,#69315f,#17101e 68%)}
+.spiral-world-entry{display:inline-flex;gap:15px;margin-top:23px;padding:15px 22px;border:1px solid #eed2e99c;color:#f9e0f0;background:#31172d99;font-size:11px;font-weight:700;letter-spacing:.14em}
+.spiral-world-entry:hover{background:#743d60}
+@media(min-width:760px) and (max-width:1120px){.world-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
