@@ -20,6 +20,23 @@ jobs:
           node-version: '20'
       - name: Verify the build, rooms, portals and artwork
         run: npm test
+
+      - name: Probe published Overflowism site URLs
+        shell: bash
+        run: |
+          set +e
+          for url in "https://overflowism.lol/" "https://overflowism.github.io/overflowism/"; do
+            echo "CHECK_URL=$url"
+            status=$(curl --location --max-time 20 --silent --show-error -o /tmp/overflowism-page.html -w '%{http_code}' "$url")
+            code=$?
+            echo "CURL_EXIT=$code HTTP_STATUS=$status"
+            if [ "$code" -eq 0 ]; then
+              echo "HAS_V2_TITLE=$(grep -c 'Welcome to the inside of my mind' /tmp/overflowism-page.html)"
+              echo "HAS_IMMERSIVE_CSS=$(grep -c 'immersive.css' /tmp/overflowism-page.html)"
+              head -c 180 /tmp/overflowism-page.html | tr '\\n' ' '
+              echo
+            fi
+          done
       - name: Capture desktop preview if browser available
         shell: bash
         run: |
