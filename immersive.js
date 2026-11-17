@@ -83,6 +83,14 @@
     $('#world-title').textContent = world.name;
     $('#world-line').textContent = world.line;
     $('#world-symbol').textContent = world.symbol;
+    const existingWalk = document.querySelector('#bloom-walk-entry');
+    if (existingWalk) existingWalk.remove();
+    if (id === 'bloom') {
+      const enterWalk = anchor('WALK INTO THE GARDEN ↗', 'bloom.html', 'bloom-world-entry');
+      enterWalk.id = 'bloom-walk-entry';
+      enterWalk.setAttribute('aria-label', 'Explore THE BLOOM in the immersive walk-through garden');
+      document.querySelector('.world-hero-body').append(enterWalk);
+    }
     const matching = atlas.rooms.filter(r => r.world === id);
     $('#world-count').textContent = matching.length + ' ROOMS TO DISCOVER';
     const target = $('#room-grid');
@@ -201,6 +209,13 @@
     $('#room-title').textContent = room.name;
     $('#room-quote').textContent = '“' + room.quote + '”';
     $('#room-emblem').textContent = world.symbol;
+    const oldWalk = document.querySelector('#bloom-room-entry');
+    if (oldWalk) oldWalk.remove();
+    if (id === 'butterfly-garden-walkway' || id === 'fairy-tale-forest') {
+      const walk = anchor('STEP INSIDE THE WALKABLE GARDEN ↗', 'bloom.html', 'bloom-room-entry');
+      walk.id = 'bloom-room-entry';
+      document.querySelector('.room-bottom-copy').append(walk);
+    }
     const feelings = $('#room-feelings');
     feelings.replaceChildren();
     room.feelings.forEach(feeling => feelings.append(make('span', 'feeling-chip', feeling)));

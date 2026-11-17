@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 
 function check(condition, message) { assert.ok(condition, message); }
 function read(path) { return readFileSync(path, 'utf8'); }
-for (const file of ['atlas-data.js','immersive.js','gallery-data.js']) {
+for (const file of ['atlas-data.js','immersive.js','gallery-data.js','bloom-walk.js']) {
   execFileSync(process.execPath, ['--check', file], { stdio: 'inherit' });
 }
 const context = { window: {} };
@@ -55,10 +55,23 @@ for (const id of ['intro-title','entrance-choices','enter-choice','world-grid','
   'dialog-visual','art-dialog-title','dialog-description','dialog-details','dialog-inquire']) {
     check(html.includes('id="' + id + '"'), 'Missing DOM target: ' + id);
 }
+const bloom = read('bloom.html');
+for (const key of ['garden','start-walk','examine-art','touch-pad','intro-veil','motion-toggle','landmark-panel']) {
+  check(bloom.includes(key), 'Walk-through is missing interaction: ' + key);
+}
+for (const asset of ['bloom-walk.css','bloom-walk.js','gallery-data.js']) {
+  check(bloom.includes(asset), 'Walk-through missing loaded script/style: ' + asset);
+}
+const bloomScript = read('bloom-walk.js');
+check(bloomScript.includes('requestAnimationFrame(loop)'), 'Walk-through animation loop missing');
+check(bloomScript.includes('drawPainting'), 'Walk-through original artwork render missing');
+check(read('immersive.js').includes('bloom.html'), 'Main gallery is not linked to Bloom walk');
 check(existsSync('dist/index.html'), 'Build output is missing; run npm run build first');
-for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js']) {
+for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js']) {
   check(existsSync(resolve('dist',file)), 'Build output missing ' + file);
 }
 check(readdirSync('dist/images').length > 0, 'Built image directory should not be empty');
 console.log('✓ All 49 rooms, five worlds, emotional pathways and artwork references verified.');
 console.log('✓ The interactive HTML and build outputs contain required assets and elements.');
+
+console.log('✓ Bloom walkthrough, original artwork, keyboard/touch controls and routes verified.');

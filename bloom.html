@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#173e39">
+  <meta name="description" content="Walk through THE BLOOM: an immersive butterfly garden and fairy-tale forest inside the Overflowism emotional gallery.">
+  <title>THE BLOOM — An Overflowism Walkthrough</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bloom-walk.css">
+  <script defer src="gallery-data.js"></script>
+  <script defer src="bloom-walk.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#experience-controls">Skip garden scene to controls</a>
+  <main class="world" id="bloom-world">
+    <canvas id="garden" role="img" aria-label="Illustrated three-dimensional perspective of a garden pathway, flowering trees, butterflies and original art. Use the labeled controls to explore."></canvas>
+    <div class="film-grain" aria-hidden="true"></div>
+    <div class="sun-flare" aria-hidden="true"></div>
+    <header class="bar">
+      <a class="brand" href="./#world/bloom" aria-label="Return to the Overflowism emotional gallery"><span class="flower" aria-hidden="true">✳</span> OVERFLOWISM<span class="dot">.</span></a>
+      <div class="chapter-name"><span class="tiny-label">CHAPTER ONE / A WORLD WITHIN</span><span>THE BLOOM</span></div>
+      <a class="exit" href="./#world/bloom">LEAVE THE GARDEN <span aria-hidden="true">↗</span></a>
+    </header>
+    <div class="chapter-card" id="chapter-card" aria-live="polite">
+      <span class="tiny-label" id="chapter-index">01 / 02 — BUTTERFLY GARDEN WALKWAY</span>
+      <h1 id="chapter-title">A little closer <em>to the light.</em></h1>
+      <p id="chapter-line">Not everything that grows started in the sun.</p>
+    </div>
+    <div class="location-mark" aria-hidden="true">MEDELLÍN, IN A DREAM <span>✳</span> A PLACE FOR JOY</div>
+    <div class="reticle" aria-hidden="true"></div>
+    <div class="landmark-panel" id="landmark-panel" hidden>
+      <span class="tiny-label" id="landmark-kicker">ORIGINAL PAINTING</span>
+      <h2 id="landmark-title">Untitled</h2>
+      <p id="landmark-description"></p>
+      <button class="soft-button" type="button" id="examine-art">LOOK CLOSER ↗</button>
+    </div>
+    <div class="completion" id="completion" hidden>
+      <span class="tiny-label">THE BLOOM / YOU MADE IT THROUGH</span>
+      <h2>You found the <em>forest.</em></h2>
+      <p>Even here, the story keeps growing. You can wander back, revisit a painting, or discover another world.</p>
+      <a class="soft-button" href="./#atrium">EXPLORE THE MIND ↗</a>
+      <button type="button" class="text-button" id="begin-again">WALK THE GARDEN AGAIN</button>
+    </div>
+    <div class="experience-controls" id="experience-controls">
+      <div class="control-help"><span class="help-icon">✳</span><span><strong id="direction-help">WALK THROUGH THE GARDEN</strong><small>W / ↑ FORWARD · A D / ← → TURN · DRAG TO LOOK · E VIEW ART</small></span></div>
+      <div class="journey"><span>THE WALKWAY</span><div class="journey-track"><div class="journey-fill" id="journey-fill"></div></div><span>THE FOREST</span></div>
+      <div class="controls-right">
+        <button class="icon-button" id="motion-toggle" type="button" aria-pressed="false" aria-label="Pause environmental animations" title="Pause environmental animations">❋ <span id="motion-label">PAUSE</span></button>
+        <button class="icon-button" id="guide-toggle" type="button" aria-expanded="false" aria-controls="guide" title="Show walking instructions">? <span>HELP</span></button>
+      </div>
+    </div>
+    <div class="touch-pad" aria-label="Walk and turn controls">
+      <button type="button" data-move="left" aria-label="Turn left">↶</button>
+      <button type="button" data-move="forward" aria-label="Move forward">↑</button>
+      <button type="button" data-move="right" aria-label="Turn right">↷</button>
+      <button type="button" data-move="back" aria-label="Step backward">↓</button>
+    </div>
+    <div class="intro-veil" id="intro-veil">
+      <div class="intro-inner">
+        <span class="tiny-label">OVERFLOWISM PRESENTS / CHAPTER ONE</span>
+        <span class="intro-symbol" aria-hidden="true">✿</span>
+        <h2>Step into <em>the bloom.</em></h2>
+        <p>An imagined garden inspired by Medellín. Follow the butterflies, discover the paintings, and make your way to the fairy-tale forest.</p>
+        <button class="enter-button" id="start-walk" type="button">ENTER THE GARDEN <span aria-hidden="true">↗</span></button>
+        <a href="./#world/bloom" class="intro-back">OR RETURN TO THE GALLERY</a>
+      </div>
+    </div>
+    <div class="guide" id="guide" hidden>
+      <button class="guide-close" type="button" id="guide-close" aria-label="Close help">×</button>
+      <span class="tiny-label">HOW TO EXPLORE</span>
+      <h2>Take your time.</h2>
+      <p><strong>Desktop:</strong> W / ↑ to walk forward, S / ↓ to step back, A/D or ←/→ to turn. Drag left or right on the scene to look around. E opens an artwork when nearby.</p>
+      <p><strong>Phone:</strong> Use the on-screen arrows or drag the scene to look around. You can also click the artwork button when it appears.</p>
+      <p>This is an artist's imagined garden, not a virtual recreation of a real place. Motion can be paused at any time, and the artwork is also accessible through the gallery.</p>
+      <button class="soft-button" type="button" id="guide-done">CONTINUE EXPLORING</button>
+    </div>
+  </main>
+  <dialog id="art-dialog" aria-labelledby="art-title">
+    <div class="art-detail">
+      <button class="dialog-close" type="button" id="close-art" aria-label="Close painting details">×</button>
+      <div class="art-image"><img id="art-image" src="images/artworks/untitled-the-bloom-web.jpg" alt=""></div>
+      <div class="art-copy"><span class="tiny-label">OVERFLOWISM / THE BLOOM / ORIGINAL WORK</span><h2 id="art-title">Untitled</h2><p id="art-description"></p><span id="art-details" class="art-medium"></span><a id="art-inquire" class="soft-button" href="mailto:hello@overflowism.com">INQUIRE ABOUT THIS PIECE ↗</a></div>
+    </div>
+  </dialog>
+  <noscript><p class="no-script">JavaScript is needed for the walk-through. <a href="./#world/bloom">Explore THE BLOOM in the standard gallery instead.</a></p></noscript>
+</body>
+</html>
