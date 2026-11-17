@@ -18,3 +18,100 @@
 @media(max-width:760px){.topbar{min-height:70px;padding:12px 5%;flex-wrap:wrap}.brand{font-size:11px}.brand-icon{font-size:17px;margin-right:5px}.topbar nav{order:3;width:100%;justify-content:space-between;gap:9px}.topbar nav a,.motion-toggle{font-size:9px}.motion-toggle{padding:8px}.motion-toggle span:first-child{margin-right:3px}.entrance-screen{display:block;min-height:950px;padding:40px 6% 85px}.entrance-content{width:100%;padding-top:265px}.entrance-art{left:17%;top:18px;width:80vw;height:310px;transform:none;opacity:.87}.head-art{width:60%;max-height:320px}.float-word{font-size:8px}.word-one{top:10%}.word-two{top:50%}.word-three{bottom:9%}.entrance-content h1{font-size:clamp(48px,10vw,70px)}.lead{font-size:14px;margin-bottom:25px}.intro-choices{max-width:100%}.entry-option{padding:13px;min-height:56px;font-size:9px}.edge-note span:last-child{display:none}.atrium-screen,.atlas-screen{padding:60px 5%}.section-intro h1{font-size:clamp(49px,9vw,75px)}.world-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.world-card{min-height:285px;padding:15px}.world-card-symbol{font-size:100px}.world-card-name{font-size:20px}.world-card-desc{font-size:10px}.world-card-cta{font-size:8px}.secret-corridor{padding:27px;flex-direction:column;align-items:flex-start}.secret-corridor h2{font-size:26px}.room-grid,.atlas-results{grid-template-columns:repeat(2,minmax(0,1fr))}.room-card{padding:16px;min-height:190px}.room-card h3{font-size:26px}.world-hero{min-height:350px}.world-hero-symbol{font-size:300px;right:-12%;opacity:.12}.world-hero-body h1{font-size:57px}.directory-heading h2{font-size:31px}.room-directory{padding:50px 5%}.installation{min-height:660px}.installation-center{padding:50px 14px 110px}.room-feelings{bottom:18px}.room-bottom{flex-direction:column;align-items:flex-start}.portal-links{justify-content:flex-start}.room-navigation{gap:12px;flex-wrap:wrap}.room-navigation a{font-size:9px}.about-screen{padding:80px 7%}.about-flower{left:-20%;top:1%}.about-text{padding-top:120px}.art-dialog-body{grid-template-columns:1fr}.dialog-visual{min-height:230px;padding:24px}.dialog-visual img{max-height:38vh}.dialog-text{padding:35px}.dialog-text h2{font-size:38px}}
 @media(max-width:420px){.world-grid,.room-grid,.atlas-results{grid-template-columns:1fr}.world-card{min-height:260px}.world-card-symbol{font-size:115px}.entry-option{font-size:8px}.entrance-actions{gap:18px}.quiet-link{font-size:9px}.world-card-desc{font-size:12px}.site-footer{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+
+
+/* ==========================================================
+   OVERFLOWISM V2 — THE LIVING MUSEUM
+   Architectural perspective, theatrical lighting and a
+   breathing Medellín-inspired garden. Decorative only.
+   ========================================================== */
+:root{--stone:#13101b;--candle:#f4c99f}
+.entrance-screen{perspective:1250px;background:radial-gradient(ellipse at 66% 35%,#37233c 0%,#17121f 43%,#090a12 87%)}
+.entrance-screen:before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:
+linear-gradient(90deg,#080911d9 0%,transparent 43%,#09091433 93%),
+repeating-linear-gradient(90deg,transparent 0 13%,#ffffff08 13.04% 13.12%,transparent 13.2% 26%),
+linear-gradient(175deg,transparent 20%,#080910b8 88%)}
+.entrance-screen:after{content:"";position:absolute;z-index:0;pointer-events:none;bottom:-21%;left:-29%;width:158%;height:61%;transform:perspective(850px) rotateX(68deg);transform-origin:bottom;background:repeating-linear-gradient(90deg,#f9edff10 0 1px,transparent 1px 11%),linear-gradient(0deg,#14111d 4%,#352638a0 78%,transparent);box-shadow:0 -25px 90px #d69ec018}
+.entrance-art{transform:translate3d(var(--look-x,0px),calc(-50% + var(--look-y,0px)),0);transition:transform .5s ease-out}
+.entrance-art:before{content:"";position:absolute;width:70%;height:112%;border-radius:46% 46% 0 0;border:2px solid #bda9c340;box-shadow:inset 0 0 55px #9b699222,0 0 75px #e89ac61c;background:radial-gradient(ellipse at 50% 35%,#6f527d24,transparent 60%);transform:translateZ(-70px)}
+.entrance-art:after{content:"";position:absolute;bottom:3%;width:67%;height:5%;background:#f0c7db2c;filter:blur(24px);border-radius:50%}
+.entrance-content{filter:drop-shadow(0 7px 23px #08050e80)}
+.head-art{filter:drop-shadow(0 3px 35px #df85b04d) drop-shadow(0 20px 20px #05040ab8)}
+.entrance-nebula{opacity:.7}
+.entrance-actions .pill-button{box-shadow:0 11px 38px #eeafd029}
+.world-grid{perspective:1450px;gap:20px}
+.atrium-screen{position:relative;background:radial-gradient(ellipse at 50% 8%,#342638,#14101b 55%,#0d0d15 100%)}
+.atrium-screen:before{content:"";position:absolute;inset:18% 0 2%;pointer-events:none;background:repeating-linear-gradient(90deg,#ffffff07 0 1px,transparent 1px 24%),linear-gradient(0deg,#07090ca9,transparent 55%)}
+.world-card{border-radius:180px 180px 4px 4px;min-height:530px;box-shadow:inset 0 0 0 8px #090a1540,inset 0 0 0 10px #efc7df19,0 26px 70px #05040b7a;transform-style:preserve-3d;transition:transform .7s cubic-bezier(.21,.6,.2,1),box-shadow .5s,border-color .5s}
+.world-card:before{background:radial-gradient(ellipse at 50% 13%,var(--world-light),transparent 56%),linear-gradient(165deg,var(--world-mid),var(--world-dark) 76%);opacity:.68}
+.world-card:after{content:"";inset:13% 11% 23%;border:3px solid #ffffff44;border-radius:150px 150px 0 0;opacity:.73;background:
+radial-gradient(ellipse at 50% 34%,#fff4d237,transparent 50%),
+linear-gradient(90deg,#04020f55 0 5%,transparent 7% 93%,#08071466 96% 100%);
+filter:none;animation:worldbreath 12s ease-in-out infinite}
+.world-card:hover{transform:translateY(-16px) rotateX(2deg);box-shadow:inset 0 0 0 8px #07071355,0 40px 95px #000b,0 0 35px var(--world-mid)}
+.world-card-symbol{position:absolute!important;z-index:1;left:50%;top:32%;transform:translate(-50%,-50%);font-size:clamp(105px,12vw,220px)!important;filter:drop-shadow(0 0 35px var(--world-light));opacity:.78}
+.world-card-bottom,.world-card-index{position:relative;z-index:3;text-shadow:0 3px 12px #000a}
+.world-card-bottom{background:linear-gradient(0deg,#0c0b19dd,#0c0b1900);margin:-25px;padding:65px 25px 25px}
+.world-hero{min-height:520px;box-shadow:inset 0 -60px 100px #0007}
+.world-hero:after{content:"";position:absolute;inset:auto -20% -63% -20%;height:75%;transform:perspective(850px) rotateX(67deg);background:repeating-linear-gradient(90deg,#fff2 0 2px,transparent 2px 10%),linear-gradient(0deg,#0008,transparent);pointer-events:none}
+.room-screen{background:#090b12}
+.installation{min-height:min(83vh,850px);perspective:1050px;isolation:isolate;background:
+radial-gradient(ellipse at 50% 45%,var(--world-mid),var(--world-dark) 78%),
+linear-gradient(#0e1120,#111321)}
+.installation:before{inset:0;background:
+linear-gradient(90deg,#05050b99 0%,transparent 17% 83%,#05050b99 100%),
+repeating-linear-gradient(90deg,transparent 0 19.8%,#ffffff10 20%,transparent 20.2%),
+linear-gradient(180deg,#08070eab,transparent 40%,#050609c2);z-index:-1}
+.installation:after{content:"";position:absolute;z-index:0;pointer-events:none;left:-12%;right:-12%;bottom:-54%;height:90%;background:
+repeating-linear-gradient(90deg,#ffffff18 0 1px,transparent 1px 9%),
+repeating-linear-gradient(0deg,#ffffff0e 0 1px,transparent 1px 14%),
+linear-gradient(0deg,#03050a,#b3a7bb27);
+transform:perspective(800px) rotateX(64deg);transform-origin:bottom;border-top:2px solid #ffffff2a}
+.installation-center{z-index:3;padding:55px 20px 95px;background:radial-gradient(ellipse at center,#090913a6,transparent 72%);text-shadow:0 3px 20px #07050fba}
+.installation-arch{z-index:1;border:3px solid #ffffff45;box-shadow:inset 0 0 30px #ffffff11,0 0 34px #ffffff10}
+.arch-two{border-color:#ffffff20}
+.installation-glow{z-index:0}
+.art-frame{box-shadow:0 15px 50px #000c,0 0 50px var(--world-light);border:7px ridge #e4c4a24d;background:#17111d}
+.art-frame:hover{box-shadow:0 20px 80px #000c,0 0 50px var(--world-light)}
+.room-feelings{z-index:4}
+.scene-environment{position:absolute;inset:0;z-index:0;overflow:hidden;pointer-events:none;isolation:isolate}
+.scene-sky{position:absolute;inset:0;background:linear-gradient(180deg,#75cced 0%,#b7e9f2 34%,#e0f5d7 57%,transparent 75%);z-index:-2}
+.installation[data-world=bloom]{--world-dark:#145857;--world-mid:#7bbf9b;--world-light:#f5d19a;background:linear-gradient(180deg,#87d9eb 0%,#9dd8ae 57%,#205f4b 100%);color:#fff}
+.installation[data-world=bloom]:before{background:linear-gradient(90deg,#155d5059,transparent 20% 80%,#155d5059),linear-gradient(0deg,#09453666,transparent 49%);z-index:1}
+.installation[data-world=bloom] .installation-center{background:radial-gradient(ellipse,#173c37bf,transparent 76%);text-shadow:0 3px 10px #1c3c35}
+.installation[data-world=bloom] .installation-emblem{color:#fff5b9}
+.installation[data-world=bloom] .installation-arch{border-color:#fff4cd77}
+.scene-sun{position:absolute;top:7%;right:14%;width:130px;aspect-ratio:1;border-radius:50%;background:#fff6d4;box-shadow:0 0 60px 25px #ffefb18e,0 0 190px 80px #f8e9a74b;animation:sunbreath 9s ease-in-out infinite}
+.scene-mountain{position:absolute;left:-15%;width:130%;height:48%;bottom:13%;clip-path:polygon(0 83%,8% 69%,18% 74%,32% 20%,42% 56%,57% 5%,68% 62%,83% 26%,100% 73%,100% 100%,0 100%)}
+.mountain-back{background:linear-gradient(180deg,#6fadb0,#367972);opacity:.57;bottom:21%;filter:blur(2px)}
+.mountain-front{background:linear-gradient(170deg,#4b8c69,#205d4a);bottom:6%;transform:scaleX(1.16);opacity:.9}
+.scene-earth{position:absolute;bottom:-8%;left:-12%;width:124%;height:37%;border-radius:50% 50% 0 0;background:linear-gradient(180deg,#367e5e,#123d31);box-shadow:0 -13px 80px #80bb6e99}
+.scene-garden-path{position:absolute;z-index:1;bottom:-29%;left:50%;height:76%;width:34%;transform:translateX(-50%) perspective(600px) rotateX(63deg);border-radius:48% 48% 0 0;background:linear-gradient(180deg,#d9b88899,#f4d09fbb 70%,#f7e9d7);box-shadow:0 0 35px #fce0ad80}
+.scene-blossom{position:absolute;z-index:2;bottom:var(--bottom);left:var(--pos);font-size:calc(36px * var(--scale));color:#fb8cbb;text-shadow:0 0 13px #fdc5cb,0 6px 11px #143b2b80;transform-origin:bottom;animation:petalSway var(--duration,5s) ease-in-out infinite alternate;animation-delay:var(--delay);opacity:.95}
+.scene-blossom:nth-of-type(3n){color:#ffe279}.scene-blossom:nth-of-type(4n){color:#bba2f1}.scene-blossom:nth-of-type(5n){color:#f7a66b}
+.scene-wing{position:absolute;z-index:2;left:var(--pos);top:var(--high);width:26px;height:30px;transform:rotate(-16deg);animation:butterflyFlight 8s ease-in-out infinite;animation-delay:var(--delay);filter:drop-shadow(0 5px 3px #24462d63)}
+.scene-wing:before,.scene-wing:after{content:"";position:absolute;top:0;width:17px;height:23px;background:radial-gradient(circle at 70% 30%,#fff3b8 4%,#ea78c8 44%,#7b4cd0 75%);border:1px solid #fff8;border-radius:75% 5% 65% 30%;transform-origin:right center;animation:wingbeat .6s ease-in-out infinite alternate}
+.scene-wing:before{left:0}.scene-wing:after{left:15px;transform:scaleX(-1);transform-origin:left center;animation-delay:-.3s}
+.scene-tree{position:absolute;z-index:2;bottom:1%;width:19%;height:84%;background:linear-gradient(90deg,#483c30,#7a5942,#423a29);clip-path:polygon(40% 100%,38% 51%,22% 23%,33% 22%,49% 45%,51% 0,59% 0,58% 44%,83% 27%,91% 29%,61% 55%,62% 100%)}
+.tree-left{left:0}.tree-right{right:0;transform:scaleX(-1)}
+.scene-tree:before{content:"";position:absolute;top:-9%;left:0;width:110%;height:50%;background:#4eaa67;border-radius:50%;box-shadow:0 0 45px #a6d27d}
+.scene-thought{position:absolute;left:var(--pos);top:var(--high);width:clamp(20px,5vw,90px);height:3px;background:linear-gradient(90deg,#84e9f5,#fa72df,transparent);box-shadow:0 0 15px #f363de;transform:rotate(calc(var(--idx) * 23deg));animation:thoughtFloat 6s ease-in-out infinite alternate;animation-delay:calc(var(--idx) * -.37s)}
+.installation[data-world=noise]{background:radial-gradient(ellipse at 42% 30%,#a23dad,#302c84 55%,#100b26)}
+.scene-heart-petal{position:absolute;left:var(--pos);top:-10%;color:#e9a0bb;font-size:40px;opacity:.55;animation:falling 12s linear infinite;animation-delay:calc(var(--idx) * -1.2s)}
+.installation[data-world=heart]{background:radial-gradient(ellipse at center,#8e345d,#36162e 63%,#140d1b)}
+.scene-mirror{position:absolute;left:calc(var(--idx) * 24% - 5%);top:12%;width:14%;height:72%;border:4px solid #c1bed55c;border-radius:50% 50% 0 0;box-shadow:inset 0 0 40px #c6c7ff26,0 0 24px #bac4ff18;background:linear-gradient(120deg,#bdc5ea1a,#0a112100,#d9dbf91e);transform:perspective(400px) rotateY(21deg)}
+.installation[data-world=watchers]{background:radial-gradient(ellipse at 45% 30%,#4b4d7b,#171f36 70%,#0c101c)}
+.scene-water{position:absolute;inset:25% -20% -30%;background:repeating-radial-gradient(ellipse at 50% 40%,#c6cce51a 0 2px,transparent 3px 45px);transform:perspective(680px) rotateX(64deg);animation:waterPulse 10s ease-in-out infinite alternate}
+.installation[data-world=undercurrent]{background:linear-gradient(180deg,#273f59,#475b68 47%,#142134)}
+@keyframes sunbreath{50%{box-shadow:0 0 90px 35px #fff2aeb3,0 0 220px 95px #ffe29d70}}
+@keyframes petalSway{0%{transform:rotate(-8deg) translateY(2px)}100%{transform:rotate(9deg) translateY(-10px)}}
+@keyframes butterflyFlight{0%,100%{transform:translate(0,0) rotate(-18deg)}35%{transform:translate(30px,-23px) rotate(12deg)}70%{transform:translate(-12px,20px) rotate(-8deg)}}
+@keyframes wingbeat{to{transform:scaleX(.35) rotate(-5deg)}}
+@keyframes thoughtFloat{to{transform:translate(13px,-26px) rotate(calc(var(--idx) * 23deg));opacity:.3}}
+@keyframes falling{to{transform:translate(45px,115vh) rotate(310deg)}}
+@keyframes waterPulse{to{opacity:.3;transform:perspective(680px) rotateX(64deg) scale(1.1)}}
+@media(max-width:1120px){.world-card{min-height:440px}.world-card-symbol{font-size:130px!important}}
+@media(max-width:700px){.entrance-screen:after{bottom:-32%;height:50%}.entrance-art:before{height:94%}.world-card{min-height:340px;border-radius:100px 100px 4px 4px}.world-card:after{border-radius:100px 100px 0 0}.world-card-symbol{font-size:90px!important}.world-card-bottom{padding:40px 17px 18px;margin:-17px}.installation{min-height:77vh}.installation-center{padding:55px 14px 92px}.scene-blossom{font-size:calc(23px * var(--scale))}.scene-wing{transform:scale(.72)}.scene-sun{width:78px;right:9%}.scene-tree{height:54%}}
+.motion-off .scene-environment *,.motion-off .scene-environment *:before,.motion-off .scene-environment *:after{animation:none!important}
+@media(prefers-reduced-motion:reduce){.scene-environment *,.scene-environment *:before,.scene-environment *:after{animation:none!important}}

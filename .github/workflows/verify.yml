@@ -20,3 +20,21 @@ jobs:
           node-version: '20'
       - name: Verify the build, rooms, portals and artwork
         run: npm test
+      - name: Capture desktop preview if browser available
+        shell: bash
+        run: |
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -n "$BROWSER" ]; then
+            "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage \
+              --window-size=1440,1000 --virtual-time-budget=3000 \
+              --screenshot="$PWD/preview-desktop.png" "file://$PWD/dist/index.html" || true
+          fi
+      - name: Package interactive preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: overflowism-v2-preview
+          path: |
+            dist/**
+            preview-desktop.png
+          if-no-files-found: error
+          retention-days: 14
