@@ -115,3 +115,9 @@ transform:perspective(800px) rotateX(64deg);transform-origin:bottom;border-top:2
 @media(max-width:700px){.entrance-screen:after{bottom:-32%;height:50%}.entrance-art:before{height:94%}.world-card{min-height:340px;border-radius:100px 100px 4px 4px}.world-card:after{border-radius:100px 100px 0 0}.world-card-symbol{font-size:90px!important}.world-card-bottom{padding:40px 17px 18px;margin:-17px}.installation{min-height:77vh}.installation-center{padding:55px 14px 92px}.scene-blossom{font-size:calc(23px * var(--scale))}.scene-wing{transform:scale(.72)}.scene-sun{width:78px;right:9%}.scene-tree{height:54%}}
 .motion-off .scene-environment *,.motion-off .scene-environment *:before,.motion-off .scene-environment *:after{animation:none!important}
 @media(prefers-reduced-motion:reduce){.scene-environment *,.scene-environment *:before,.scene-environment *:after{animation:none!important}}
+
+/* Bridge from THE BLOOM's atlas wing to its walk-through garden. */
+.bloom-world-entry,.bloom-room-entry{display:inline-flex;align-items:center;gap:15px;margin-top:18px;padding:15px 20px;background:#f2e8cf;color:#193d34!important;font-family:"DM Sans",sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-decoration:none;box-shadow:0 10px 35px #071c1950;transition:transform .2s,background .2s}
+.bloom-world-entry:hover,.bloom-room-entry:hover{background:#ffe0a4;transform:translateY(-3px)}
+.bloom-room-entry{margin-top:13px}
+@media(prefers-reduced-motion:reduce){.bloom-world-entry,.bloom-room-entry{transition:none}}
