@@ -17,7 +17,6 @@
   ];
   additional.forEach(r=>{r.atlasId='spiral-'+r.id;d.rooms.push(r);d.thresholds[r.id]=r.id==='affirmation'?7:5;});
   Object.assign(d.categories,{
-    anxious:['What if I am not ready?','I can feel uncertain and still move.','What if I choose wrong?'],
     creative:['One idea becomes a universe.','The color keeps speaking.','What if I create the impossible?'],
     curious:['What exists behind this door?','Look closer.','Maybe the small things hold more.'],
     grateful:['I notice the light on the wall.','This moment is enough to remember.','I am thankful for what I have learned.'],
@@ -40,7 +39,7 @@
     'I am allowed to feel joy today.'
   ];
   d.connections={
-    loop:['creative','possibility'],collapse:['joy','stillness'],whispers:['love','affirmation'],
+    loop:['creative','possibility'],mirror:['becoming','affirmation'],collapse:['joy','stillness'],whispers:['love','affirmation'],
     stillness:['wonder','creative'],creative:['wonder','becoming'],joy:['gratitude','love'],
     love:['whispers','affirmation'],wonder:['creative','possibility'],
     gratitude:['joy','affirmation'],possibility:['loop','becoming'],
