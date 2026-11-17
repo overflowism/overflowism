@@ -58,6 +58,7 @@
   const worldGrid = $('#world-grid');
   atlas.worlds.filter(w => w.id !== 'undercurrent').forEach((world, index) => {
     const card = anchor('', '#world/' + world.id, 'world-card');
+    card.dataset.world = world.id;
     theme(card, world);
     card.append(
       make('span', 'world-card-index', 'WORLD 0' + (index + 1)),
@@ -79,6 +80,7 @@
     const world = worlds.get(id);
     if (!world) return false;
     theme($('#world-hero'), world);
+    $('#world-hero').dataset.world = world.id;
     $('#world-label').textContent = world.label.toUpperCase();
     $('#world-title').textContent = world.name;
     $('#world-line').textContent = world.line;
@@ -128,30 +130,9 @@
     const env = make('div', 'scene-environment');
     env.setAttribute('aria-hidden', 'true');
     if (world.id === 'bloom') {
-      env.append(make('span', 'scene-sky'), make('span', 'scene-sun'),
-        make('span', 'scene-mountain mountain-back'), make('span', 'scene-mountain mountain-front'),
-        make('span', 'scene-earth'), make('span', 'scene-garden-path'));
-      for (let i = 0; i < 33; i++) {
-        const blossom = make('span', 'scene-blossom', i % 4 === 0 ? '✼' : i % 3 === 0 ? '✿' : '❀');
-        blossom.style.setProperty('--idx', i);
-        blossom.style.setProperty('--pos', ((i * 37 + 7) % 102) + '%');
-        blossom.style.setProperty('--scale', (0.65 + (i % 5) * .19).toFixed(2));
-        blossom.style.setProperty('--bottom', (1 + ((i * 17) % 23)) + '%');
-        blossom.style.setProperty('--duration', (3.7 + i % 5) + 's');
-        blossom.style.setProperty('--delay', (i % 8 * -.73).toFixed(2) + 's');
-        env.append(blossom);
-      }
-      for (let i = 0; i < 7; i++) {
-        const butterfly = make('span', 'scene-wing');
-        butterfly.style.setProperty('--idx', i);
-        butterfly.style.setProperty('--pos', (8 + ((i * 17) % 85)) + '%');
-        butterfly.style.setProperty('--high', (18 + ((i * 29) % 38)) + '%');
-        butterfly.style.setProperty('--delay', (i * -1.4) + 's');
-        env.append(butterfly);
-      }
-      if (room.id === 'fairy-tale-forest') {
-        env.append(make('span', 'scene-tree tree-left'), make('span', 'scene-tree tree-right'));
-      }
+      // A realistic botanical backdrop complements the artwork; no cartoon flower sprites.
+      env.append(make('span', 'garden-photography'), make('span', 'garden-daylight'),
+        make('span', 'garden-natural-shadow'));
     } else if (world.id === 'noise') {
       for (let i = 0; i < 20; i++) {
         const line = make('span', 'scene-thought');
@@ -177,6 +158,19 @@
       env.append(make('span', 'scene-water'));
     }
     stage.prepend(env);
+    stage.querySelector('.garden-step')?.remove();
+    stage.classList.remove('garden-close');
+    if (world.id === 'bloom') {
+      const step = make('button', 'garden-step', 'WALK DEEPER INTO THE GARDEN ↗');
+      step.type = 'button';
+      step.setAttribute('aria-pressed', 'false');
+      step.addEventListener('click', () => {
+        const closer = stage.classList.toggle('garden-close');
+        step.setAttribute('aria-pressed', String(closer));
+        step.textContent = closer ? 'RETURN TO THE GALLERY ↖' : 'WALK DEEPER INTO THE GARDEN ↗';
+      });
+      stage.append(step);
+    }
   }
 
   // Pointer-responsive viewpoint: ambient parallax rather than forced scrolling.
@@ -228,9 +222,11 @@
       img.alt = art.alt;
       img.loading = 'lazy';
       imageRoot.append(img);
+      $('#look-art').classList.add('has-original-art');
       $('#frame-label').textContent = art.title.toUpperCase() + ' · ORIGINAL PAINTING';
       $('#look-art').setAttribute('aria-label', 'View original painting ' + art.title);
     } else {
+      $('#look-art').classList.remove('has-original-art');
       imageRoot.append(make('span', 'placeholder-paint'));
       $('#frame-label').textContent = 'ARTWORK SPACE · COMING SOON';
       $('#look-art').setAttribute('aria-label', 'Explore artwork placeholder in ' + room.name);
