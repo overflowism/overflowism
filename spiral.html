@@ -4,22 +4,25 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#100b19">
-  <meta name="description" content="THE SPIRAL — The walls begin whispering. Explore five immersive rooms where thoughts intensify and transform into art, part of Overflowism.">
+  <meta name="description" content="THE SPIRAL — The walls begin whispering. Explore thirteen connected immersive rooms where thoughts can become art, including joy, love, wonder, and complexity, part of Overflowism.">
   <title>THE SPIRAL — Overflowism</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="spiral.css">
+  <link rel="stylesheet" href="spiral-expansion.css">
   <script defer src="gallery-data.js"></script>
   <script defer src="spiral-data.js"></script>
+  <script defer src="spiral-expansion-data.js"></script>
   <script defer src="spiral.js"></script>
+  <script defer src="spiral-expansion.js"></script>
 </head>
 <body>
   <a class="skip-link" href="#room-actions">Skip the corridor to room controls</a>
   <div id="spiral-app" class="spiral-app" data-room="whispers" data-phase="opening">
     <header class="masthead">
       <a class="wordmark" href="index.html#atrium" aria-label="Overflowism main gallery">✳ OVERFLOWISM<span>.</span></a>
-      <div class="masthead-center"><span>WORLD 05</span><strong>THE SPIRAL</strong></div>
+      <div class="masthead-center"><span>WORLD 05 · 13 ROOMS</span><strong>THE SPIRAL</strong></div>
       <div class="top-actions">
         <button id="motion-toggle" type="button" aria-pressed="false" title="Pause ambient movement">PAUSE MOTION</button>
         <button id="audio-toggle" type="button" aria-pressed="false" title="Optional synthesized ambient hum">SOUND OFF</button>
@@ -75,7 +78,7 @@
       </aside>
 
       <div class="room-rail">
-        <div class="rail-heading"><span class="eyebrow">FIVE ROOMS · ONE OVERFLOW</span><span>ESCAPE IS ALWAYS AVAILABLE</span></div>
+        <div class="rail-heading"><span class="eyebrow">THIRTEEN ROOMS · ONE OVERFLOW · THE SPIRAL EXPANDS</span><span>ESCAPE IS ALWAYS AVAILABLE</span></div>
         <nav class="room-selector" id="room-selector" aria-label="The Spiral rooms"></nav>
         <div class="room-arrows">
           <button type="button" id="previous-room" aria-label="Go to previous room">← PREVIOUS</button>
@@ -95,7 +98,7 @@
         <div class="intro-whisper-lines" aria-hidden="true">
           <span>Are you listening?</span><span>Or are you thinking again?</span>
         </div>
-        <p class="intro-description">An impossible corridor of hidden thoughts. Here, what cannot remain inside becomes something you can see.</p>
+        <p class="intro-description">An impossible corridor of hidden thoughts. Here, what cannot remain inside becomes something you can see. A spiral does not always mean falling apart. Sometimes it means expanding.</p>
         <button class="enter-button" id="enter-spiral" type="button">ENTER THE SPIRAL <span aria-hidden="true">↗</span></button>
         <a class="intro-exit" href="index.html#atrium">RETURN TO THE GALLERY</a>
       </div>
