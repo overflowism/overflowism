@@ -2,7 +2,7 @@
 .studio-entrance{--mood-heat:.45;--studio-pink:#e6a3b4;--studio-light:#e7b786;--studio-shadow:#110e14;position:relative;display:block;min-height:calc(100svh - 84px);overflow:hidden;background:#171117;padding:0;color:#faf3ed;font-family:"DM Sans",sans-serif}
 .studio-entrance *{box-sizing:border-box}
 .studio-entrance .studio-space{min-height:max(820px,calc(100svh - 84px));position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(ellipse at 64% 36%,#654237 0,#281d22 46%,#100f16 95%);transition:background 1.8s}
-.studio-scene{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:-2;filter:saturate(1.08)}
+.studio-scene{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:0;filter:saturate(1.08)}
 .studio-ambience{position:absolute;inset:0;background:radial-gradient(ellipse at 70% 74%,rgba(246,101,98,.12),transparent 53%),radial-gradient(ellipse at 14% 16%,rgba(97,34,64,.35),transparent 54%),linear-gradient(90deg,#0e0d15eb 0,transparent 40%,#150c15aa 100%);z-index:6;pointer-events:none}
 .studio-ceiling{position:absolute;top:-4%;left:-8%;width:116%;height:18%;transform:perspective(900px) rotateX(-14deg);background:repeating-linear-gradient(90deg,#0e0c11 0 4px,#38272b 4px 100px,#140d12 100px 112px),linear-gradient(#312327,#0b0a0e);border-bottom:8px solid #100c12;box-shadow:0 14px 42px #0b090d;z-index:5;opacity:.93}
 .studio-backwall{position:absolute;inset:1% 0 20%;background:repeating-linear-gradient(0deg,transparent 0 95px,#c29a7120 96px 97px),linear-gradient(90deg,#32222e,#665049 44%,#37202c);box-shadow:inset 0 -75px 120px #180e19}
