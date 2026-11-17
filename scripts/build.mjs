@@ -11,6 +11,8 @@ for (const path of [
   'spiral.css',
   'spiral-data.js',
   'spiral.js',
+  'studio.css',
+  'studio.js',
   'immersive.css',
   'bloom.css',
   'immersive.js',
