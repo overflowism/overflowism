@@ -70,7 +70,7 @@ for(const room of spiralData.rooms){
   check(atlas.rooms.some(r=>r.id===room.atlasId && r.world==='spiral'),'Spiral room missing in main atlas '+room.id);
 }
 check(read('immersive.js').includes('spiral.html'),'Main gallery does not link to Spiral');
-// Studio entrance is a working interactive room, not a static background image.
+// The cinematic entrance must offer reachable living-studio interactions rather than silently hiding them.
 const studioHtml = read('index.html');
 for(const id of ['studio-space','studio-avatar','studio-paint-surface','studio-emotion-name',
   'studio-temp-track','studio-mark','studio-words','studio-word-input','studio-sound',
@@ -84,7 +84,17 @@ const studioJs = read('studio.js');
 for(const marker of ["data-studio-stop","pointerdown","setStation","randomMark","visibilitychange","AudioContext"]) {
   check(studioJs.includes(marker), 'Studio interaction missing ' + marker);
 }
-check(studioHtml.includes('images/artworks/untitled-the-bloom-web.jpg'), 'Preserve original Untitled painting inside the studio');
+check(!studioHtml.includes('class="studio-featured-original"'), 'Keep the original painting out of the homepage overlay');
+check(gallery.artworks.some(a => a.title === 'Untitled'), 'Preserve original Untitled in the gallery collection');
+check(studioHtml.includes('<details class="studio-interactions">'), 'Visitors must be able to expand interactive studio tools');
+check(studioHtml.includes('BRING THE STUDIO TO LIFE'), 'Living studio must have a discoverable control');
+check(studioHtml.includes('class="studio-choose-feeling"'), 'Feeling chooser must be reachable');
+check(!studioHtml.includes('<a href="#atrium">THE WORLDS</a>'), 'Avoid redundant untracked primary navigation');
+const heroCss = read('studio-hero.css');
+check(!heroCss.includes('display:none!important'), 'Studio interactions must not be hidden by blanket CSS');
+for(const selector of ['.studio-entrance .studio-avatar{display:block', '.studio-entrance .studio-live-canvas{display:block', '.studio-entrance .studio-status{display:block', '.studio-entrance .studio-interactions{display:block', '.studio-entrance .studio-choose-feeling{display:block']) {
+  check(heroCss.includes(selector), 'Living studio visible styling missing: ' + selector);
+}
 check(studioHtml.includes('Walk into<br><em>my mind.</em>'), 'Updated studio headline missing');
 check(existsSync('images/studio-entrance.png'), 'Dimensional studio artwork asset missing');
 check(!studioHtml.includes('window-dog') && !studioHtml.includes('dog-portrait'), 'No dog requested in studio');
@@ -100,10 +110,11 @@ check(bloomScript.includes('requestAnimationFrame(loop)'), 'Walk-through animati
 check(bloomScript.includes('drawPainting'), 'Walk-through original artwork render missing');
 check(read('immersive.js').includes('bloom.html'), 'Main gallery is not linked to Bloom walk');
 check(existsSync('dist/index.html'), 'Build output is missing; run npm run build first');
-for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js','spiral.html','spiral.css','spiral-data.js','spiral.js','studio.css','studio.js']) {
+for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js','spiral.html','spiral.css','spiral-data.js','spiral.js','studio.css','studio-hero.css','studio.js']) {
   check(existsSync(resolve('dist',file)), 'Build output missing ' + file);
 }
 check(readdirSync('dist/images').length > 0, 'Built image directory should not be empty');
+check(existsSync('dist/images/studio-entrance.png'), 'Cinematic hero asset must be shipped with the site');
 console.log('✓ All 54 rooms, five official worlds, hidden Undercurrent passages, and artwork references verified.');
 console.log('✓ The interactive HTML and build outputs contain required assets and elements.');
 
@@ -111,4 +122,4 @@ console.log('✓ Bloom walkthrough, original artwork, keyboard/touch controls an
 
 console.log('✓ The Spiral: five rooms, curated whispers, standalone entrance and gallery integration verified.');
 
-console.log('✓ Living studio: animated avatar, scenic windows, canvas, coding station and interaction controls verified.');
+console.log('✓ Living studio: interactive markup, discoverable controls, visibility styles and shipped assets checked (browser behavior still needs manual review).');

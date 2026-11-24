@@ -29,7 +29,6 @@
       <a href="#atrium" data-nav="atrium">EXPLORE</a>
       <a href="#atlas" data-nav="atlas">THE ATLAS</a>
       <a href="#about" data-nav="about">THE ARTIST</a>
-      <a href="#atrium">THE WORLDS</a>
     </nav>
     <button class="motion-toggle" id="motion-toggle" type="button" aria-pressed="false" title="Turn animations off"><span aria-hidden="true">◌</span><span id="motion-label">PAUSE MOTION</span></button>
   </header>
@@ -37,51 +36,6 @@
   <main id="content">
     <section class="screen entrance-screen studio-entrance" id="entrance" data-screen="entrance" aria-labelledby="intro-title" data-mood="wonder">
       <div class="studio-space" id="studio-space">
-        <div class="studio-scene" aria-hidden="true">
-          <div class="studio-ambience"></div><div class="studio-ceiling"></div><div class="studio-backwall"></div>
-          <div class="studio-arched-window window-hills">
-            <div class="studio-window-glow"></div><div class="window-cloud cloud-one"></div><div class="window-cloud cloud-two"></div>
-            <div class="window-mountain far"></div><div class="window-mountain near"></div><div class="window-city"></div>
-            <span class="window-bar bar-vertical"></span><span class="window-bar bar-horizontal"></span>
-          </div>
-          <div class="studio-arched-window window-roofs">
-            <div class="window-sky"></div><div class="window-sun"></div>
-            <div class="window-rooftops"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-            <span class="window-bar bar-vertical"></span><span class="window-bar bar-horizontal"></span>
-          </div>
-          <div class="studio-arched-window window-sea">
-            <div class="window-moon"></div><div class="window-horizon"></div><div class="window-water"></div>
-            <span class="window-bar bar-vertical"></span><span class="window-bar bar-horizontal"></span>
-          </div>
-          <div class="studio-gallery-wall">
-            <div class="studio-art-frame frame-original">
-              <img src="images/artworks/untitled-the-bloom-web.jpg" alt="" loading="eager">
-              <span class="frame-caption">ORIGINAL ARTWORK · THE BLOOM</span>
-            </div>
-            <div class="studio-art-frame frame-abstract"><div class="studio-ink-eye"></div><div class="studio-ink-mark"></div></div>
-            <div class="studio-art-frame frame-sketch"><div class="sketch-line one"></div><div class="sketch-line two"></div><div class="sketch-line three"></div></div>
-          </div>
-          <div class="studio-floor"></div><div class="studio-floor-reflection"></div>
-          <div class="studio-fireplace"><div class="fireplace-mantel"></div><div class="fireplace-glow"></div><div class="fireplace-flame flame-a"></div><div class="fireplace-flame flame-b"></div><div class="fireplace-flame flame-c"></div></div>
-          <div class="studio-votive-niche"><span class="niche-cross">✝</span><span class="niche-votive"></span><span class="niche-votive"></span><span class="niche-votive"></span><span class="niche-rosary"></span></div>
-          <div class="studio-roses"><div class="rose-flower rose-a"></div><div class="rose-flower rose-b"></div><div class="rose-flower rose-c"></div><div class="rose-flower rose-d"></div><div class="rose-leaves"></div><div class="rose-vase"></div></div>
-          <div class="studio-desk">
-            <div class="studio-laptop">
-              <div class="laptop-screen"><span class="code-top">~/overflowism/</span>
-                <span class="code-row row-one"></span><span class="code-row row-two"></span><span class="code-row row-three"></span><span class="code-row row-four"></span><span class="code-row row-five"></span>
-                <span class="code-prompt">npm run create_</span>
-              </div><div class="laptop-base"></div>
-            </div>
-            <div class="studio-keyboard"></div><div class="desk-candle candle-a"></div><div class="desk-candle candle-b"></div><div class="studio-notebook"></div>
-          </div>
-          <div class="studio-worktable"><div class="worktable-top"></div><div class="worktable-leg left"></div><div class="worktable-leg right"></div>
-            <div class="worktable-brushes"><i></i><i></i><i></i></div><div class="worktable-palette"></div>
-          </div>
-          <div class="studio-candle-shelf"><span class="studio-candle c1"></span><span class="studio-candle c2"></span><span class="studio-candle c3"></span><span class="studio-candle c4"></span></div>
-          <div class="studio-scorpio-stars"><span>✦</span><span>✧</span><span>✦</span><span>✧</span><span>✦</span></div>
-          <div class="studio-vinyl"><div class="vinyl-record"></div><div class="vinyl-needle"></div></div>
-          <div class="studio-rose-shadow"></div>
-        </div>
 
         <div class="studio-live-canvas">
           <div class="canvas-rail"><span class="canvas-label">WORK IN PROGRESS</span><span class="canvas-mark">✳</span></div>
@@ -135,7 +89,6 @@
           <div class="studio-main-actions"><a class="studio-primary-action" href="#atrium">ENTER THE GALLERY <span aria-hidden="true">↗</span></a><a href="#atlas" class="studio-secondary-action">EXPLORE THE ATLAS</a></div>
         </div>
 
-        <a class="studio-featured-original" href="#world/bloom" aria-label="Explore THE BLOOM featuring the original painting Untitled"><img src="images/artworks/untitled-the-bloom-web.jpg" alt="Original Overflowism painting of white flowers in a yellow and green vase against blue" loading="eager"><span class="studio-featured-caption">ORIGINAL ARTWORK · THE BLOOM ↗</span></a>
         <a class="studio-explore-hotspot" href="#atrium" aria-label="Explore the five Overflowism worlds"><span aria-hidden="true">✳</span><span>DISCOVER THE WORLDS</span></a>
         <div class="studio-status">
           <span class="studio-status-kicker">THE ARTIST IS FEELING</span>
@@ -144,7 +97,9 @@
           <div class="studio-temperature"><span>CREATIVE TEMPERATURE</span><div id="studio-temp-track" role="progressbar" aria-label="Creative intensity" aria-valuemin="0" aria-valuemax="100" aria-valuenow="44"><i id="studio-temp-fill"></i></div></div>
         </div>
 
-        <div class="studio-interactions">
+        <details class="studio-interactions">
+          <summary>BRING THE STUDIO TO LIFE <span aria-hidden="true">+</span></summary>
+          <div class="studio-interactions-content">
           <span class="studio-interactions-title">FOLLOW HER THROUGH THE STUDIO</span>
           <div class="studio-interaction-row">
             <button type="button" data-studio-stop="paint">PAINT</button>
@@ -158,7 +113,8 @@
           <form id="studio-words" class="studio-words" hidden><label for="studio-word-input">A THOUGHT TO LEAVE HERE</label><input id="studio-word-input" maxlength="90" autocomplete="off" placeholder="Something you can't contain…"><button type="submit">LET IT BECOME FORM ↗</button></form>
           <p id="studio-words-output" class="studio-words-output"></p>
           <p id="studio-announcement" class="studio-sr-only" aria-live="polite" aria-atomic="true"></p>
-        </div>
+          </div>
+        </details>
 
         <details class="studio-choose-feeling"><summary>START WITH A FEELING <span>+</span></summary>
           <div class="intro-choices"><div class="choice-list" id="entrance-choices" role="group" aria-label="Choose an optional emotional starting point"></div></div>
