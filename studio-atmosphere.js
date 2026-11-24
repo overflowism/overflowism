@@ -12,6 +12,8 @@
   let manualUntil=0;
   const dust=layer.querySelector('.studio-atmo-dust');
   const embers=layer.querySelector('.studio-atmo-embers');
+  const phases=Array.from(layer.querySelectorAll('.studio-atmo-phase'));
+  let phaseIndex=-1;
   function particle(host,kind,i){
     const part=document.createElement('i');
     part.className='studio-atmo-particle studio-atmo-'+kind;
@@ -34,6 +36,15 @@
     room.dataset.atmosphereWeather=plan.weather;
     room.style.setProperty('--atmo-light',hexRgb(plan.light));
     room.style.setProperty('--atmo-shadow',hexRgb(plan.shadow));
+    if(phases.length===2){
+      const nextIndex=(phaseIndex+1)%2;
+      const incoming=phases[nextIndex];
+      incoming.style.setProperty('--phase-light',hexRgb(plan.light));
+      incoming.style.setProperty('--phase-shadow',hexRgb(plan.shadow));
+      incoming.classList.add('is-active');
+      if(phaseIndex>=0)phases[phaseIndex].classList.remove('is-active');
+      phaseIndex=nextIndex;
+    }
     room.style.setProperty('--atmo-fire',plan.fire.toFixed(3));
     room.style.setProperty('--atmo-dust',plan.dust.toFixed(3));
     room.style.setProperty('--atmo-intensity',plan.intensity.toFixed(3));
