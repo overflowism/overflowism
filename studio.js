@@ -104,7 +104,7 @@
     }
     if(id==='paint'&&!manual&&marked<16)randomMark();
     $('.laptop-screen')?.classList.toggle('coding',id==='code');
-    if(manual){announce(s.title+'. '+s.line);resetTour();}
+    if(manual){announce(s.title+'. '+s.line);room.dispatchEvent(new CustomEvent('studio:manual-action'));resetTour();}
   }
   const allowAuto=()=>!media.matches&&!document.documentElement.classList.contains('motion-off')&&!document.hidden&&!room.hidden;
   function autoplayStep(){
@@ -113,10 +113,15 @@
   }
   function resetTour(){
     if(autoplay)window.clearInterval(autoplay);
+    if(document.getElementById('studio-atmosphere'))return; // The Living Mind now drives autonomous behavior.
     autoplay=window.setInterval(autoplayStep,10000);
   }
   room.querySelectorAll('[data-studio-stop]').forEach(b=>{
     b.addEventListener('click',()=>setStation(b.dataset.studioStop,true));
+  });
+  room.addEventListener('studio:atmosphere',event=>{
+    const station=event.detail?.station;
+    if(stationMap.has(station))setStation(station);
   });
   setStation('paint');resetTour();
   const toggle=$('#studio-words-toggle'),form=$('#studio-words'),text=$('#studio-word-input');
