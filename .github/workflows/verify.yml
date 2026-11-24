@@ -29,6 +29,15 @@ jobs:
               --window-size=1440,1000 --virtual-time-budget=3000 \
               --screenshot="$PWD/preview-desktop.png" "file://$PWD/dist/index.html" || true
           fi
+      - name: Capture mobile preview if browser available
+        shell: bash
+        run: |
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
+          if [ -n "$BROWSER" ]; then
+            "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage \\
+              --window-size=390,844 --virtual-time-budget=3000 \\
+              --screenshot="$PWD/preview-mobile.png" "file://$PWD/dist/index.html" || true
+          fi
       - name: Verify live studio entrance initializes
         shell: bash
         run: |
@@ -37,6 +46,8 @@ jobs:
             "$BROWSER" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
               --virtual-time-budget=1200 --dump-dom "file://$PWD/dist/index.html" > /tmp/overflowism-studio-dom.html
             grep -q 'data-studio-ready="yes"' /tmp/overflowism-studio-dom.html
+            grep -q 'data-atmosphere-ready="yes"' /tmp/overflowism-studio-dom.html
+            grep -q 'studio-atmo-phase-a is-active' /tmp/overflowism-studio-dom.html
             grep -q 'data-studio-stop="dance" aria-pressed="false"' /tmp/overflowism-studio-dom.html
             grep -q 'data-studio-stop="paint" aria-pressed="true"' /tmp/overflowism-studio-dom.html
             grep -q 'data-action="walk"' /tmp/overflowism-studio-dom.html
@@ -78,6 +89,7 @@ jobs:
           path: |
             dist/**
             preview-desktop.png
+            preview-mobile.png
             preview-spiral.png
           if-no-files-found: error
           retention-days: 14
