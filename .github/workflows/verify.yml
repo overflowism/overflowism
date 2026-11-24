@@ -29,15 +29,6 @@ jobs:
               --window-size=1440,1000 --virtual-time-budget=3000 \
               --screenshot="$PWD/preview-desktop.png" "file://$PWD/dist/index.html" || true
           fi
-      - name: Capture mobile preview if browser available
-        shell: bash
-        run: |
-          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
-          if [ -n "$BROWSER" ]; then
-            timeout 45s "$BROWSER" --headless --no-sandbox --disable-gpu --hide-scrollbars --disable-dev-shm-usage \\
-              --window-size=390,844 --virtual-time-budget=3000 \\
-              --screenshot="$PWD/preview-mobile.png" "file://$PWD/dist/index.html" || true
-          fi
       - name: Verify live studio entrance initializes
         shell: bash
         run: |
@@ -89,7 +80,6 @@ jobs:
           path: |
             dist/**
             preview-desktop.png
-            preview-mobile.png
             preview-spiral.png
           if-no-files-found: error
           retention-days: 14
