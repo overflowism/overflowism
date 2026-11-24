@@ -9,7 +9,7 @@ The cinematic entrance remains the original `images/studio-entrance.png` render.
 - `studio-atmosphere.css`: subtle composited light crossfades, floating dust, firelight and tiny ember effects. The original render remains the visual base.
 - `studio.js`: connects the existing artist's movement/actions to the autonomous engine, without running the old fixed 10-second tour at the same time. All current studio buttons remain usable.
 - `scripts/test-emotions.mjs`: tests mood variety/blending, independent state changes, Pause Motion, recovery, hidden-tab shutdown, and preservation of the featured-artwork removal.
-- Build/verification: copies new assets; adds a browser smoke check and a mobile preview artifact where a browser is available.
+- Build/verification: copies new assets, runs Node state/controller tests, captures a desktop preview where Chromium is available, and adds a browser initialization smoke check. Mobile screenshot capture is deferred because the hosted Chromium runner timed out; mobile styling requires manual visual QA.
 
 ## Known limitations and asset requirements
 **The approved studio is a flattened raster scene**, not a separately rendered 3D room. The overlays add a real atmospheric layer but do **not** make individual window skies, flowers, candles, water, or paintings independently movable. Their precise animation needs aligned and quality-approved transparent layers, masks, animation frames, depth maps, or high-resolution rendered footage from the same camera position. This initial implementation does not fake physical blooming, rain behind window glass, interactive 3D walking, or complex human motion with CSS-only substitutes.
@@ -19,7 +19,7 @@ The current avatar is an SVG figure, not a properly rigged cinematic character. 
 The original `images/studio-entrance.png` asset remains roughly 2.8 MB. An optimized responsive WebP/AVIF derivative and browser visual QA remain important before a full public release.
 
 ## Test and release gate
-- Run `npm test`; review the Playwright/Chromium preview artifacts if the runner captures them.
+- Run `npm test`; review the Chromium desktop preview artifact if the runner captures it.
 - Confirm the current hero composition is unchanged at desktop/mobile widths.
 - Verify the atmosphere shifts independently after a variable delay, with no visitor action.
 - Use Pause Motion: both ongoing particles and future mood changes must stop; resume must restore change.
