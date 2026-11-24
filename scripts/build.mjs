@@ -13,7 +13,6 @@ for (const path of [
   'spiral.js',
   'studio.css',
   'studio-hero.css',
-  'studio.js',
   'immersive.css',
   'bloom.css',
   'immersive.js',

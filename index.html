@@ -18,7 +18,6 @@
   <script defer src="gallery-data.js"></script>
   <script defer src="atlas-data.js"></script>
   <script defer src="immersive.js"></script>
-  <script defer src="studio.js"></script>
 </head>
 <body>
   <a href="#content" class="skip-link">Skip to main content</a>
@@ -37,49 +36,7 @@
     <section class="screen entrance-screen studio-entrance" id="entrance" data-screen="entrance" aria-labelledby="intro-title" data-mood="wonder">
       <div class="studio-space" id="studio-space">
 
-        <div class="studio-live-canvas">
-          <div class="canvas-rail"><span class="canvas-label">WORK IN PROGRESS</span><span class="canvas-mark">✳</span></div>
-          <canvas id="studio-paint-surface" width="500" height="640" aria-label="Interactive blank studio canvas. Select Paint and drag, or use Make a Mark to paint with the keyboard." tabindex="0"></canvas>
-          <div class="canvas-footer"><span>NOTHING HAS TO BE FINISHED.</span></div>
-        </div>
-
-        <div class="studio-avatar" id="studio-avatar" aria-label="A stylized, curvy brown-haired artist avatar moving around her studio" role="img" data-action="walk">
-          <div class="avatar-shadow"></div>
-          <svg viewBox="0 0 250 455" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <defs>
-              <linearGradient id="studioSkin" x1="0" x2="1"><stop stop-color="#a85e42"/><stop offset=".52" stop-color="#df996a"/><stop offset="1" stop-color="#8f523a"/></linearGradient>
-              <linearGradient id="studioHair" x1="0" x2="1"><stop stop-color="#170d12"/><stop offset=".38" stop-color="#68402d"/><stop offset=".69" stop-color="#9d6341"/><stop offset="1" stop-color="#24151d"/></linearGradient>
-              <linearGradient id="studioOutfit" x1="0" x2="1"><stop stop-color="#090910"/><stop offset=".45" stop-color="#29202b"/><stop offset="1" stop-color="#08080c"/></linearGradient>
-              <linearGradient id="studioTrouser" x1="0" x2="1"><stop stop-color="#09080e"/><stop offset=".45" stop-color="#251a27"/><stop offset="1" stop-color="#0c0b12"/></linearGradient>
-            </defs>
-            <g class="avatar-hair-back"><path d="M73 97 C28 105 30 186 52 240 C31 281 52 309 82 318 C103 304 137 302 166 314 C203 296 212 260 191 222 C223 165 197 95 166 82 Z" fill="url(#studioHair)"/><path d="M59 136 C33 183 69 221 48 261 M186 125 C213 190 174 241 195 277" stroke="#c28e60" stroke-opacity=".4" stroke-width="9" fill="none"/></g>
-            <g class="avatar-leg-left"><path d="M96 291 C84 321 79 362 79 422 L66 442 L101 446 C111 407 119 366 126 336 Z" fill="url(#studioTrouser)" stroke="#513741" stroke-width="2"/></g>
-            <g class="avatar-leg-right"><path d="M127 318 C132 346 148 381 153 428 L146 448 L187 448 C184 408 177 361 165 311 Z" fill="url(#studioTrouser)" stroke="#513741" stroke-width="2"/></g>
-            <path d="M89 228 C63 245 58 275 73 310 C84 329 113 333 131 323 C146 334 172 324 181 308 C196 274 179 246 163 226 Z" fill="url(#studioTrouser)" stroke="#50313d" stroke-width="2"/>
-            <path d="M97 155 C80 169 72 196 84 220 C91 236 91 243 82 257 C94 276 118 268 131 267 C144 273 162 272 175 261 C160 239 168 226 173 203 C169 173 155 153 139 150 Z" fill="url(#studioSkin)"/>
-            <path d="M91 161 C77 169 73 192 79 211 C87 230 109 226 124 225 C139 230 164 233 175 209 C178 192 170 169 152 159 C145 171 137 187 129 191 C111 193 101 180 91 161 Z" fill="url(#studioOutfit)" stroke="#100d14" stroke-width="2"/>
-            <path d="M95 169 L113 195 M150 169 L136 195" stroke="#ded1ba" stroke-opacity=".45" stroke-width="3"/>
-            <path d="M104 225 C116 231 143 230 154 224" stroke="#33212b" stroke-width="4"/>
-            <g class="avatar-arm-left"><path d="M91 165 C70 173 59 208 53 249 C46 271 43 282 48 293 C53 299 60 298 64 291 C70 265 80 240 89 218 Z" fill="url(#studioSkin)"/><path d="M49 287 l-8 16 m9 -17 l0 18 m7 -17 l4 15" stroke="#b87753" stroke-width="4" stroke-linecap="round"/></g>
-            <g class="avatar-arm-right"><path d="M158 162 C179 161 194 181 195 210 C195 233 185 253 190 263 C203 274 203 284 198 288 C182 282 176 265 175 247 C168 227 162 213 153 201 Z" fill="url(#studioSkin)"/><path d="M196 277 l10 10 m-13 -9 l4 14" stroke="#ba7c59" stroke-width="3"/></g>
-            <path d="M111 143 Q125 154 139 143 L142 171 Q124 185 109 169Z" fill="url(#studioSkin)"/>
-            <ellipse cx="124" cy="94" rx="55" ry="67" fill="url(#studioHair)"/>
-            <path d="M82 75 C80 104 90 146 124 155 C153 147 164 119 162 82 C150 50 97 46 82 75Z" fill="url(#studioSkin)"/>
-            <path d="M82 103 Q91 100 106 106 M139 105 Q150 100 161 103" stroke="#301721" stroke-width="4" stroke-linecap="round" fill="none"/>
-            <path d="M93 110 Q100 117 108 110 M139 109 Q147 117 155 108" stroke="#231522" stroke-width="3" fill="none"/>
-            <path d="M124 112 L120 129 L131 130" stroke="#9e5c4f" stroke-width="2.5" fill="none"/>
-            <path d="M110 140 Q125 149 141 139 Q126 135 110 140" fill="#7a2c42"/><path d="M111 140 Q125 144 139 139" stroke="#d96b70" fill="none" stroke-width="2"/>
-            <path d="M74 89 C59 42 96 16 132 20 C184 21 190 61 177 116 C171 80 166 67 154 48 C141 71 102 83 75 77Z" fill="url(#studioHair)"/>
-            <path d="M75 69 C88 29 126 25 152 36 M169 69 C178 117 167 167 182 202" fill="none" stroke="#b47f56" stroke-opacity=".7" stroke-width="9" stroke-linecap="round"/>
-            <circle cx="81" cy="126" r="8" fill="none" stroke="#e8bb83" stroke-width="3"/><circle cx="166" cy="123" r="8" fill="none" stroke="#e8bb83" stroke-width="3"/>
-            <path d="M80 247 l7 8 m63 32 l8 6 M106 310 l6 -13" stroke="#d44569" stroke-width="5" stroke-linecap="round"/>
-            <path d="M144 268 l8 11 M93 288 l9 -6 M177 346 l-8 6" stroke="#5a8fdb" stroke-width="5" stroke-linecap="round"/>
-            <circle cx="79" cy="240" r="3" fill="#eabb3e"/><circle cx="158" cy="302" r="4" fill="#ec6494"/>
-          </svg>
-          <div class="avatar-brush" aria-hidden="true"></div>
-        </div>
-        <div class="studio-emotion-ring" aria-hidden="true"></div>
-        <div class="studio-spotlight" aria-hidden="true"></div>
+        <!-- The approved cinematic studio is the visual focal point: no duplicate cartoon artist or floating canvas. -->
 
         <div class="studio-copy">
           <p class="studio-kicker">AN ARTISTIC MOVEMENT <span class="studio-kicker-dot">✳</span> EST. 2026</p>
@@ -90,32 +47,6 @@
         </div>
 
         <a class="studio-explore-hotspot" href="#atrium" aria-label="Explore the five Overflowism worlds"><span aria-hidden="true">✳</span><span>DISCOVER THE WORLDS</span></a>
-        <div class="studio-status">
-          <span class="studio-status-kicker">THE ARTIST IS FEELING</span>
-          <strong id="studio-emotion-name">WONDER</strong>
-          <p id="studio-emotion-line">Somewhere between looking and becoming.</p>
-          <div class="studio-temperature"><span>CREATIVE TEMPERATURE</span><div id="studio-temp-track" role="progressbar" aria-label="Creative intensity" aria-valuemin="0" aria-valuemax="100" aria-valuenow="44"><i id="studio-temp-fill"></i></div></div>
-        </div>
-
-        <details class="studio-interactions">
-          <summary>BRING THE STUDIO TO LIFE <span aria-hidden="true">+</span></summary>
-          <div class="studio-interactions-content">
-          <span class="studio-interactions-title">FOLLOW HER THROUGH THE STUDIO</span>
-          <div class="studio-interaction-row">
-            <button type="button" data-studio-stop="paint">PAINT</button>
-            <button type="button" data-studio-stop="code">CODE</button>
-            <button type="button" data-studio-stop="dance">DANCE</button>
-            <button type="button" data-studio-stop="roses">FEEL</button>
-            <button type="button" data-studio-stop="windows">WANDER</button>
-            <button type="button" data-studio-stop="fire">REFLECT</button>
-          </div>
-          <div class="studio-tools"><button type="button" id="studio-mark">MAKE A MARK ✳</button><button type="button" id="studio-words-toggle" aria-expanded="false" aria-controls="studio-words">WRITE A THOUGHT</button><button type="button" id="studio-sound" aria-pressed="false">SOUND OFF ♫</button></div>
-          <form id="studio-words" class="studio-words" hidden><label for="studio-word-input">A THOUGHT TO LEAVE HERE</label><input id="studio-word-input" maxlength="90" autocomplete="off" placeholder="Something you can't contain…"><button type="submit">LET IT BECOME FORM ↗</button></form>
-          <p id="studio-words-output" class="studio-words-output"></p>
-          <p id="studio-announcement" class="studio-sr-only" aria-live="polite" aria-atomic="true"></p>
-          </div>
-        </details>
-
         <details class="studio-choose-feeling"><summary>START WITH A FEELING <span>+</span></summary>
           <div class="intro-choices"><div class="choice-list" id="entrance-choices" role="group" aria-label="Choose an optional emotional starting point"></div></div>
           <a class="studio-feeling-enter" id="enter-choice" href="#room/the-mirror">STEP INSIDE THAT FEELING ↗</a>

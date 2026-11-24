@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 
 function check(condition, message) { assert.ok(condition, message); }
 function read(path) { return readFileSync(path, 'utf8'); }
-for (const file of ['atlas-data.js','immersive.js','gallery-data.js','bloom-walk.js','spiral-data.js','spiral.js','studio.js']) {
+for (const file of ['atlas-data.js','immersive.js','gallery-data.js','bloom-walk.js','spiral-data.js','spiral.js']) {
   execFileSync(process.execPath, ['--check', file], { stdio: 'inherit' });
 }
 const context = { window: {} };
@@ -70,34 +70,32 @@ for(const room of spiralData.rooms){
   check(atlas.rooms.some(r=>r.id===room.atlasId && r.world==='spiral'),'Spiral room missing in main atlas '+room.id);
 }
 check(read('immersive.js').includes('spiral.html'),'Main gallery does not link to Spiral');
-// The cinematic entrance must offer reachable living-studio interactions rather than silently hiding them.
+// The approved cinematic homepage must never reintroduce the unwanted SVG avatar
+// or floating WIP canvas. The actual photographed/rendered studio remains untouched.
 const studioHtml = read('index.html');
-for(const id of ['studio-space','studio-avatar','studio-paint-surface','studio-emotion-name',
-  'studio-temp-track','studio-mark','studio-words','studio-word-input','studio-sound',
-  'entrance-choices','enter-choice']) {
-  check(studioHtml.includes('id="' + id + '"'), 'Living studio missing interaction target: ' + id);
+for(const id of ['studio-space','intro-title','entrance-choices','enter-choice']){
+  check(studioHtml.includes('id="'+id+'"'), 'Cinematic studio missing '+id);
 }
-for(const file of ['studio.css','studio-hero.css','studio.js']) {
-  check(studioHtml.includes(file), 'Main entrance must load ' + file);
+for(const marker of ['studio-avatar','studio-live-canvas','studio-paint-surface',
+  'studio-emotion-ring','studio-spotlight','studio-interactions',
+  'BRING THE STUDIO TO LIFE','WORK IN PROGRESS','studio.js']){
+  check(!studioHtml.includes(marker), 'Unwanted cartoon studio feature returned: '+marker);
 }
-const studioJs = read('studio.js');
-for(const marker of ["data-studio-stop","pointerdown","setStation","randomMark","visibilitychange","AudioContext"]) {
-  check(studioJs.includes(marker), 'Studio interaction missing ' + marker);
+for(const file of ['studio.css','studio-hero.css']){
+  check(studioHtml.includes(file), 'Main entrance missing '+file);
 }
-check(!studioHtml.includes('class="studio-featured-original"'), 'Keep the original painting out of the homepage overlay');
-check(gallery.artworks.some(a => a.title === 'Untitled'), 'Preserve original Untitled in the gallery collection');
-check(studioHtml.includes('<details class="studio-interactions">'), 'Visitors must be able to expand interactive studio tools');
-check(studioHtml.includes('BRING THE STUDIO TO LIFE'), 'Living studio must have a discoverable control');
-check(studioHtml.includes('class="studio-choose-feeling"'), 'Feeling chooser must be reachable');
-check(!studioHtml.includes('<a href="#atrium">THE WORLDS</a>'), 'Avoid redundant untracked primary navigation');
+check(studioHtml.includes('Walk into<br><em>my mind.</em>'), 'Approved headline missing');
+check(studioHtml.includes('class="studio-choose-feeling"'), 'Preserve optional emotional starting point');
+check(!studioHtml.includes('class="studio-featured-original"'), 'Keep painting overlay off homepage');
+check(gallery.artworks.some(a=>a.title==='Untitled'), 'Keep original Untitled art in the gallery');
 const heroCss = read('studio-hero.css');
-check(!heroCss.includes('display:none!important'), 'Studio interactions must not be hidden by blanket CSS');
-for(const selector of ['.studio-entrance .studio-avatar{display:block', '.studio-entrance .studio-live-canvas{display:block', '.studio-entrance .studio-status{display:block', '.studio-entrance .studio-interactions{display:block', '.studio-entrance .studio-choose-feeling{display:block']) {
-  check(heroCss.includes(selector), 'Living studio visible styling missing: ' + selector);
-}
-check(studioHtml.includes('Walk into<br><em>my mind.</em>'), 'Updated studio headline missing');
-check(existsSync('images/studio-entrance.png'), 'Dimensional studio artwork asset missing');
-check(!studioHtml.includes('window-dog') && !studioHtml.includes('dog-portrait'), 'No dog requested in studio');
+check(heroCss.includes('images/studio-entrance.png'), 'Preserve approved cinematic studio image');
+check(!heroCss.includes('.studio-entrance .studio-avatar{display:block'), 'Do not restore avatar overlay');
+check(!heroCss.includes('.studio-entrance .studio-live-canvas{display:block'), 'Do not restore WIP canvas overlay');
+check(!read('scripts/build.mjs').includes("'studio.js'"), 'Do not ship retired animation script');
+check(!existsSync('studio.js'), 'Retired avatar/canvas script should not exist');
+check(existsSync('images/studio-entrance.png'), 'Approved cinematic image missing');
+check(!studioHtml.includes('window-dog') && !studioHtml.includes('dog-portrait'),'No dog requested in studio');
 const bloom = read('bloom.html');
 for (const key of ['garden','start-walk','examine-art','touch-pad','intro-veil','motion-toggle','landmark-panel']) {
   check(bloom.includes(key), 'Walk-through is missing interaction: ' + key);
@@ -110,16 +108,19 @@ check(bloomScript.includes('requestAnimationFrame(loop)'), 'Walk-through animati
 check(bloomScript.includes('drawPainting'), 'Walk-through original artwork render missing');
 check(read('immersive.js').includes('bloom.html'), 'Main gallery is not linked to Bloom walk');
 check(existsSync('dist/index.html'), 'Build output is missing; run npm run build first');
-for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js','spiral.html','spiral.css','spiral-data.js','spiral.js','studio.css','studio-hero.css','studio.js']) {
+for (const file of ['index.html','immersive.css','immersive.js','atlas-data.js','gallery-data.js','bloom.html','bloom-walk.css','bloom-walk.js','spiral.html','spiral.css','spiral-data.js','spiral.js','studio.css','studio-hero.css']) {
   check(existsSync(resolve('dist',file)), 'Build output missing ' + file);
 }
 check(readdirSync('dist/images').length > 0, 'Built image directory should not be empty');
 check(existsSync('dist/images/studio-entrance.png'), 'Cinematic hero asset must be shipped with the site');
+check(!existsSync('dist/studio.js'),'Do not ship cartoon avatar/canvas logic');
+check(!read('dist/index.html').includes('studio-avatar'),'No duplicate cartoon avatar in published HTML');
+check(!read('dist/index.html').includes('studio-live-canvas'),'No floating WIP canvas in published HTML');
 console.log('✓ All 54 rooms, five official worlds, hidden Undercurrent passages, and artwork references verified.');
-console.log('✓ The interactive HTML and build outputs contain required assets and elements.');
+console.log('✓ Gallery HTML and build outputs contain the required assets and elements.');
 
 console.log('✓ Bloom walkthrough, original artwork, keyboard/touch controls and routes verified.');
 
 console.log('✓ The Spiral: five rooms, curated whispers, standalone entrance and gallery integration verified.');
 
-console.log('✓ Living studio: interactive markup, discoverable controls, visibility styles and shipped assets checked (browser behavior still needs manual review).');
+console.log('✓ Homepage preserves cinematic studio and rejects cartoon/avatar/canvas overlay regressions.');

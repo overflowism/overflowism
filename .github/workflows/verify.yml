@@ -29,20 +29,21 @@ jobs:
               --window-size=1440,1000 --virtual-time-budget=3000 \
               --screenshot="$PWD/preview-desktop.png" "file://$PWD/dist/index.html" || true
           fi
-      - name: Verify live studio entrance initializes
+      - name: Verify cinematic studio does not contain cartoon or canvas overlays
         shell: bash
         run: |
           BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
           if [ -n "$BROWSER" ]; then
-            "$BROWSER" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
+            timeout 45s "$BROWSER" --headless --no-sandbox --disable-gpu --disable-dev-shm-usage \
               --virtual-time-budget=1200 --dump-dom "file://$PWD/dist/index.html" > /tmp/overflowism-studio-dom.html
-            grep -q 'data-studio-ready="yes"' /tmp/overflowism-studio-dom.html
-            grep -q 'data-studio-stop="dance" aria-pressed="false"' /tmp/overflowism-studio-dom.html
-            grep -q 'data-studio-stop="paint" aria-pressed="true"' /tmp/overflowism-studio-dom.html
-            grep -q 'data-action="walk"' /tmp/overflowism-studio-dom.html
-            echo "Studio JS initialized the current station, motion and accessible controls."
+            grep -q 'Walk into<br><em>my mind.</em>' /tmp/overflowism-studio-dom.html
+            grep -q 'id="entrance-choices"' /tmp/overflowism-studio-dom.html
+            ! grep -q 'id="studio-avatar"' /tmp/overflowism-studio-dom.html
+            ! grep -q 'id="studio-paint-surface"' /tmp/overflowism-studio-dom.html
+            ! grep -q 'BRING THE STUDIO TO LIFE' /tmp/overflowism-studio-dom.html
+            echo "Approved cinematic entrance loads without unwanted cartoon/canvas overlays."
           else
-            echo "No browser available; studio code and markup verified by npm test."
+            echo "No headless browser installed; cinematic entrance contracts verified by npm test."
           fi
       - name: Verify Bloom experience renders in a browser
         shell: bash
