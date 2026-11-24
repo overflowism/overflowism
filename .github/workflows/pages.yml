@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  issues: write
 
 concurrency:
   group: pages
@@ -35,3 +36,32 @@ jobs:
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4
+      - name: Verify the published homepage and studio image
+        id: smoke
+        env:
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          BASE="${SITE_URL%/}"
+          echo "Checking live site: $BASE"
+          for attempt in 1 2 3 4 5 6 7 8; do
+            if curl --connect-timeout 15 --max-time 35 --location --fail --silent "$BASE/" | grep -q 'Walk into<br><em>my mind.</em>' \
+              && curl --connect-timeout 15 --max-time 35 --location --fail --silent --head "$BASE/images/studio-entrance.png" >/dev/null; then
+              echo "Live website and illustrated hero asset both verified."
+              exit 0
+            fi
+            echo "Site not updated yet; retry $attempt"
+            sleep 12
+          done
+          echo "Live smoke test did not pass."
+          exit 1
+      - name: Report verified publication in GitHub issue
+        if: success()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SITE_URL: ${{ steps.deployment.outputs.page_url }}
+        shell: bash
+        run: |
+          gh issue comment 18 --repo "$GITHUB_REPOSITORY" --body "✅ Homepage deployment verified live: $SITE_URL — illustrated studio, updated text, and image asset were checked by the Pages workflow. Commit: $GITHUB_SHA"
+
