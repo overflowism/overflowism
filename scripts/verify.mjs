@@ -77,7 +77,7 @@ for(const id of ['studio-space','studio-avatar','studio-paint-surface','studio-e
   'entrance-choices','enter-choice']) {
   check(studioHtml.includes('id="' + id + '"'), 'Living studio missing interaction target: ' + id);
 }
-for(const file of ['studio.css','studio.js']) {
+for(const file of ['studio.css','studio-hero.css','studio.js']) {
   check(studioHtml.includes(file), 'Main entrance must load ' + file);
 }
 const studioJs = read('studio.js');
@@ -85,6 +85,8 @@ for(const marker of ["data-studio-stop","pointerdown","setStation","randomMark",
   check(studioJs.includes(marker), 'Studio interaction missing ' + marker);
 }
 check(studioHtml.includes('images/artworks/untitled-the-bloom-web.jpg'), 'Preserve original Untitled painting inside the studio');
+check(studioHtml.includes('Walk into<br><em>my mind.</em>'), 'Updated studio headline missing');
+check(existsSync('images/studio-entrance.png'), 'Dimensional studio artwork asset missing');
 check(!studioHtml.includes('window-dog') && !studioHtml.includes('dog-portrait'), 'No dog requested in studio');
 const bloom = read('bloom.html');
 for (const key of ['garden','start-walk','examine-art','touch-pad','intro-veil','motion-toggle','landmark-panel']) {
