@@ -3,8 +3,6 @@
 .studio-entrance{background:#1c0d15;color:#fff6ec}
 .studio-entrance .studio-space{position:relative;isolation:isolate;min-height:max(680px,calc(100svh - 76px));background:#321924 url("images/studio-entrance.png") center center/cover no-repeat}
 .studio-entrance .studio-space::before{content:"";position:absolute;inset:0;z-index:8;pointer-events:none;background:linear-gradient(90deg,#120810a9 0%,#1c0b134d 27%,transparent 57%),linear-gradient(0deg,#130a11c4,transparent 28%,transparent 84%,#16091039)}
-/* The static illustration replaces only the decorative scenery; all studio interactions remain available. */
-.studio-entrance .studio-scene{display:none}
 .studio-entrance .studio-copy{position:absolute;z-index:16;left:7%;top:34%;bottom:auto;width:min(42%,570px);max-width:none;padding:0;text-shadow:0 3px 28px #130610}
 .studio-entrance .studio-kicker{font:700 clamp(9px,.78vw,12px)/1.4 "DM Sans",sans-serif;letter-spacing:.23em;color:#f5d2c8}
 .studio-entrance .studio-copy h1{margin:20px 0 22px;max-width:580px;font:500 clamp(62px,6.25vw,112px)/.87 "Cormorant Garamond",Georgia,serif;letter-spacing:-.05em;color:#fff5ee}
@@ -44,41 +42,10 @@
 .motion-off .studio-entrance .studio-explore-hotspot span:first-child{animation:none!important}
 @media(prefers-reduced-motion:reduce){.studio-entrance .studio-explore-hotspot span:first-child{animation:none!important}}
 
-
-/* Accessible living-studio layer atop the cinematic homepage.
-   Keep the image composition uncluttered until a visitor opens the studio tools. */
-.studio-entrance .studio-avatar{display:block;z-index:12;width:clamp(90px,10vw,165px);opacity:.96}
-.studio-entrance .studio-live-canvas{display:block;left:50%;top:57%;width:10%;height:23%;z-index:13;border-width:5px}
-.studio-entrance .studio-status{display:block;right:5%;top:8%;width:min(220px,22%);padding:12px 14px;z-index:16}
-.studio-entrance .studio-emotion-ring{display:block;opacity:.24;z-index:9}
-.studio-entrance .studio-spotlight{display:block;opacity:.4;z-index:8}
-.studio-entrance .studio-interactions{display:block;position:absolute;left:7%;bottom:11%;width:max-content;max-width:60%;margin:0;padding:0;z-index:19;background:none;border:0}
-.studio-entrance .studio-interactions>summary{display:inline-flex;gap:10px;align-items:center;cursor:pointer;list-style:none;color:#fff3ea;background:#1e111bcf;border:1px solid #f1c6b585;padding:12px 15px;font:700 10px "DM Sans",sans-serif;letter-spacing:.09em;backdrop-filter:blur(12px)}
-.studio-entrance .studio-interactions>summary::-webkit-details-marker{display:none}
-.studio-entrance .studio-interactions>summary:focus-visible{outline:2px solid #fff;outline-offset:4px}
-.studio-entrance .studio-interactions[open]>summary span{transform:rotate(45deg)}
-.studio-entrance .studio-interactions-content{position:absolute;bottom:calc(100% + 12px);left:0;width:min(520px,85vw);max-height:min(65svh,560px);overflow-y:auto;padding:16px;background:#1b111beF;border:1px solid #d4a18a9c;box-shadow:0 15px 38px #09050ecc;backdrop-filter:blur(16px)}
+/* Keep the optional feeling doorway, without a cartoon artist, floating canvas, or tool dashboard. */
 .studio-entrance .studio-choose-feeling{display:block;right:5%;bottom:11%;width:min(245px,24%);z-index:19}
-.studio-entrance .studio-interactions-title{font-size:9px}
-.studio-entrance .studio-interaction-row button{min-height:36px}
-.studio-entrance .studio-tools button{min-height:36px}
-@media(max-width:900px){
-  .studio-entrance .studio-status{width:min(210px,29%);right:4%;top:6%}
-  .studio-entrance .studio-live-canvas{left:53%;top:55%;width:14%;height:21%}
-  .studio-entrance .studio-choose-feeling{right:4%;width:27%}
-}
+@media(max-width:900px){.studio-entrance .studio-choose-feeling{right:4%;width:27%}}
 @media(max-width:650px){
-  .studio-entrance .studio-space{min-height:950px;padding-bottom:0}
-  .studio-entrance .studio-status{right:6%;top:7%;width:48%;padding:10px}
-  .studio-entrance .studio-status strong{font-size:26px}
-  .studio-entrance .studio-status p{font-size:13px}
-  .studio-entrance .studio-live-canvas{left:10%;top:14%;width:23%;height:19%}
-  .studio-entrance .studio-avatar{width:clamp(85px,23vw,125px);top:calc(var(--avatar-y,50%) - 15%)}
-  .studio-entrance .studio-copy{top:auto;bottom:20%;left:7%;right:7%;width:auto}
-  .studio-entrance .studio-interactions{position:absolute;left:7%;bottom:9%;width:auto;max-width:62%;margin:0;padding:0;background:none}
-  .studio-entrance .studio-interactions>summary{font-size:8px;padding:10px;letter-spacing:.03em}
-  .studio-entrance .studio-interactions-content{bottom:calc(100% + 8px);width:min(86vw,450px);max-height:55svh}
   .studio-entrance .studio-choose-feeling{position:absolute;right:6%;bottom:9%;width:31%;margin:0;padding:10px}
   .studio-entrance .studio-choose-feeling summary{font-size:8px}
-  .studio-entrance .studio-bottom-note{position:absolute;bottom:14px;left:7%;right:7%;margin:0;padding:0}
 }
