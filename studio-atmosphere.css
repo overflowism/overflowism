@@ -1,0 +1,92 @@
+/* OVERFLOWISM · An independent atmospheric layer over the approved render.
+   These are optical light/air treatments, not CSS replacements for furniture,
+   flowers, windows, the artist, or original paintings. */
+.studio-entrance .studio-atmosphere{
+  position:absolute;inset:0;z-index:9;pointer-events:none;
+  overflow:hidden;isolation:isolate;contain:paint;
+}
+.studio-entrance .studio-atmo-phase{
+  position:absolute;inset:0;opacity:0;transition:opacity 16s ease-in-out;
+  background:
+    radial-gradient(ellipse at 63% 40%,rgba(var(--phase-light,213,187,166),.13),transparent 57%),
+    linear-gradient(110deg,rgba(var(--phase-shadow,43,35,49),.09),transparent 58%),
+    radial-gradient(ellipse at 35% 8%,rgba(var(--phase-light,213,187,166),.055),transparent 60%);
+  mix-blend-mode:soft-light;
+}
+.studio-entrance .studio-atmo-phase.is-active{opacity:1}
+.studio-entrance .studio-atmo-windowlight{
+  position:absolute;left:12%;top:11%;width:69%;height:48%;opacity:.35;
+  background:linear-gradient(110deg,transparent 18%,#ffe8bb0f 46%,transparent 77%);
+  filter:blur(20px);transform-origin:center top;
+  animation:studioAmbientWindow 27s ease-in-out infinite alternate;
+}
+.studio-entrance .studio-atmo-firelight{
+  position:absolute;left:52%;top:53%;height:32%;width:30%;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 50%,#ffba6e27,#f1844720 32%,transparent 74%);
+  mix-blend-mode:screen;filter:blur(18px);
+  opacity:var(--atmo-fire,.5);transition:opacity 12s ease;
+  animation:studioAmbientFire 6.5s ease-in-out infinite alternate;
+}
+.studio-entrance .studio-atmo-dust,.studio-entrance .studio-atmo-embers{
+  position:absolute;inset:0;overflow:hidden;
+}
+.studio-entrance .studio-atmo-particle{
+  display:block;position:absolute;left:var(--x);top:var(--y);
+  width:var(--size);height:var(--size);border-radius:50%;pointer-events:none;
+  animation-duration:var(--duration);animation-delay:var(--delay);
+  animation-iteration-count:infinite;animation-timing-function:ease-in-out;
+}
+.studio-entrance .studio-atmo-dust{opacity:calc(var(--atmo-dust,.4) * .43);transition:opacity 12s ease}
+.studio-entrance .studio-atmo-dust .studio-atmo-particle{
+  background:#ffe3ca99;box-shadow:0 0 8px 2px #ffe8c457;
+  animation-name:studioAmbientDust;
+}
+.studio-entrance .studio-atmo-embers{
+  left:51%;top:53%;width:30%;height:27%;
+  opacity:calc(var(--atmo-fire,.5) * .5);transition:opacity 12s ease;
+}
+.studio-entrance .studio-atmo-embers .studio-atmo-particle{
+  background:#ffc281;box-shadow:0 0 8px #ffa658b0;
+  animation-name:studioAmbientEmber;
+}
+.studio-entrance[data-atmosphere-weather="night"] .studio-atmo-windowlight{
+  opacity:.11;filter:blur(27px);transition:opacity 14s ease;
+}
+.studio-entrance[data-atmosphere-weather="clouded"] .studio-atmo-windowlight{
+  opacity:.15;transition:opacity 14s ease;
+}
+.studio-entrance[data-atmosphere-weather="clear"] .studio-atmo-windowlight{
+  opacity:.43;transition:opacity 14s ease;
+}
+.studio-entrance[data-atmosphere-weather="haze"] .studio-atmo-windowlight{
+  opacity:.28;transition:opacity 14s ease;
+}
+@keyframes studioAmbientDust{
+  0%,100%{transform:translate3d(0,0,0);opacity:.32}
+  50%{transform:translate3d(13px,-22px,0);opacity:.85}
+}
+@keyframes studioAmbientEmber{
+  0%{transform:translate3d(0,15px,0) scale(.7);opacity:0}
+  32%{opacity:.75}
+  100%{transform:translate3d(17px,-57px,0) scale(.4);opacity:0}
+}
+@keyframes studioAmbientWindow{
+  to{transform:translate3d(8px,5px,0);opacity:.25}
+}
+@keyframes studioAmbientFire{
+  to{transform:scale(1.07);filter:blur(21px);opacity:.7}
+}
+.studio-entrance .studio-atmo-paused *,
+.motion-off .studio-entrance .studio-atmosphere *,
+.motion-off .studio-entrance .studio-atmosphere *::before,
+.motion-off .studio-entrance .studio-atmosphere *::after{
+  animation-play-state:paused!important;transition:none!important;
+}
+@media (prefers-reduced-motion:reduce){
+ .studio-entrance .studio-atmosphere *{animation:none!important;transition:none!important}
+}
+@media(max-width:650px){
+  .studio-entrance .studio-atmo-dust .studio-atmo-particle:nth-child(n+6),
+  .studio-entrance .studio-atmo-embers .studio-atmo-particle:nth-child(n+3){display:none}
+  .studio-entrance .studio-atmo-windowlight{filter:blur(24px)}
+}
