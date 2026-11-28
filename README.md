@@ -1,5 +1,6 @@
 # Overflowism — The Emotional Atlas
 
+> **Foundational creative direction:** Overflowism is Marcela Thomas's 2026 artistic movement, not only an emotional or mental-health gallery. The definitive [Foundational Manifesto](FOUNDATIONAL-MANIFESTO.md) anchors the process **Experience → Feeling → Threshold → Release → Form** and the statement **"I create what I can't contain."** Read it before changing the site's creative direction.
 An immersive, ever-expanding art-gallery experience built on the original Overflowism static website.
 
 > When experience can no longer be contained, it becomes creation.
